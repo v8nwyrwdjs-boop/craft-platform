@@ -143,6 +143,6 @@ create policy "Staff can create mentor feedback" on public.mentor_feedback for i
   and mentor_id = auth.uid()
   and exists (
     select 1 from public.assignment_submissions s
-    where s.id = submission_id and s.student_id = student_id
+    where s.id = mentor_feedback.submission_id and s.student_id = mentor_feedback.student_id
   )
 );
