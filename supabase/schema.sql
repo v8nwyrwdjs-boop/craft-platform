@@ -68,7 +68,7 @@ create policy "Users can read their own lesson progress" on public.lesson_progre
 drop policy if exists "Users can create their own lesson progress" on public.lesson_progress;
 create policy "Users can create their own lesson progress" on public.lesson_progress for insert to authenticated with check (auth.uid() = student_id and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = lesson_progress.program_slug and e.status = 'active'));
 drop policy if exists "Users can update their own lesson progress" on public.lesson_progress;
-create policy "Users can update their own lesson progress" on public.lesson_progress for update to authenticated using (auth.uid() = student_id and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = lesson_progress.program_slug and e.status = 'active')) with check (auth.uid() = student_id);
+create policy "Users can update their own lesson progress" on public.lesson_progress for update to authenticated using (auth.uid() = student_id and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = lesson_progress.program_slug and e.status = 'active')) with check (auth.uid() = student_id and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = lesson_progress.program_slug and e.status = 'active'));
 
 create or replace function public.handle_new_user()
 returns trigger
