@@ -6,6 +6,7 @@ const messages: Record<string, string> = {
   validation: "Введи email и пароль.",
   credentials: "Не удалось войти. Проверь email и пароль или подтверди почту.",
   callback: "Ссылка подтверждения недействительна или устарела. Запроси новую.",
+  "reset-session": "Ссылка восстановления истекла. Запроси письмо ещё раз.",
 };
 
 export default async function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
@@ -23,6 +24,7 @@ export default async function LoginPage({ searchParams }: { searchParams: { erro
           <label>Пароль<input name="password" type="password" autoComplete="current-password" placeholder="Твой пароль" required /></label>
           <button className="button button-dark auth-submit" type="submit">Войти в аккаунт <span>↗</span></button>
         </form>
+        <p className="auth-switch"><Link href="/forgot-password">Забыли пароль?</Link></p>
         <p className="auth-switch">Ещё нет аккаунта? <Link href="/register">Зарегистрироваться</Link></p>
       </section>
     </main>
