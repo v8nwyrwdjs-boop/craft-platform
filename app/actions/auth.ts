@@ -57,13 +57,15 @@ export async function updatePassword(formData: FormData) {
 export async function signIn(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   const password = value(formData, "password");
+  const requestedNext = value(formData, "next");
+  const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
   if (!hasSupabaseConfig()) redirect("/login?error=setup");
   if (!email || !password) redirect("/login?error=validation");
 
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) redirect("/login?error=credentials");
-  redirect("/dashboard");
+  redirect(next);
 }
 
 export async function signOut() {
