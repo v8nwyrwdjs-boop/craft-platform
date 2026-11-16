@@ -30,6 +30,30 @@ export async function signUp(formData: FormData) {
   redirect("/register?success=confirm");
 }
 
+export async function requestPasswordReset(formData: FormData) {
+  const email = value(formData, "email").toLowerCase();
+  if (!hasSupabaseConfig()) redirect("/forgot-password?error=setup");
+  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) redirect("/forgot-password?error=email");
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000") + "/auth/callback?next=/account/reset-password",
+  });
+  if (error) redirect("/forgot-password?error=send");
+  redirect("/forgot-password?success=sent");
+}
+
+export async function updatePassword(formData: FormData) {
+  const password = value(formData, "password");
+  if (!hasSupabaseConfig()) redirect("/account/reset-password?error=setup");
+  if (password.length < 8) redirect("/account/reset-password?error=password");
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login?error=reset-session");
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) redirect("/account/reset-password?error=update");
+  redirect("/account/reset-password?success=updated");
+}
+
 export async function signIn(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   const password = value(formData, "password");
