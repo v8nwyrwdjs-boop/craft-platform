@@ -113,3 +113,36 @@ $$;
 
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created after insert on auth.users for each row execute procedure public.handle_new_user();
+
+-- Staff permissions are based only on trusted app_metadata claims.
+-- Set app_metadata.role to "admin" or "mentor" from a trusted Supabase admin context.
+drop policy if exists "Staff can read all profiles" on public.profiles;
+create policy "Staff can read all profiles" on public.profiles for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+
+drop policy if exists "Staff can read all projects" on public.student_projects;
+create policy "Staff can read all projects" on public.student_projects for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+drop policy if exists "Staff can update all projects" on public.student_projects;
+create policy "Staff can update all projects" on public.student_projects for update to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor')) with check ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+
+drop policy if exists "Admins can manage enrollments" on public.enrollments;
+create policy "Admins can manage enrollments" on public.enrollments for all to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin') with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+drop policy if exists "Staff can read all lesson progress" on public.lesson_progress;
+create policy "Staff can read all lesson progress" on public.lesson_progress for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+
+drop policy if exists "Staff can read all submissions" on public.assignment_submissions;
+create policy "Staff can read all submissions" on public.assignment_submissions for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+drop policy if exists "Staff can review submissions" on public.assignment_submissions;
+create policy "Staff can review submissions" on public.assignment_submissions for update to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor')) with check ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+
+drop policy if exists "Staff can read all mentor feedback" on public.mentor_feedback;
+create policy "Staff can read all mentor feedback" on public.mentor_feedback for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+drop policy if exists "Staff can create mentor feedback" on public.mentor_feedback;
+create policy "Staff can create mentor feedback" on public.mentor_feedback for insert to authenticated with check (
+  (auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor')
+  and mentor_id = auth.uid()
+  and exists (
+    select 1 from public.assignment_submissions s
+    where s.id = submission_id and s.student_id = student_id
+  )
+);
