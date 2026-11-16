@@ -107,3 +107,8 @@
 .assignment-form textarea{width:100%;min-height:115px;resize:vertical;padding:12px;border:1px solid var(--line);background:#faf9f4;font:12px/1.6 'DM Sans';color:var(--ink)}
 .assignment-form button{align-self:flex-start;border:0;background:var(--ink);color:#fff;padding:13px 16px;font:600 10px 'DM Sans';cursor:pointer}
 .submission-status{font-size:10px;color:#58752e;margin:0 0 12px}
+
+.mentor-feedback{margin-top:14px;padding:16px;background:#e6eddc;border-left:3px solid #91ad5a}
+.mentor-feedback>b{font-size:9px;letter-spacing:1px;color:#526d31}
+.mentor-feedback p{font-size:12px;line-height:1.7;color:#404a34;margin:8px 0}
+.mentor-feedback time{font-size:9px;color:#71835a}
