@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "CRAFT — Digital Product School",
-  description: "Практическая школа создания цифровых продуктов: от идеи и проверки спроса до запуска и первых пользователей.",
+  description: "Выбери направление или бизнес-концепцию. Создай цифровой продукт с поддержкой CRAFT и наставника.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
