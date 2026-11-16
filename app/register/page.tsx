@@ -7,8 +7,8 @@ const messages: Record<string, string> = {
   signup: "Не удалось создать аккаунт. Возможно, этот email уже зарегистрирован.",
 };
 
-export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ error?: string; success?: string }> }) {
-  const params = await searchParams;
+export default async function RegisterPage({ searchParams }: { searchParams: { error?: string; success?: string } }) {
+  const params = searchParams;
   return (
     <main className="auth-shell">
       <header className="auth-top"><Link className="brand" href="/">CRAFT<span>®</span></Link><Link href="/">На главную ↗</Link></header>
