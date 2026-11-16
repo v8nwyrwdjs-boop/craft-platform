@@ -11,8 +11,9 @@ const concepts = [
   { id:"C-06", slug:"C-06", type:"CALCULATOR / SAAS", title:"Калькулятор решений для профессиональной ниши", problem:"Специалисты вручную считают стоимость, сроки или параметры по сложным таблицам и разрозненным правилам.", audience:"Одна профессия или сегмент малого бизнеса", revenue:"Бесплатный базовый инструмент и платные функции либо подписка", mvp:"Один точный сценарий расчёта, сохранение результата и экспорт", difficulty:"Низкая / средняя", validation:"Проверить, насколько часто выполняется расчёт, сколько ошибок он создаёт и кто платит за решение." },
 ];
 
-export default function ConceptDetailPage({ params }: { params: { id: string } }) {
-  const item = concepts.find((concept) => concept.id === params.id.toUpperCase());
+export default async function ConceptDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const item = concepts.find((concept) => concept.id === id.toUpperCase());
   if (!item) notFound();
   return (
     <main className="catalog-page">
