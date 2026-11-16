@@ -24,7 +24,7 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
           <label>Пароль<input name="password" type="password" autoComplete="new-password" placeholder="Не менее 8 символов" minLength={8} required /></label>
           <button className="button button-dark auth-submit" type="submit">Создать аккаунт <span>↗</span></button>
         </form>
-        <p className="auth-legal">Создавая аккаунт, ты соглашаешься с условиями использования и политикой конфиденциальности. Перед открытым запуском эти документы должны быть опубликованы.</p>
+        <p className="auth-legal">Регистрация создаёт бесплатный аккаунт и не означает покупку обучения. Условия использования и политика конфиденциальности будут опубликованы до открытия регистрации для пользователей.</p>
         <p className="auth-switch">Уже есть аккаунт? <Link href="/login">Войти</Link></p>
       </section>
     </main>
