@@ -11,8 +11,9 @@ const directions = [
   { slug:"direction-06", number:"06", title:"Нишевые цифровые продукты", description:"Узкие решения для определённой аудитории. Часто их проще проверить на небольшом сегменте рынка.", models:"Разовая покупка · подписка · платные функции", examples:"Калькуляторы, конфигураторы, базы данных, отраслевые инструменты", level:"Зависит от идеи", questions:["Кто конкретно будет пользоваться продуктом?","Как часто у этой аудитории возникает задача?","Какая минимальная версия уже решает её целиком?"] },
 ];
 
-export default function DirectionDetailPage({ params }: { params: { slug: string } }) {
-  const item = directions.find((direction) => direction.slug === params.slug);
+export default async function DirectionDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = directions.find((direction) => direction.slug === slug);
   if (!item) notFound();
   return (
     <main className="catalog-page">
