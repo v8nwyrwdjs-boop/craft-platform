@@ -56,3 +56,28 @@
 .student-project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
 .student-project{padding:24px;border:1px solid var(--line);background:#faf9f4}.student-project span{font-size:10px;color:#8b8e83}.student-project h3{font:700 20px Manrope}.student-project p{font-size:12px;color:#77796f}
 @media(max-width:760px){.header-account{gap:12px}.header-account>a:first-child{display:none}.auth-top{height:72px}.auth-card{margin-top:45px}.dashboard-welcome{padding:65px 0 45px}.dashboard-user>span{max-width:145px;overflow:hidden;text-overflow:ellipsis}.dashboard-section-title{align-items:flex-start;gap:15px;flex-direction:column}.dashboard-empty{padding:28px 22px}.student-project-grid{grid-template-columns:1fr}}
+
+/* Catalog detail and student project workspace */
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.detail-grid article{padding:28px;border:1px solid var(--line);background:#faf9f4}
+.detail-grid article>span,.product-fields span{display:block;font-size:9px;letter-spacing:1px;color:#85877e;font-weight:700;margin-bottom:12px}
+.detail-grid article>p,.detail-grid li{font-size:14px;line-height:1.75;color:#55584f}
+.detail-grid ul{padding-left:18px;margin:0}
+.detail-action{margin-top:55px;padding:38px;background:#e8e9e0;display:flex;justify-content:space-between;align-items:center;gap:30px}
+.detail-action h2{font:700 clamp(28px,4vw,42px)/1.12 Manrope;letter-spacing:-1.8px;margin:14px 0}
+.detail-action h2 em{font-style:normal;color:#85877e}
+.detail-action p:not(.eyebrow){font-size:13px;line-height:1.7;color:#686a62;max-width:540px}
+.detail-action form{flex-shrink:0}
+.detail-action button{border:0;cursor:pointer}
+.new-project-panel{margin-top:28px;padding:28px;background:#e8e9e0;display:flex;justify-content:space-between;gap:25px;align-items:center}
+.new-project-panel h3{font:700 20px Manrope;margin:8px 0}
+.new-project-panel p:not(.eyebrow){font-size:12px;color:#686a62;margin:0}
+.new-project-panel form{display:flex;gap:8px;flex:1;max-width:520px}
+.new-project-panel input{height:46px;min-width:0;flex:1;border:1px solid var(--line);background:#faf9f4;padding:0 12px;font:12px 'DM Sans'}
+.new-project-panel button{border:0;background:var(--ink);color:white;padding:0 16px;font:600 11px 'DM Sans';cursor:pointer}
+.student-project time{font-size:10px;color:#8b8e83}
+.learning-preview{margin-top:45px;padding:30px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.learning-preview h2{font:700 28px Manrope;margin:8px 0}
+.learning-preview p:not(.eyebrow){font-size:12px;color:#686a62}
+.learning-preview>span{font-size:9px;letter-spacing:1px;color:#77796f;text-align:right}
+@media(max-width:760px){.detail-grid{grid-template-columns:1fr}.detail-action,.new-project-panel,.learning-preview{align-items:stretch;flex-direction:column}.detail-action{padding:25px}.new-project-panel form{max-width:none;flex-direction:column}.new-project-panel button{height:44px}.learning-preview>span{text-align:left}}
