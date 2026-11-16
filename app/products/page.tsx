@@ -17,7 +17,7 @@ export default function ProductsPage() {
           <a href="/products">Готовые концепции</a>
           <a href="/#approach">Как работает CRAFT</a>
         </nav>
-        <a className="header-cta" href="mailto:hello@craft.school?subject=CRAFT%20%E2%80%94%20%D0%9E%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D0%B8%D1%8E">Обсудить концепцию <span>↗</span></a>
+        <a className="header-cta" href="/register">Обсудить концепцию <span>↗</span></a>
       </header>
 
       <section className="catalog-hero wrap">
@@ -36,7 +36,7 @@ export default function ProductsPage() {
           {products.map((item) => <article className="product-card" key={item.id}>
             <div className="product-card-head"><span>{item.id} / {item.type}</span><span className="product-arrow">↗</span></div>
             <div className="product-card-main"><h3>{item.title}</h3><p>{item.problem}</p><div className="product-fields"><div><span>ДЛЯ КОГО</span><b>{item.audience}</b></div><div><span>КАК МОЖЕТ ЗАРАБАТЫВАТЬ</span><b>{item.revenue}</b></div><div><span>ВОЗМОЖНЫЙ MVP</span><b>{item.mvp}</b></div><div><span>ПЕРВАЯ ПРОВЕРКА</span><b>{item.validation}</b></div></div></div>
-            <div className="product-card-foot"><span>Сложность реализации: {item.difficulty}</span><a href={`mailto:hello@craft.school?subject=${encodeURIComponent("CRAFT — хочу обсудить " + item.title)}`}>Обсудить с наставником <span>↗</span></a></div>
+            <div className="product-card-foot"><span>Сложность реализации: {item.difficulty}</span><a href={`/register?concept=${item.id}`}>Обсудить с наставником <span>↗</span></a></div>
           </article>)}
         </div>
       </section>
