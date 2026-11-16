@@ -36,7 +36,7 @@ export default function ProductsPage() {
           {products.map((item) => <article className="product-card" key={item.id}>
             <div className="product-card-head"><span>{item.id} / {item.type}</span><span className="product-arrow">↗</span></div>
             <div className="product-card-main"><h3>{item.title}</h3><p>{item.problem}</p><div className="product-fields"><div><span>ДЛЯ КОГО</span><b>{item.audience}</b></div><div><span>КАК МОЖЕТ ЗАРАБАТЫВАТЬ</span><b>{item.revenue}</b></div><div><span>ВОЗМОЖНЫЙ MVP</span><b>{item.mvp}</b></div><div><span>ПЕРВАЯ ПРОВЕРКА</span><b>{item.validation}</b></div></div></div>
-            <div className="product-card-foot"><span>Сложность реализации: {item.difficulty}</span><a href={`/register?concept=${item.id}`}>Обсудить с наставником <span>↗</span></a></div>
+            <div className="product-card-foot"><span>Сложность реализации: {item.difficulty}</span><a href={`/products/${item.id}`}>Подробнее о концепции <span>↗</span></a></div>
           </article>)}
         </div>
       </section>
