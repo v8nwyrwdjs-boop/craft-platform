@@ -81,3 +81,22 @@
 .learning-preview p:not(.eyebrow){font-size:12px;color:#686a62}
 .learning-preview>span{font-size:9px;letter-spacing:1px;color:#77796f;text-align:right}
 @media(max-width:760px){.detail-grid{grid-template-columns:1fr}.detail-action,.new-project-panel,.learning-preview{align-items:stretch;flex-direction:column}.detail-action{padding:25px}.new-project-panel form{max-width:none;flex-direction:column}.new-project-panel button{height:44px}.learning-preview>span{text-align:left}}
+
+/* Learning area */
+.learning-progress{padding:22px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:5px 12px;align-items:center}
+.learning-progress>b{font:700 22px Manrope}.learning-progress>span{font-size:11px;color:#77796f}
+.learning-progress>div{grid-column:1/-1;height:5px;background:#dedfd6;margin-top:8px}.learning-progress>div>i{display:block;height:100%;background:#9ab75c}
+.enrollment-note{padding:20px 22px;background:#e8e9e0;margin:24px 0;font-size:13px}.enrollment-note p{font-size:12px;line-height:1.7;color:#686a62;margin-bottom:0}
+.curriculum-list{margin-top:28px;border-top:1px solid var(--line)}
+.curriculum-card{display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;padding:25px 8px;border-bottom:1px solid var(--line)}
+.curriculum-number{font:700 24px Manrope;color:#9ab75c}.curriculum-main h2{font:700 19px Manrope;margin:0 0 6px}.curriculum-main p{font-size:12px;color:#686a62;margin:0 0 9px}.curriculum-main>span,.curriculum-locked{font-size:10px;color:#85877e}
+.curriculum-card>a{font-size:11px;font-weight:700}
+.module-lesson-list{border-top:1px solid var(--line);margin-bottom:40px}
+.module-lesson{padding:32px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:28px}
+.module-lesson>div:first-child>span{font-size:9px;letter-spacing:1px;color:#85877e;font-weight:700}
+.module-lesson h2{font:700 24px Manrope;letter-spacing:-.7px;margin:10px 0}
+.module-lesson>div:first-child>p{font-size:13px;line-height:1.8;color:#55584f;max-width:780px}
+.lesson-task{margin-top:22px;padding:20px;background:#e8e9e0;max-width:780px}.lesson-task>b{font-size:9px;letter-spacing:1px}.lesson-task p{font-size:12px;line-height:1.7;color:#55584f;margin-bottom:0}
+.lesson-status{align-self:start;padding-top:22px}.lesson-status button{border:1px solid var(--line);background:transparent;padding:12px 15px;font:600 10px 'DM Sans';cursor:pointer}.lesson-done{font-size:10px;color:#58752e;font-weight:700}
+.learning-preview>a{font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:760px){.curriculum-card{grid-template-columns:38px 1fr;gap:12px}.curriculum-card>a,.curriculum-locked{grid-column:2}.module-lesson{grid-template-columns:1fr}.lesson-status{padding-top:0}}
