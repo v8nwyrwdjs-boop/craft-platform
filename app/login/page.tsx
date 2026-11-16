@@ -8,8 +8,8 @@ const messages: Record<string, string> = {
   callback: "Ссылка подтверждения недействительна или устарела. Запроси новую.",
 };
 
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
-  const params = await searchParams;
+export default async function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
+  const params = searchParams;
   return (
     <main className="auth-shell">
       <header className="auth-top"><Link className="brand" href="/">CRAFT<span>®</span></Link><Link href="/">На главную ↗</Link></header>
