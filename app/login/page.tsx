@@ -9,7 +9,7 @@ const messages: Record<string, string> = {
   "reset-session": "Ссылка восстановления истекла. Запроси письмо ещё раз.",
 };
 
-export default async function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
+export default async function LoginPage({ searchParams }: { searchParams: { error?: string; next?: string } }) {
   const params = searchParams;
   return (
     <main className="auth-shell">
@@ -19,7 +19,7 @@ export default async function LoginPage({ searchParams }: { searchParams: { erro
         <h1>С возвращением<br /><em>к своему делу.</em></h1>
         <p className="auth-intro">Войди, чтобы продолжить работу над своим цифровым продуктом.</p>
         {params.error && <p className="auth-message error">{messages[params.error] ?? "Не удалось выполнить вход."}</p>}
-        <form action={signIn} className="auth-form">
+        <form action={signIn} className="auth-form"><input type="hidden" name="next" value={params.next ?? "/dashboard"} />
           <label>Email<input name="email" type="email" autoComplete="email" placeholder="you@example.com" required /></label>
           <label>Пароль<input name="password" type="password" autoComplete="current-password" placeholder="Твой пароль" required /></label>
           <button className="button button-dark auth-submit" type="submit">Войти в аккаунт <span>↗</span></button>
