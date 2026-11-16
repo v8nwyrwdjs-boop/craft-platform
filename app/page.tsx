@@ -17,7 +17,7 @@ export default function Home() {
           <a href="/products">Готовые концепции</a>
           <a href="#approach">Как работает</a>
         </nav>
-        <a className="header-cta" href="#choose">Выбрать свой путь <span>↗</span></a>
+        <div className="header-account"><a href="/login">Войти</a><a className="header-cta" href="/register">Создать аккаунт <span>↗</span></a></div>
       </header>
 
       <section className="hero wrap">
@@ -56,7 +56,7 @@ export default function Home() {
 
       <section className="format wrap" id="format"><p className="eyebrow">04 / ОБУЧЕНИЕ И ПОДДЕРЖКА</p><div className="format-grid"><h2>Делаешь сам.<br /><em>Не остаёшься один.</em></h2><div className="format-copy"><p>Базовый маршрут помогает двигаться самостоятельно. Когда нужна более глубокая помощь, можно подключить дополнительные форматы работы с наставником.</p><ul><li>Материалы и практические задания</li><li>Обратная связь по своему проекту</li><li>Консультации с наставником</li><li>Дополнительное сопровождение по запросу</li></ul></div></div></section>
 
-      <section className="apply wrap" id="apply"><div className="apply-panel"><p className="eyebrow">05 / СЛЕДУЮЩИЙ ШАГ</p><h2>Есть идея?<br /><em>Давай превратим её в продукт.</em></h2><p>Расскажи, что хочешь создать или в каком направлении хочешь разобраться. Обсудим, с чего начать.</p><a className="button button-light" href="mailto:hello@craft.school?subject=CRAFT%20%E2%80%94%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D1%81%D1%82%D0%B0%D1%80%D1%82">Обсудить старт <span>↗</span></a><small>Содержание программ и условия участия будут опубликованы после подготовки пилота.</small></div></section>
+      <section className="apply wrap" id="apply"><div className="apply-panel"><p className="eyebrow">05 / СЛЕДУЮЩИЙ ШАГ</p><h2>Есть идея?<br /><em>Давай превратим её в продукт.</em></h2><p>Расскажи, что хочешь создать или в каком направлении хочешь разобраться. Обсудим, с чего начать.</p><a className="button button-light" href="/register">Обсудить старт <span>↗</span></a><small>Содержание программ и условия участия будут опубликованы после подготовки пилота.</small></div></section>
       <footer className="footer wrap"><a className="brand" href="/">CRAFT<span>®</span></a><p>DIGITAL PRODUCT SCHOOL</p><span>© 2026 CRAFT. Создавай осмысленно.</span></footer>
     </main>
   );
