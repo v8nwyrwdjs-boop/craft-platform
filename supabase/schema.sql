@@ -41,10 +41,32 @@ create table if not exists public.lesson_progress (
   unique(student_id, program_slug, lesson_slug)
 );
 
+create table if not exists public.assignment_submissions (
+  id uuid primary key default gen_random_uuid(),
+  student_id uuid not null references auth.users(id) on delete cascade,
+  program_slug text not null default 'craft-foundation',
+  lesson_slug text not null,
+  response text not null check (char_length(response) between 20 and 20000),
+  status text not null default 'submitted' check (status in ('submitted', 'reviewing', 'revision_requested', 'accepted')),
+  submitted_at timestamptz not null default now()
+);
+create index if not exists assignment_submissions_student_lesson_idx on public.assignment_submissions(student_id, lesson_slug, submitted_at desc);
+
+create table if not exists public.mentor_feedback (
+  id uuid primary key default gen_random_uuid(),
+  submission_id uuid not null references public.assignment_submissions(id) on delete cascade,
+  student_id uuid not null references auth.users(id) on delete cascade,
+  mentor_id uuid not null references auth.users(id),
+  body text not null check (char_length(body) between 1 and 10000),
+  created_at timestamptz not null default now()
+);
+
 alter table public.profiles enable row level security;
 alter table public.student_projects enable row level security;
 alter table public.enrollments enable row level security;
 alter table public.lesson_progress enable row level security;
+alter table public.assignment_submissions enable row level security;
+alter table public.mentor_feedback enable row level security;
 
 drop policy if exists "Users can read their own profile" on public.profiles;
 create policy "Users can read their own profile" on public.profiles for select to authenticated using (auth.uid() = id);
@@ -65,6 +87,13 @@ create policy "Users can read their own enrollments" on public.enrollments for s
 
 drop policy if exists "Users can read their own lesson progress" on public.lesson_progress;
 create policy "Users can read their own lesson progress" on public.lesson_progress for select to authenticated using (auth.uid() = student_id);
+
+drop policy if exists "Users can read their own submissions" on public.assignment_submissions;
+create policy "Users can read their own submissions" on public.assignment_submissions for select to authenticated using (auth.uid() = student_id);
+drop policy if exists "Enrolled users can submit assignments" on public.assignment_submissions;
+create policy "Enrolled users can submit assignments" on public.assignment_submissions for insert to authenticated with check (auth.uid() = student_id and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = assignment_submissions.program_slug and e.status = 'active'));
+drop policy if exists "Students can read their own mentor feedback" on public.mentor_feedback;
+create policy "Students can read their own mentor feedback" on public.mentor_feedback for select to authenticated using (auth.uid() = student_id);
 drop policy if exists "Users can create their own lesson progress" on public.lesson_progress;
 create policy "Users can create their own lesson progress" on public.lesson_progress for insert to authenticated with check (auth.uid() = student_id and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = lesson_progress.program_slug and e.status = 'active'));
 drop policy if exists "Users can update their own lesson progress" on public.lesson_progress;
