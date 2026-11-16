@@ -20,7 +20,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
     <main className="dashboard-shell">
       <header className="dashboard-header wrap">
         <Link className="brand" href="/">CRAFT<span>®</span></Link>
-        <div className="dashboard-user"><span>{user.email}</span><form action={signOut}><button type="submit">Выйти ↗</button></form></div>
+        <div className="dashboard-user"><span>{user.email}</span>{["admin","mentor"].includes(user.app_metadata?.role) && <Link href="/admin">Панель команды ↗</Link>}<form action={signOut}><button type="submit">Выйти ↗</button></form></div>
       </header>
       <section className="dashboard-welcome wrap">
         <p className="eyebrow"><i /> ЛИЧНЫЙ КАБИНЕТ / CRAFT</p>
