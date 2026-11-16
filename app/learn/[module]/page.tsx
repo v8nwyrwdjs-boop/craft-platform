@@ -12,8 +12,9 @@ const modules = [
   { slug:"launch", title:"Запуск и развитие", result:"План выхода к пользователям и следующая итерация", lessons:[["Первый канал привлечения","Начни с канала, где уже присутствует твоя аудитория. Для узкого сегмента личные контакты и партнёрства могут быть эффективнее массовой рекламы.","Выбери один канал, опиши сообщение, целевое действие и критерий результата."],["Запуск и обратная связь","Запуск — это начало наблюдения за реальным использованием. Смотри, доходят ли пользователи до результата и где они застревают.","Подготовь план первых десяти пользователей и короткий сценарий сбора обратной связи."],["Метрики и план развития","Метрики должны отражать ценность и устойчивость: активацию, повторное использование, удержание, оплату и стоимость обслуживания.","Выбери три главные метрики на первый месяц и запланируй следующую продуктовую итерацию."]]},
 ];
 
-export default async function ModulePage({ params }: { params: { module: string } }) {
-  const item = modules.find((module)=>module.slug===params.module);
+export default async function ModulePage({ params }: { params: Promise<{ module: string }> }) {
+  const { module: moduleSlug } = await params;
+  const item = modules.find((module)=>module.slug===moduleSlug);
   if (!item) notFound();
   if (!hasSupabaseConfig()) redirect("/login");
   const supabase=await createClient();
