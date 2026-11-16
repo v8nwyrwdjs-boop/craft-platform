@@ -10,7 +10,9 @@ CRAFT — практическая школа создания цифровог�
 - GitHub Actions build workflow
 
 ## Локальный запуск
-Для локальной разработки установи Node.js 24. Затем:\n1. npm install\n2. Скопировать .env.example в .env.local.
+Для локальной разработки установи Node.js 24. Затем:
+1. npm install
+2. Скопировать .env.example в .env.local.
 3. Заполнить переменные Supabase.
 4. npm run dev.
 Откройте http://localhost:3000.
