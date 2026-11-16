@@ -36,17 +36,11 @@
 - reviewed_at
 - status
 
-### Application
-- id
-- contact_name
-- email
-- selected_path: direction | concept | undecided
-- direction_id (optional)
-- concept_id (optional)
-- message
-- status: new | contacted | meeting | offer | won | lost
-- consent_version
-- created_at
+### Account / Profile
+- User identity and credentials are managed by Supabase Auth.
+- Profile: id, display_name, created_at, updated_at.
+- Registration is free and does not grant paid-program access.
+
 
 ### StudentProject
 - id
