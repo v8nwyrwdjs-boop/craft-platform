@@ -1,108 +1,147 @@
 # CRAFT — предварительная доменная модель
 
-Эта модель описывает целевую структуру данных. Она не означает, что БД или API уже реализованы.
+Модель отражает текущую продуктовую логику. Физическая схема базы данных развивается в supabase/schema.sql.
 
-## Основные сущности
-
+## Identity and access
 ### User
-- id
-- email
+- id (UUID, Supabase Auth)
+- email (managed by Auth)
+- created_at
+
+### Profile
+- id (UUID, FK User)
 - display_name
-- role: student | mentor | admin
-- created_at
-
-### Direction
-- id / slug
-- title
-- summary
-- business_model
-- monetization_options
-- complexity_note
-- status
-- updated_at
-
-### BusinessConcept
-- id / slug
-- title
-- short_pitch
-- problem
-- target_audience
-- proposed_solution
-- monetization_hypotheses
-- mvp_scope
-- validation_plan
-- risks
-- research_status
-- reviewed_at
-- status
-
-### Account / Profile
-- User identity and credentials are managed by Supabase Auth.
-- Profile: id, display_name, created_at, updated_at.
-- Registration is free and does not grant paid-program access.
-
-
-### StudentProject
-- id
-- student_id
-- origin_type: own_idea | direction | concept
-- direction_id (optional)
-- concept_id (optional)
-- working_title
-- problem_hypothesis
-- audience_hypothesis
-- monetization_hypothesis
-- current_stage
-- project_status
 - created_at
 - updated_at
-
-### Program / Module / Lesson
-- Program: программа и её версия.
-- Module: упорядоченный блок программы.
-- Lesson: материал, цели и содержание урока.
-- Содержимое урока может включать текст, видео, ссылки, файлы и инструкции.
 
 ### Enrollment
 - id
 - student_id
-- program_id
-- project_id
-- access_status
-- started_at
-- completed_at
+- program_slug
+- status: pending | active | completed | cancelled
+- enrolled_at
 
-### Assignment / Submission / Feedback
-- Assignment: задача, критерии и дедлайн (если используется).
-- Submission: ответ ученика, вложения, версия и дата отправки.
-- Feedback: комментарий наставника, статус проверки и дата.
+Enrollment — отдельное решение о доступе к платной программе; регистрация сама по себе не зачисляет пользователя.
 
-### MentorAssignment
+## Student work
+### StudentProject
 - id
-- mentor_id
 - student_id
-- project_id
-- assigned_at
+- title
+- origin_type: own_idea | direction | concept
+- origin_slug (optional)
+- stage
+- status
+- created_at
+- updated_at
+
+Ученик может иметь несколько проектов и менять исходную бизнес-гипотезу в ходе исследования.
+
+### LessonProgress
+- id
+- student_id
+- program_slug
+- lesson_slug
+- status: in_progress | completed
+- completed_at
+- updated_at
+
+## Learning and feedback — planned
+### Program
+- slug
+- title
+- description
 - status
 
-### Service / Order / Payment
-- Service: описание и версия услуги, цена и условия.
-- Order: выбранная услуга, сумма, валюта и статус.
-- Payment: provider reference, сумма, валюта, статус и timestamps.
-- Секретные платёжные данные не хранятся в CRAFT.
+### Module
+- id
+- program_slug
+- title
+- position
+- expected_outcome
 
-## Ключевые отношения
-- Направление может содержать множество бизнес-концепций.
-- Ученик может иметь один или несколько проектов.
-- Проект может ссылаться на направление или исходную концепцию, но может быть изменён.
-- Заявка может ссылаться на направление или концепцию, но не обязана.
-- У ученика есть зачисление на программу и связанный проект.
-- Наставник назначается вручную на ученика/проект в 1.0.
-- Услуги и платежи отделены от учебного прогресса.
+### Lesson
+- id
+- module_id
+- title
+- content
+- position
 
-## Архитектурные решения
-- Каталог публичный и доступен без авторизации.
-- Учебный контент и ученические работы приватны.
-- Не делать концепцию жёстко связанной с проектом: ученик должен иметь возможность адаптировать или заменить её.
-- Хранить историю изменения ключевых гипотез проекта.
-- Версионировать учебную программу и коммерческие предложения.
+### Assignment
+- id
+- lesson_id
+- title
+- instructions
+- rubric
+
+### Submission
+- id
+- assignment_id
+- student_id
+- project_id
+- content
+- attachment_refs
+- status: submitted | reviewing | revision_requested | accepted
+- submitted_at
+
+### Feedback
+- id
+- submission_id
+- mentor_id
+- body
+- created_at
+
+## Catalogs
+### Direction
+- slug
+- title
+- description
+- monetization_models
+- examples
+- complexity
+- status
+
+### BusinessConcept
+- slug
+- title
+- problem
+- audience
+- revenue_hypothesis
+- mvp_hypothesis
+- validation_approach
+- status: draft | published | archived
+
+Каталоги пока статические frontend-данные. Перенос в управляемую БД/CMS — отдельная задача.
+
+## Operations — planned
+### MentorAssignment
+- id
+- student_id
+- mentor_id
+- project_id
+- status
+- assigned_at
+
+### Service
+- id
+- title
+- description
+- price
+- availability
+
+### Order / Payment
+- order_id
+- student_id
+- service_id
+- amount
+- currency
+- status
+- provider_reference
+
+Платёжные сущности добавлять только после утверждения юрисдикции, условий, провайдера и возвратной политики.
+
+## Access principles
+- Student reads and changes only own profile, projects and progress.
+- Enrollment is written only by authorized staff/backend.
+- Lesson content is visible only when the user has active enrollment.
+- Mentor/admin permissions require explicit roles and server-side checks; do not infer them from user-supplied form fields.
