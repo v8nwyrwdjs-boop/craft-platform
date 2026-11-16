@@ -22,7 +22,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   if (!["admin", "mentor"].includes(role)) redirect("/dashboard");
 
   const { data: submissions } = await supabase.from("assignment_submissions").select("id,student_id,lesson_slug,response,status,submitted_at").order("submitted_at", { ascending: false }).limit(100);
-  const studentIds = [...new Set((submissions ?? []).map((item) => item.student_id))];
+  const studentIds = Array.from(new Set((submissions ?? []).map((item) => item.student_id)));
   const { data: profiles } = studentIds.length
     ? await supabase.from("profiles").select("id,display_name").in("id", studentIds)
     : { data: [] as { id: string; display_name: string }[] };
