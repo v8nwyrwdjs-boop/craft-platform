@@ -29,7 +29,7 @@ export default function ConceptDetailPage({ params }: { params: { id: string } }
           <article><span>ПЕРВЫЙ MVP</span><p>{item.mvp}</p></article>
           <article><span>КАК ПРОВЕРЯТЬ</span><p>{item.validation}</p></article>
         </div>
-        <div className="catalog-bridge-inner detail-action"><div><p className="eyebrow">СЛЕДУЮЩИЙ ШАГ</p><h2>Адаптируй концепцию<br /><em>под свою аудиторию.</em></h2><p>Сохрани её в своём кабинете и продолжи исследование. Концепция — гипотеза, а не обещание результата.</p></div><form action={saveCatalogProject}><input type="hidden" name="origin_type" value="concept"/><input type="hidden" name="origin_slug" value={item.id}/><input type="hidden" name="title" value={item.title}/><button className="button button-dark" type="submit">Добавить в мои проекты ↗</button></form></div>
+        <div className="catalog-bridge-inner detail-action"><div><p className="eyebrow">СЛЕДУЮЩИЙ ШАГ</p><h2>Адаптируй концепцию<br /><em>под свою аудиторию.</em></h2><p>Сохрани её в своём кабинете и продолжи исследование. Концепция — гипотеза, а не обещание результата.</p></div><form action={saveCatalogProject}><input type="hidden" name="return_to" value={`/products/${item.id}`}/><input type="hidden" name="origin_type" value="concept"/><input type="hidden" name="origin_slug" value={item.id}/><input type="hidden" name="title" value={item.title}/><button className="button button-dark" type="submit">Добавить в мои проекты ↗</button></form></div>
       </section>
       <footer className="footer wrap"><Link className="brand" href="/">CRAFT<span>®</span></Link><p>DIGITAL PRODUCT SCHOOL</p><span>© 2026 CRAFT.</span></footer>
     </main>
