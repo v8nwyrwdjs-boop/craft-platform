@@ -8,6 +8,8 @@ const allowedOrigins = new Set(["own_idea", "direction", "concept"]);
 
 export async function saveCatalogProject(formData: FormData) {
   if (!hasSupabaseConfig()) redirect("/register?error=setup");
+  const returnTo = String(formData.get("return_to") ?? "/dashboard");
+  const safeReturn = /^\/(products|directions)\/[a-zA-Z0-9_-]+$/.test(returnTo) ? returnTo : "/dashboard";
   const originType = String(formData.get("origin_type") ?? "");
   const originSlug = String(formData.get("origin_slug") ?? "").trim();
   const title = String(formData.get("title") ?? "").trim();
@@ -17,7 +19,7 @@ export async function saveCatalogProject(formData: FormData) {
 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/login?next=/dashboard");
+  if (!user) redirect("/login?next=" + encodeURIComponent(safeReturn));
 
   const { error } = await supabase.from("student_projects").insert({
     student_id: user.id,
