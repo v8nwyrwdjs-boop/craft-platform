@@ -43,7 +43,7 @@ export default function DirectionsPage() {
             <h3>{item.title}</h3><p>{item.description}</p>
             <div className="direction-detail"><span>ВОЗМОЖНАЯ МОНЕТИЗАЦИЯ</span><b>{item.models}</b></div>
             <div className="direction-detail"><span>ПРИМЕРЫ</span><b>{item.examples}</b></div>
-            <div className="direction-bottom"><span>Сложность: {item.level}</span><a href="/register">Обсудить <span>↗</span></a></div>
+            <div className="direction-bottom"><span>Сложность: {item.level}</span><a href={`/directions/direction-${item.number}`}>Подробнее <span>↗</span></a></div>
           </article>)}
         </div>
       </section>
