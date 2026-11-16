@@ -112,3 +112,7 @@
 .mentor-feedback>b{font-size:9px;letter-spacing:1px;color:#526d31}
 .mentor-feedback p{font-size:12px;line-height:1.7;color:#404a34;margin:8px 0}
 .mentor-feedback time{font-size:9px;color:#71835a}
+
+.submission-preview{margin:0 0 12px;font-size:11px;color:#55584f}
+.submission-preview summary{cursor:pointer;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.submission-preview p{white-space:pre-wrap;font-size:11px;line-height:1.7;padding:12px;background:#faf9f4;border:1px solid var(--line)}
