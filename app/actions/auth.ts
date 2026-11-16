@@ -33,7 +33,7 @@ export async function signUp(formData: FormData) {
 export async function requestPasswordReset(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   if (!hasSupabaseConfig()) redirect("/forgot-password?error=setup");
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) redirect("/forgot-password?error=email");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect("/forgot-password?error=email");
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000") + "/auth/callback?next=/account/reset-password",
