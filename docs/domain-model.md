@@ -74,22 +74,26 @@ Enrollment — отдельное решение о доступе к платн
 - instructions
 - rubric
 
-### Submission
+### AssignmentSubmission
 - id
-- assignment_id
 - student_id
-- project_id
-- content
-- attachment_refs
+- program_slug
+- lesson_slug
+- response
 - status: submitted | reviewing | revision_requested | accepted
 - submitted_at
 
-### Feedback
+Implemented in public.assignment_submissions for text-only submissions. File attachments and a richer assignment relation remain planned.
+
+### MentorFeedback
 - id
 - submission_id
+- student_id
 - mentor_id
 - body
 - created_at
+
+Implemented in public.mentor_feedback. Staff inserts are limited by RLS to trusted admin/mentor app_metadata roles; students can read only their own feedback.
 
 ## Catalogs
 ### Direction
