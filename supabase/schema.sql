@@ -91,7 +91,7 @@ create policy "Users can read their own lesson progress" on public.lesson_progre
 drop policy if exists "Users can read their own submissions" on public.assignment_submissions;
 create policy "Users can read their own submissions" on public.assignment_submissions for select to authenticated using (auth.uid() = student_id);
 drop policy if exists "Enrolled users can submit assignments" on public.assignment_submissions;
-create policy "Enrolled users can submit assignments" on public.assignment_submissions for insert to authenticated with check (auth.uid() = student_id and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = assignment_submissions.program_slug and e.status = 'active'));
+create policy "Enrolled users can submit assignments" on public.assignment_submissions for insert to authenticated with check (auth.uid() = student_id and status = 'submitted' and exists (select 1 from public.enrollments e where e.student_id = auth.uid() and e.program_slug = assignment_submissions.program_slug and e.status = 'active'));
 drop policy if exists "Students can read their own mentor feedback" on public.mentor_feedback;
 create policy "Students can read their own mentor feedback" on public.mentor_feedback for select to authenticated using (auth.uid() = student_id);
 drop policy if exists "Users can create their own lesson progress" on public.lesson_progress;
