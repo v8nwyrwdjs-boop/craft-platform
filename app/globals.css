@@ -134,5 +134,5 @@
 .staff-review-form label{display:flex;flex-direction:column;gap:8px;font-size:10px;font-weight:700}
 .staff-review-form textarea{min-height:90px;padding:12px;border:1px solid var(--line);background:#fff;font:12px/1.6 'DM Sans';resize:vertical}
 .staff-review-form>div{display:flex;gap:10px;justify-content:flex-end}
-.staff-review-form select{min-width:170px;padding:0 10px;border:1px solid var(--line);background:#fff;font:11px 'DM Sans}
+.staff-review-form select{min-width:170px;padding:0 10px;border:1px solid var(--line);background:#fff;font:11px 'DM Sans';}
 @media(max-width:760px){.staff-enroll{grid-template-columns:1fr;padding:22px}.staff-review-form>div{flex-direction:column}.staff-review-form select,.staff-review-form button{height:43px}}
