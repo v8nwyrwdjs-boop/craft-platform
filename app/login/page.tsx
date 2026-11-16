@@ -9,8 +9,8 @@ const messages: Record<string, string> = {
   "reset-session": "Ссылка восстановления истекла. Запроси письмо ещё раз.",
 };
 
-export default async function LoginPage({ searchParams }: { searchParams: { error?: string; next?: string } }) {
-  const params = searchParams;
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
+  const params = await searchParams;
   return (
     <main className="auth-shell">
       <header className="auth-top"><Link className="brand" href="/">CRAFT<span>®</span></Link><Link href="/">На главную ↗</Link></header>
