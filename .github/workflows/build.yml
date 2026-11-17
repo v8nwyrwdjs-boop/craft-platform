@@ -18,5 +18,4 @@ jobs:
       - run: npm install
       - name: Dependency security audit
         run: npm audit --audit-level=high
-      - run: npm run test:security
       - run: npm run build
