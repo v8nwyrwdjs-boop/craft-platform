@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 import { createClient, hasSupabaseConfig } from "@/lib/supabase/server";
 import { safeInternalPath } from "@/lib/safe-internal-path";
 
@@ -17,18 +16,22 @@ async function siteUrl() {
   const configured = process.env.NEXT_PUBLIC_SITE_URL;
   if (configured) {
     const url = new URL(configured);
-    if (url.protocol !== "https:" && url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {
-      throw new Error("NEXT_PUBLIC_SITE_URL must use HTTPS");
+    const isLocal = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+    if ((url.protocol !== "https:" && !isLocal) || url.username || url.password) {
+      throw new Error("NEXT_PUBLIC_SITE_URL must be a valid HTTPS origin");
     }
     return url.origin;
   }
-  const requestHeaders = await headers();
-  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
-  if (!host || !/^[a-z0-9.-]+(?::[0-9]{1,5})?$/i.test(host)) {
-    throw new Error("Unable to determine the application URL");
+
+  // Vercel provides a deployment-specific hostname. Do not trust the incoming
+  // Host / X-Forwarded-Host headers for security-sensitive email links.
+  const deploymentHost = process.env.VERCEL_URL;
+  if (deploymentHost && /^[a-z0-9.-]+$/i.test(deploymentHost)) {
+    return `https://${deploymentHost}`;
   }
-  const local = host.startsWith("localhost") || host.startsWith("127.0.0.1");
-  return `${local ? "http" : "https"}://${host}`;
+
+  if (process.env.NODE_ENV !== "production") return "http://localhost:3000";
+  throw new Error("Set NEXT_PUBLIC_SITE_URL or deploy on Vercel before sending auth emails");
 }
 
 export async function signUp(formData: FormData) {
@@ -36,7 +39,7 @@ export async function signUp(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   const password = rawValue(formData, "password");
   if (!hasSupabaseConfig()) redirect("/register?error=setup");
-  if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 8) {
+  if (name.length < 2 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || password.length < 8) {
     redirect("/register?error=validation");
   }
 
@@ -57,7 +60,7 @@ export async function signUp(formData: FormData) {
 export async function requestPasswordReset(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   if (!hasSupabaseConfig()) redirect("/forgot-password?error=setup");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect("/forgot-password?error=email");
+  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) redirect("/forgot-password?error=email");
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: (await siteUrl()) + "/auth/callback?next=/account/reset-password",
