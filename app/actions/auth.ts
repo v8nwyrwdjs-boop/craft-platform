@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { createClient, hasSupabaseConfig } from "@/lib/supabase/server";
 import { safeInternalPath } from "@/lib/safe-internal-path";
 
@@ -10,6 +11,24 @@ function value(formData: FormData, key: string) {
 
 function rawValue(formData: FormData, key: string) {
   return String(formData.get(key) ?? "");
+}
+
+async function siteUrl() {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL;
+  if (configured) {
+    const url = new URL(configured);
+    if (url.protocol !== "https:" && url.hostname !== "localhost" && url.hostname !== "127.0.0.1") {
+      throw new Error("NEXT_PUBLIC_SITE_URL must use HTTPS");
+    }
+    return url.origin;
+  }
+  const requestHeaders = await headers();
+  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
+  if (!host || !/^[a-z0-9.-]+(?::[0-9]{1,5})?$/i.test(host)) {
+    throw new Error("Unable to determine the application URL");
+  }
+  const local = host.startsWith("localhost") || host.startsWith("127.0.0.1");
+  return `${local ? "http" : "https"}://${host}`;
 }
 
 export async function signUp(formData: FormData) {
@@ -27,7 +46,7 @@ export async function signUp(formData: FormData) {
     password,
     options: {
       data: { display_name: name },
-      emailRedirectTo: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000") + "/auth/callback",
+      emailRedirectTo: (await siteUrl()) + "/auth/callback",
     },
   });
   if (error) redirect("/register?error=signup");
@@ -41,7 +60,7 @@ export async function requestPasswordReset(formData: FormData) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect("/forgot-password?error=email");
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000") + "/auth/callback?next=/account/reset-password",
+    redirectTo: (await siteUrl()) + "/auth/callback?next=/account/reset-password",
   });
   if (error) redirect("/forgot-password?error=send");
   redirect("/forgot-password?success=sent");
