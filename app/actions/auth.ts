@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { createClient, hasSupabaseConfig } from "@/lib/supabase/server";
 import { safeInternalPath } from "@/lib/safe-internal-path";
+import { getSiteOrigin } from "@/lib/site-url";
 
 function value(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
@@ -12,27 +13,6 @@ function rawValue(formData: FormData, key: string) {
   return String(formData.get(key) ?? "");
 }
 
-async function siteUrl() {
-  const configured = process.env.NEXT_PUBLIC_SITE_URL;
-  if (configured) {
-    const url = new URL(configured);
-    const isLocal = url.hostname === "localhost" || url.hostname === "127.0.0.1";
-    if ((url.protocol !== "https:" && !isLocal) || url.username || url.password) {
-      throw new Error("NEXT_PUBLIC_SITE_URL must be a valid HTTPS origin");
-    }
-    return url.origin;
-  }
-
-  // Vercel provides a deployment-specific hostname. Do not trust incoming
-  // Host / X-Forwarded-Host headers for security-sensitive email links.
-  const deploymentHost = process.env.VERCEL_URL;
-  if (deploymentHost && /^[a-z0-9.-]+$/i.test(deploymentHost)) {
-    return "https://" + deploymentHost;
-  }
-
-  if (process.env.NODE_ENV !== "production") return "http://localhost:3000";
-  throw new Error("Set NEXT_PUBLIC_SITE_URL or deploy on Vercel before sending auth emails");
-}
 
 export async function signUp(formData: FormData) {
   const name = value(formData, "name");
@@ -49,7 +29,7 @@ export async function signUp(formData: FormData) {
     password,
     options: {
       data: { display_name: name },
-      emailRedirectTo: (await siteUrl()) + "/auth/callback",
+      emailRedirectTo: getSiteOrigin() + "/auth/callback",
     },
   });
   if (error) redirect("/register?error=signup");
@@ -63,7 +43,7 @@ export async function requestPasswordReset(formData: FormData) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect("/forgot-password?error=email");
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: (await siteUrl()) + "/auth/callback?next=/account/reset-password",
+    redirectTo: getSiteOrigin() + "/auth/callback?next=/account/reset-password",
   });
   if (error) redirect("/forgot-password?error=send");
   redirect("/forgot-password?success=sent");
