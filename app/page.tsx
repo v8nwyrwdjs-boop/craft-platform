@@ -33,6 +33,17 @@ export default function Home() {
         <div className="header-account"><a href="/login">Войти</a><a className="header-cta" href="/register">Присоединиться <span>↗</span></a></div>
       </header>
 
+      <nav className="home-category-nav wrap" aria-label="Популярные направления">
+        <a href="#products" className="category-pill category-featured">Популярное <span>✳</span></a>
+        <a href="#directions" className="category-pill">Искусственный интеллект</a>
+        <a href="#directions" className="category-pill">Разработка с ИИ</a>
+        <a href="#directions" className="category-pill">SaaS и сервисы</a>
+        <a href="#directions" className="category-pill">Автоматизация</a>
+        <a href="#directions" className="category-pill">Дизайн</a>
+        <a href="#directions" className="category-pill">Медиа и контент</a>
+        <a href="#directions" className="category-pill">Web3</a>
+      </nav>
+
       <section className="hero wrap">
         <div className="hero-copy">
           <p className="eyebrow"><i /> ШКОЛА ЦИФРОВЫХ ПРОДУКТОВ</p>
@@ -56,6 +67,56 @@ export default function Home() {
       <div className="ticker" aria-label="Принципы CRAFT"><div>ДУМАТЬ <b>✳</b> СОЗДАВАТЬ <b>✳</b> ПРОВЕРЯТЬ <b>✳</b> ЗАПУСКАТЬ <b>✳</b> ДУМАТЬ <b>✳</b> СОЗДАВАТЬ <b>✳</b> ПРОВЕРЯТЬ <b>✳</b> ЗАПУСКАТЬ <b>✳</b></div></div>
 
       <ProductShowcase />
+
+      <section className="offers-section" id="formats">
+        <div className="wrap">
+          <div className="section-head offers-heading">
+            <div><p className="eyebrow">02 / ВЫБЕРИ ФОРМАТ УЧАСТИЯ</p><h2>Один продукт.<br /><em>Три уровня поддержки.</em></h2></div>
+            <p>Можно начать с самостоятельного изучения, подключить наставника или пройти путь создания продукта вместе с командой CRAFT.</p>
+          </div>
+          <div className="offer-grid">
+            <article className="offer-card">
+              <div className="offer-top"><span>01 / САМОСТОЯТЕЛЬНО</span><span className="offer-mark">↗</span></div>
+              <h3>База</h3>
+              <p className="offer-price">2 000 ₽ <small>/ разово</small></p>
+              <p className="offer-summary">Понятный маршрут, чтобы разобраться в теме и попробовать всё своими руками.</p>
+              <ul><li>Структурированные уроки от основ</li><li>Пошаговые инструкции и примеры</li><li>Шаблоны, чек-листы и полезные материалы</li><li>Доступ к обновлениям программы</li></ul>
+              <a className="offer-link" href="/register">Изучить программу <b>↗</b></a>
+            </article>
+            <article className="offer-card offer-card-featured">
+              <div className="offer-top"><span>02 / С НАСТАВНИКОМ</span><span className="offer-mark">✳</span></div>
+              <div className="offer-ribbon">ПОПУЛЯРНЫЙ ФОРМАТ</div>
+              <h3>С сопровождением</h3>
+              <p className="offer-price">10 000 ₽ <small>/ программа</small></p>
+              <p className="offer-summary">Не просто смотришь уроки — разбираешь свои решения с человеком, который помогает двигаться дальше.</p>
+              <ul><li>Всё из самостоятельного формата</li><li>Стартовая встреча с наставником</li><li>Разбор твоего проекта и обратная связь</li><li>Групповые встречи и помощь с вопросами</li></ul>
+              <a className="offer-link" href="/register">Выбрать сопровождение <b>↗</b></a>
+            </article>
+            <article className="offer-card">
+              <div className="offer-top"><span>03 / СОЗДАЁМ ВМЕСТЕ</span><span className="offer-mark">↗</span></div>
+              <h3>Под ключ</h3>
+              <p className="offer-price">40 000 ₽ <small>/ проект</small></p>
+              <p className="offer-summary">Максимальная поддержка: от настройки инструментов до собственной рабочей версии продукта.</p>
+              <ul><li>Всё из формата с наставником</li><li>Персональный план создания продукта</li><li>Совместная настройка инструментов на твоём устройстве</li><li>Пошаговая разработка и проверка результата</li></ul>
+              <a className="offer-link" href="/register">Обсудить свой проект <b>↗</b></a>
+            </article>
+          </div>
+          <p className="offer-disclaimer">Цены и состав пакетов — проектная модель для тестирования спроса. Точные сроки, объём встреч, поддержка и условия будут закреплены в описании каждой программы до открытия продаж.</p>
+        </div>
+      </section>
+
+      <section className="membership-section" id="membership">
+        <div className="wrap membership-grid">
+          <div><p className="eyebrow">03 / CRAFT CLUB</p><h2>Не учиться в одиночку.<br /><em>Быть среди своих.</em></h2><p className="membership-lead">Подписка для тех, кто хочет оставаться в движении, получать новые идеи и иметь место, где можно спросить, показать прогресс и найти единомышленников.</p></div>
+          <article className="membership-card">
+            <div className="offer-top"><span>ЕЖЕМЕСЯЧНАЯ ПОДПИСКА</span><span className="offer-mark">✳</span></div>
+            <p className="membership-price">990 ₽ <small>/ месяц</small></p>
+            <ul><li>Закрытое сообщество участников CRAFT</li><li>Ежемесячные практические воркшопы</li><li>Библиотека шаблонов, инструкций и разборов</li><li>Групповые часы вопросов и ответов</li><li>Специальные цены на программы и мероприятия</li><li>Ранний доступ к новым направлениям</li></ul>
+            <a className="button button-dark" href="/register">Присоединиться к сообществу <span>↗</span></a>
+            <small className="membership-note">Подписка не заменяет персональное наставничество и не включает индивидуальную разработку проекта.</small>
+          </article>
+        </div>
+      </section>
 
       <section className="directions-section" id="directions">
         <div className="wrap">
