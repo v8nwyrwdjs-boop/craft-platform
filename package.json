@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test:security": "node --experimental-strip-types --test tests/security/*.test.mjs"
   },
   "dependencies": {
     "next": "16.4.6",
