@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { isValidLessonForModule, isValidLessonSlug } from "../../lib/curriculum.ts";
+import { curriculum, isValidLessonForModule, isValidLessonSlug } from "../../lib/curriculum.ts";
 
 test("accepts all known lesson identifiers", () => {
   for (const module of ["idea", "research", "validation", "business-model", "mvp", "launch"]) {
@@ -22,4 +22,15 @@ test("requires the submitted lesson to belong to the selected module", () => {
   assert.equal(isValidLessonForModule("idea-1", "research"), false);
   assert.equal(isValidLessonForModule("business-model-2", "business-model"), true);
   assert.equal(isValidLessonForModule("business-model-2", "business"), false);
+});
+
+test("every lesson has a concrete task and a defined deliverable", () => {
+  assert.equal(curriculum.length, 6);
+  for (const module of curriculum) {
+    assert.equal(module.lessons.length, 3, module.slug);
+    for (const lesson of module.lessons) {
+      assert.ok(lesson.task.length >= 20, `${module.slug}: missing task`);
+      assert.ok(lesson.deliverable.length >= 20, `${module.slug}: missing deliverable`);
+    }
+  }
 });
