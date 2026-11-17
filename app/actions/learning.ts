@@ -3,12 +3,13 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient, hasSupabaseConfig } from "@/lib/supabase/server";
+import { isValidLessonSlug } from "@/lib/curriculum-validation";
 
 export async function completeLesson(formData: FormData) {
   if (!hasSupabaseConfig()) redirect("/login");
   const lessonSlug = String(formData.get("lesson_slug") ?? "");
   const programSlug = "craft-foundation";
-  if (!/^[a-z0-9-]{2,80}$/.test(lessonSlug)) redirect("/learn");
+  if (!isValidLessonSlug(lessonSlug)) redirect("/learn?error=lesson");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
