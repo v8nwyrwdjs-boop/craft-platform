@@ -8,10 +8,14 @@ function value(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
 }
 
+function rawValue(formData: FormData, key: string) {
+  return String(formData.get(key) ?? "");
+}
+
 export async function signUp(formData: FormData) {
   const name = value(formData, "name");
   const email = value(formData, "email").toLowerCase();
-  const password = value(formData, "password");
+  const password = rawValue(formData, "password");
   if (!hasSupabaseConfig()) redirect("/register?error=setup");
   if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 8) {
     redirect("/register?error=validation");
