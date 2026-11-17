@@ -17,7 +17,7 @@ export default async function DirectionDetailPage({ params }: { params: Promise<
   if (!item) notFound();
   return (
     <main className="catalog-page">
-      <header className="header wrap"><Link className="brand" href="/">CRAFT<span>®</span></Link><nav><Link href="/directions">Все направления</Link><Link href="/products">Готовые концепции</Link></nav><Link className="header-cta" href="/dashboard">Личный кабинет ↗</Link></header>
+      <header className="header wrap"><Link className="brand" href="/">CRAFT<span>®</span></Link><nav><Link href="/directions">Все направления</Link><Link href="/products">Готовые концепции</Link><Link href="/formats">Форматы</Link></nav><Link className="header-cta" href="/dashboard">Личный кабинет ↗</Link></header>
       <section className="catalog-hero wrap">
         <p className="eyebrow"><i /> CRAFT / НАПРАВЛЕНИЕ {item.number}</p><p className="catalog-kicker">ПУТЬ 01 — ИССЛЕДОВАНИЕ</p>
         <h1>{item.title}</h1><p className="catalog-lead">{item.description}</p>
