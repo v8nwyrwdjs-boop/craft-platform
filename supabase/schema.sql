@@ -135,6 +135,10 @@ create policy "Staff can read all submissions" on public.assignment_submissions 
 drop policy if exists "Staff can review submissions" on public.assignment_submissions;
 create policy "Staff can review submissions" on public.assignment_submissions for update to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor')) with check ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
 
+-- Staff may change only the review status, never student content or ownership.
+revoke update on public.assignment_submissions from authenticated;
+grant update (status) on public.assignment_submissions to authenticated;
+
 drop policy if exists "Staff can read all mentor feedback" on public.mentor_feedback;
 create policy "Staff can read all mentor feedback" on public.mentor_feedback for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
 drop policy if exists "Staff can create mentor feedback" on public.mentor_feedback;
