@@ -29,6 +29,8 @@ test("every lesson has a concrete task and a defined deliverable", () => {
   for (const module of curriculum) {
     assert.equal(module.lessons.length, 3, module.slug);
     for (const lesson of module.lessons) {
+      assert.ok(lesson.title.length >= 5, `${module.slug}: missing title`);
+      assert.ok(lesson.body.length >= 100, `${module.slug}: lesson explanation is too short`);
       assert.ok(lesson.task.length >= 20, `${module.slug}: missing task`);
       assert.ok(lesson.deliverable.length >= 20, `${module.slug}: missing deliverable`);
     }
