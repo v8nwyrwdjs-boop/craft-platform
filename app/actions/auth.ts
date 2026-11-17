@@ -23,11 +23,11 @@ async function siteUrl() {
     return url.origin;
   }
 
-  // Vercel provides a deployment-specific hostname. Do not trust the incoming
+  // Vercel provides a deployment-specific hostname. Do not trust incoming
   // Host / X-Forwarded-Host headers for security-sensitive email links.
   const deploymentHost = process.env.VERCEL_URL;
   if (deploymentHost && /^[a-z0-9.-]+$/i.test(deploymentHost)) {
-    return `https://${deploymentHost}`;
+    return "https://" + deploymentHost;
   }
 
   if (process.env.NODE_ENV !== "production") return "http://localhost:3000";
@@ -39,7 +39,7 @@ export async function signUp(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   const password = rawValue(formData, "password");
   if (!hasSupabaseConfig()) redirect("/register?error=setup");
-  if (name.length < 2 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || password.length < 8) {
+  if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 8) {
     redirect("/register?error=validation");
   }
 
@@ -60,7 +60,7 @@ export async function signUp(formData: FormData) {
 export async function requestPasswordReset(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   if (!hasSupabaseConfig()) redirect("/forgot-password?error=setup");
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) redirect("/forgot-password?error=email");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect("/forgot-password?error=email");
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: (await siteUrl()) + "/auth/callback?next=/account/reset-password",
