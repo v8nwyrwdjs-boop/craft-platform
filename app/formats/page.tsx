@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Форматы обучения и сопровождения",
+  description: "Сравни форматы CRAFT: самостоятельное обучение, наставничество, разработка цифрового продукта под ключ и CRAFT CLUB.",
+};
+
 import Link from "next/link";
 
 const formats = [
