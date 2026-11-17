@@ -582,3 +582,27 @@ a,button{touch-action:manipulation}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Mobile navigation and curriculum refinements */
+@media(max-width:760px){
+  .home-page .header,.formats-page .header{height:auto;min-height:70px;flex-wrap:wrap;padding-block:10px}
+  .home-page .header nav,.formats-page .header nav{display:flex;order:3;width:100%;max-width:100%;overflow-x:auto;gap:22px;padding:7px 0 3px;white-space:nowrap;scrollbar-width:none}
+  .home-page .header nav::-webkit-scrollbar,.formats-page .header nav::-webkit-scrollbar{display:none}
+  .home-page .header nav a,.formats-page .header nav a{display:inline-flex;align-items:center;min-height:34px;flex:0 0 auto;font-size:11px}
+  .formats-page .header-account{margin-left:auto}
+  .dashboard-header{min-height:70px;gap:12px}
+  .dashboard-header>a:last-child{display:inline-flex;align-items:center;min-height:42px;font-size:11px}
+  .curriculum-card{grid-template-columns:38px minmax(0,1fr);gap:12px;padding:19px 16px}
+  .curriculum-main{min-width:0}
+  .curriculum-main h2{font-size:18px;line-height:1.3}
+  .curriculum-main p{font-size:11px;line-height:1.65}
+  .curriculum-card>a,.curriculum-locked{grid-column:2;justify-self:start;min-height:40px;display:inline-flex;align-items:center}
+  .learning-progress{grid-template-columns:auto 1fr;gap:7px 10px}
+  .learning-progress>div{grid-column:1/-1}
+}
+@media(max-width:390px){
+  .home-page .header nav,.formats-page .header nav{gap:17px}
+  .home-page .header nav a,.formats-page .header nav a{font-size:10px}
+  .formats-page .header .brand{font-size:23px}
+  .formats-page .header-cta{font-size:10px;padding-inline:11px}
+}
