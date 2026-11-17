@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient, hasSupabaseConfig } from "@/lib/supabase/server";
+import { safeInternalPath } from "@/lib/safe-internal-path";
 
 export async function GET(request: Request) {
   const parsed = new URL(request.url);
@@ -10,6 +11,6 @@ export async function GET(request: Request) {
   const supabase = await createClient();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
   if (error) return NextResponse.redirect(new URL("/login?error=callback", parsed.origin));
-  const safeNext = next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
+  const safeNext = safeInternalPath(next);
   return NextResponse.redirect(new URL(safeNext, parsed.origin));
 }
