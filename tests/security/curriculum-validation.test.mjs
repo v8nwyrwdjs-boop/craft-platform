@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { isValidLessonForModule, isValidLessonSlug } from "../../lib/curriculum-validation.ts";
+import { isValidLessonForModule, isValidLessonSlug } from "../../lib/curriculum.ts";
 
 test("accepts all known lesson identifiers", () => {
   for (const module of ["idea", "research", "validation", "business-model", "mvp", "launch"]) {
