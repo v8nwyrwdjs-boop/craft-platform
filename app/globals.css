@@ -606,3 +606,7 @@ a,button{touch-action:manipulation}
   .formats-page .header .brand{font-size:23px}
   .formats-page .header-cta{font-size:10px;padding-inline:11px}
 }
+
+/* Clear distinction between the exercise and the evidence a learner should produce. */
+.lesson-output{background:#f1f4e9;border-left:3px solid #a5c75f}
+.lesson-output>b{color:#526d31}
