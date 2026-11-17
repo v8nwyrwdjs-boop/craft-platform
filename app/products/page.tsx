@@ -15,7 +15,8 @@ export default function ProductsPage() {
         <nav aria-label="Основная навигация">
           <a href="/directions">Направления</a>
           <a href="/products">Готовые концепции</a>
-          <a href="/#approach">Как работает CRAFT</a>
+          <a href="/formats">Форматы</a>
+          <a href="/#method">Как работает CRAFT</a>
         </nav>
         <a className="header-cta" href="/register">Обсудить концепцию <span>↗</span></a>
       </header>
