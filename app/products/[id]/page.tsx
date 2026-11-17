@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { saveCatalogProject } from "@/app/actions/projects";
@@ -10,6 +11,17 @@ const concepts = [
   { id:"C-05", slug:"C-05", type:"DATA SUBSCRIPTION", title:"Отраслевая база данных с регулярными обновлениями", problem:"Специалисты тратят часы на сбор разрозненной информации, которая быстро устаревает.", audience:"Профессионалы одной конкретной отрасли", revenue:"Подписка на доступ; командные тарифы", mvp:"Курируемая база, фильтры, карточки объектов и дата обновления", difficulty:"Средняя", validation:"Проверить частоту использования информации и ценность актуальности для конкретной аудитории." },
   { id:"C-06", slug:"C-06", type:"CALCULATOR / SAAS", title:"Калькулятор решений для профессиональной ниши", problem:"Специалисты вручную считают стоимость, сроки или параметры по сложным таблицам и разрозненным правилам.", audience:"Одна профессия или сегмент малого бизнеса", revenue:"Бесплатный базовый инструмент и платные функции либо подписка", mvp:"Один точный сценарий расчёта, сохранение результата и экспорт", difficulty:"Низкая / средняя", validation:"Проверить, насколько часто выполняется расчёт, сколько ошибок он создаёт и кто платит за решение." },
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const item = concepts.find((concept) => concept.id === id.toUpperCase());
+  if (!item) return { robots: { index: false, follow: false } };
+  return {
+    title: item.title,
+    description: item.problem,
+    openGraph: { title: item.title, description: item.problem, type: "article" },
+  };
+}
 
 export default async function ConceptDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
