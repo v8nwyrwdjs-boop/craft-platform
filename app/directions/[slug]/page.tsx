@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { saveCatalogProject } from "@/app/actions/projects";
@@ -10,6 +11,17 @@ const directions = [
   { slug:"direction-05", number:"05", title:"Сервисы автоматизации", description:"Инструменты, которые убирают повторяющуюся ручную работу у частных специалистов и компаний.", models:"Подписка · пакеты операций · внедрение", examples:"Запись клиентов, уведомления, отчёты, интеграции", level:"Низкая / средняя", questions:["Какая ручная операция повторяется чаще всего?","Какие ошибки и задержки возникают сейчас?","Можно ли проверить ценность автоматизации на одном процессе?"] },
   { slug:"direction-06", number:"06", title:"Нишевые цифровые продукты", description:"Узкие решения для определённой аудитории. Часто их проще проверить на небольшом сегменте рынка.", models:"Разовая покупка · подписка · платные функции", examples:"Калькуляторы, конфигураторы, базы данных, отраслевые инструменты", level:"Зависит от идеи", questions:["Кто конкретно будет пользоваться продуктом?","Как часто у этой аудитории возникает задача?","Какая минимальная версия уже решает её целиком?"] },
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const item = directions.find((direction) => direction.slug === slug);
+  if (!item) return { robots: { index: false, follow: false } };
+  return {
+    title: item.title,
+    description: item.description,
+    openGraph: { title: item.title, description: item.description, type: "article" },
+  };
+}
 
 export default async function DirectionDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
