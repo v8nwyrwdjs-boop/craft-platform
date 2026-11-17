@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient, hasSupabaseConfig } from "@/lib/supabase/server";
+import { safeInternalPath } from "@/lib/safe-internal-path";
 
 function value(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
@@ -58,7 +59,7 @@ export async function signIn(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
   const password = value(formData, "password");
   const requestedNext = value(formData, "next");
-  const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
+  const next = safeInternalPath(requestedNext);
   if (!hasSupabaseConfig()) redirect("/login?error=setup");
   if (!email || !password) redirect("/login?error=validation");
 
