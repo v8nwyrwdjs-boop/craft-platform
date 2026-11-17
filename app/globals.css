@@ -316,3 +316,66 @@
 @media(max-width:900px){.offer-grid{grid-template-columns:1fr 1fr}.offer-card:last-child{grid-column:1/-1;min-height:450px}.membership-grid{gap:35px}}
 @media(max-width:760px){.home-category-nav{width:100%;padding-left:20px;padding-right:20px;gap:8px}.category-pill{padding:11px 15px;font-size:11px}.offers-section,.membership-section{padding:75px 0}.offer-grid{grid-template-columns:1fr}.offer-card:last-child{grid-column:auto;min-height:0}.offer-card{min-height:0;padding:25px}.offer-summary{min-height:0}.membership-grid{grid-template-columns:1fr;gap:28px}.membership-card{padding:25px}.hero-art,.showcase-art,.apply-panel{border-radius:20px}.direction-tile{border-radius:18px}}
 @media(prefers-reduced-motion:reduce){.category-pill,.button,.offer-card,.membership-card,.direction-tile{transition:none}}
+
+
+/* CRAFT Control Room */
+.admin-shell{min-height:100vh;background:#f3f2ec;color:#20221f}
+.admin-top{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d9d9d0}
+.admin-top-right{display:flex;align-items:center;gap:24px;font-size:12px;font-weight:600}
+.admin-role{font-size:9px;letter-spacing:1.5px;color:#7b7e73}
+.admin-hero{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;padding-block:76px 58px}
+.admin-hero h1{font:800 clamp(52px,7vw,82px)/.98 Manrope,sans-serif;letter-spacing:-5px;margin:22px 0}
+.admin-hero h1 em{font-style:normal;color:#92958a}
+.admin-hero>div:first-child>p:last-child{max-width:520px;color:#707269;font-size:14px;line-height:1.8}
+.admin-hero-aside{min-width:245px;padding:22px 24px;background:#e8e9e0;border-radius:18px;display:flex;flex-direction:column;gap:9px}
+.admin-hero-aside span,.admin-stat>span{font-size:9px;letter-spacing:1.5px;color:#898c81;font-weight:700}
+.admin-hero-aside strong{font-size:12px;overflow-wrap:anywhere}
+.admin-hero-aside small{font-size:10px;color:#85877e}
+.admin-content{padding-bottom:70px}
+.admin-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.admin-stat{padding:23px;background:#fff;border:1px solid #e2e2d9;border-radius:18px;display:flex;flex-direction:column;gap:10px}
+.admin-stat strong{font:800 38px Manrope,sans-serif;letter-spacing:-2px}
+.admin-stat small{font-size:10px;color:#85877e}
+.admin-panel{padding:30px;background:#20221f;color:#f3f2ec;border-radius:22px;margin:0 0 64px;display:flex;justify-content:space-between;align-items:center;gap:30px}
+.admin-panel .eyebrow{color:#b6baaa}.admin-panel h2{font:700 25px Manrope;margin:10px 0}.admin-panel p:not(.eyebrow){max-width:530px;color:#b8bbb1;font-size:12px;line-height:1.7}
+.admin-panel form{display:flex;gap:8px;min-width:390px}
+.admin-panel input,.admin-panel button{height:46px;border:0;border-radius:999px;padding:0 17px;font:600 11px 'DM Sans',sans-serif}
+.admin-panel input{flex:1;min-width:0;background:#fff;color:#20221f}
+.admin-panel button{background:#c8f169;color:#20221f;cursor:pointer;white-space:nowrap}
+.admin-section{margin:0 0 68px;scroll-margin-top:25px}
+.admin-section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:23px}
+.admin-section-head h2{font:700 35px Manrope,sans-serif;letter-spacing:-1.8px;margin:8px 0 0}
+.admin-section-head>span{font-size:11px;color:#85877e}
+.admin-table-wrap{overflow-x:auto;background:#fff;border:1px solid #e2e2d9;border-radius:18px}
+.admin-table{width:100%;border-collapse:collapse;text-align:left;min-width:680px}
+.admin-table th{font-size:9px;letter-spacing:1.2px;color:#898c81;font-weight:700;padding:16px 20px;border-bottom:1px solid #e8e8e1}
+.admin-table td{font-size:11px;padding:16px 20px;border-bottom:1px solid #eeeeea;color:#686a62}
+.admin-table tr:last-child td{border-bottom:0}
+.admin-table td strong{display:block;color:#20221f;font-size:12px}
+.admin-table td small{display:block;color:#999b92;font-size:9px;margin-top:4px}
+.admin-table code{font-size:9px;color:#85877e}
+.admin-table a{color:#687f38;font-weight:700}
+.admin-footnote{font-size:10px;color:#92948a;margin:12px 2px}
+.admin-record-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.admin-record{background:#fff;border:1px solid #e2e2d9;border-radius:18px;padding:22px}
+.admin-record>div{display:flex;justify-content:space-between;gap:10px;color:#85877e;font-size:9px}
+.admin-record h3{font:700 18px Manrope;margin:24px 0 9px}
+.admin-record p{font-size:11px;color:#77796f}
+.admin-record>b{display:inline-block;margin-top:8px;padding:7px 10px;border-radius:99px;background:#edf2e3;color:#627a35;font-size:9px}
+.admin-empty{padding:30px;background:#fff;border:1px dashed #d4d5ca;border-radius:18px;color:#85877e;font-size:12px}
+.admin-status{display:inline-block;padding:6px 9px;border-radius:99px;background:#efefe9;color:#73766c;font-size:9px}
+.admin-status.active{background:#e8f2d8;color:#55732c}
+.admin-review-list{display:grid;gap:14px}
+.admin-review{padding:25px;background:#fff;border:1px solid #e2e2d9;border-radius:18px}
+.admin-review-meta{display:flex;align-items:center;gap:15px;flex-wrap:wrap;font-size:10px;color:#85877e}
+.admin-review-meta strong{font-size:12px;color:#20221f}
+.admin-review-answer{margin:20px 0;padding:18px;background:#f5f5f0;border-radius:12px;white-space:pre-wrap;font-size:12px;line-height:1.75;color:#55584f}
+.admin-review .staff-review-form{display:grid;gap:12px}
+.admin-review .staff-review-form label{display:grid;gap:8px;font-size:10px;font-weight:700;color:#77796f}
+.admin-review .staff-review-form textarea{width:100%;min-height:105px;padding:14px;border:1px solid #dedfd6;border-radius:12px;background:#fbfbf8;font:12px 'DM Sans',sans-serif;resize:vertical}
+.admin-review .staff-review-form>div{display:flex;justify-content:flex-end;gap:9px}
+.admin-review .staff-review-form select,.admin-review .staff-review-form button{height:42px;border-radius:99px;padding:0 15px;font:600 10px 'DM Sans',sans-serif;border:1px solid #dedfd6;background:#f7f7f2}
+.admin-review .staff-review-form button{background:#20221f;color:#fff;border-color:#20221f;cursor:pointer}
+.admin-footer{height:90px;border-top:1px solid #d9d9d0;display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#85877e}
+@media(max-width:900px){.admin-stat-grid{grid-template-columns:repeat(2,1fr)}.admin-panel{align-items:flex-start;flex-direction:column}.admin-panel form{width:100%;min-width:0}.admin-record-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.admin-top{height:70px}.admin-top-right{gap:12px;font-size:10px}.admin-role{display:none}.admin-hero{display:block;padding-block:55px 38px}.admin-hero h1{font-size:58px;letter-spacing:-3.5px}.admin-hero-aside{margin-top:25px}.admin-stat-grid{gap:8px}.admin-stat{padding:17px;border-radius:14px}.admin-stat strong{font-size:32px}.admin-stat small{font-size:9px}.admin-panel{padding:23px;border-radius:17px}.admin-panel form{flex-direction:column}.admin-panel button{height:44px}.admin-section-head h2{font-size:29px}.admin-record-grid{grid-template-columns:1fr}.admin-review{padding:18px}.admin-review .staff-review-form>div{flex-direction:column}.admin-review .staff-review-form select,.admin-review .staff-review-form button{width:100%}.admin-footer{gap:12px;flex-wrap:wrap;padding-block:20px;height:auto}}
