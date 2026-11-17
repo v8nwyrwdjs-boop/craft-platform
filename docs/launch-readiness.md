@@ -11,8 +11,9 @@ This document separates what exists in code from what must be verified operation
 - [x] Responsive styles across public pages, authentication, dashboard, learning and admin.
 - [x] Search metadata, social metadata, environment-aware robots rules and a conditional sitemap.
 - [x] Security helper tests run as part of every build.
+- [x] One shared curriculum source defines all six modules, 18 lessons, practical tasks and expected deliverables.
 - [x] Server actions validate lesson IDs against the actual six-module curriculum.
-- [x] Preview build for commit `495c5b87b7385b20cd38d365c817598d4e8d3058` completed successfully; 11 security tests passed and TypeScript/page generation completed.
+- [x] Preview build for commit `495c5b87b7385b20cd38d365c817598d4e8d3058` completed successfully; 12 security tests passed and TypeScript/page generation completed.
 - [ ] Verify the latest documentation-only follow-up Preview build before handing off.
 
 ## Required before inviting real students
