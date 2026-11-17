@@ -806,3 +806,58 @@ body{background:var(--paper)}
 .home-page .apply h2 em{color:#c8f169}
 @media(max-width:900px){.home-page .hero{gap:35px}.human-edge-grid{gap:35px}.offer-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.home-page .hero{min-height:0;padding-block:55px 48px}.home-page .hero h1{font-size:56px;letter-spacing:-3.8px}.home-page .hero-art{height:340px}.human-edge-section{padding:72px 0}.human-edge-grid{grid-template-columns:1fr;gap:18px}.human-edge-grid h2{font-size:44px}.offer-card,.membership-card{padding:25px}}
+
+/* CRAFT participation formats */
+.formats-page{min-height:100vh;background:#f5f6f0}
+.formats-page .header{border-bottom:1px solid #dfe3d8}
+.formats-hero{padding:92px 0 70px}
+.formats-hero .catalog-kicker{margin-top:68px}
+.formats-hero h1{font:750 clamp(58px,8vw,94px)/.98 Manrope;letter-spacing:-6px;margin:0 0 28px}
+.formats-hero h1 em{font-style:normal;color:#879b70}
+.formats-hero .catalog-lead{max-width:690px}
+.formats-list{display:flex;flex-direction:column;gap:16px;padding-bottom:110px}
+.format-detail-card{padding:34px 38px;background:#fff;border:1px solid #e0e4da;border-radius:26px;scroll-margin-top:24px}
+.format-detail-featured{background:#1b211a;color:#f5f6f0;border-color:#1b211a;box-shadow:0 20px 55px #202b1a17}
+.format-detail-index{display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:9px;letter-spacing:1.4px;color:#858d7d}
+.format-detail-featured .format-detail-index{color:#b7c2aa}
+.format-detail-index b{padding:8px 12px;border-radius:999px;background:#c8f169;color:#1b211a;font-size:8px;letter-spacing:.8px}
+.format-detail-main{display:grid;grid-template-columns:1fr auto;gap:35px;align-items:center;padding:30px 0;border-bottom:1px solid #e5e8e0}
+.format-detail-featured .format-detail-main{border-color:#424a3d}
+.format-detail-main h2{font:750 clamp(29px,4vw,43px)/1.1 Manrope;letter-spacing:-1.8px;margin:0 0 12px}
+.format-detail-main>div:first-child>p{max-width:690px;color:#687165;font-size:13px;line-height:1.8;margin:0}
+.format-detail-featured .format-detail-main>div:first-child>p{color:#c3ccba}
+.format-detail-price{display:flex;flex-direction:column;align-items:flex-end;gap:5px;white-space:nowrap}
+.format-detail-price strong{font:800 clamp(27px,3vw,38px) Manrope;letter-spacing:-1.4px}
+.format-detail-price span{font-size:10px;color:#858d7d}
+.format-detail-featured .format-detail-price span{color:#b7c2aa}
+.format-detail-bottom{display:grid;grid-template-columns:1.2fr .8fr;gap:45px;padding-top:25px}
+.format-includes-label{font-size:9px;letter-spacing:1.4px;color:#8a9380;font-weight:800}
+.format-detail-bottom ul{list-style:none;padding:0;margin:12px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:0 25px}
+.format-detail-bottom li{position:relative;padding:10px 0 10px 18px;border-top:1px solid #e7eae3;color:#50594c;font-size:11px;line-height:1.6}
+.format-detail-bottom li:before{content:"↗";position:absolute;left:0;color:#91b34f}
+.format-detail-featured .format-detail-bottom li{border-color:#424a3d;color:#e1e8db}
+.format-detail-note{align-self:end;margin:0;padding:18px 20px;background:#f1f3ed;color:#737b6d;font-size:10px;line-height:1.8;border-radius:14px}
+.format-detail-featured .format-detail-note{background:#2a3326;color:#c5cfbb}
+.formats-principle{background:#e9eee2;padding:90px 0}
+.formats-principle h2{font:750 clamp(40px,5vw,62px)/1.05 Manrope;letter-spacing:-3px;margin:20px 0}
+.formats-principle h2 em{font-style:normal;color:#879b70}
+.formats-principle>div>p:last-child{max-width:740px;color:#5d6858;font-size:13px;line-height:1.9}
+.formats-cta{display:flex;justify-content:space-between;align-items:center;gap:30px;padding-block:85px}
+.formats-cta h2{font:750 clamp(30px,4vw,46px)/1.12 Manrope;letter-spacing:-2px;margin:17px 0}
+.formats-cta h2 em{font-style:normal;color:#879b70}
+.formats-cta>div>p:last-child{font-size:12px;color:#687165}
+.formats-cta .button{white-space:nowrap}
+@media(max-width:760px){
+ .formats-hero{padding:60px 0 45px}
+ .formats-hero .catalog-kicker{margin-top:48px}
+ .formats-hero h1{font-size:55px;letter-spacing:-3.7px}
+ .formats-list{padding-bottom:70px}
+ .format-detail-card{padding:24px 20px;border-radius:20px}
+ .format-detail-index{align-items:flex-start;flex-direction:column}
+ .format-detail-main{grid-template-columns:1fr;gap:18px;padding:24px 0}
+ .format-detail-price{align-items:flex-start;flex-direction:row;gap:8px}
+ .format-detail-bottom{grid-template-columns:1fr;gap:18px}
+ .format-detail-bottom ul{grid-template-columns:1fr}
+ .formats-principle{padding:65px 0}
+ .formats-cta{align-items:flex-start;flex-direction:column;padding-block:65px}
+}
