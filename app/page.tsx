@@ -68,12 +68,12 @@ export default function Home() {
 
       <ProductShowcase />
 
-      <section className="human-edge-section"><div className="wrap human-edge-grid"><div><p className="eyebrow">01 / ПРИНЦИП CRAFT</p><h2>Тебе отвечает<br /><em>человек. Не бот.</em></h2></div><div className="human-edge-copy"><p>Вопросы не должны теряться в бесконечной ленте чата. В формате с наставником ты получаешь содержательный разбор своей задачи, помощь с инструментами и обратную связь по собственному проекту.</p><div className="human-edge-points"><span><b>01</b> Разбираем именно твою ситуацию</span><span><b>02</b> Помогаем понять ошибки, а не просто исправить их</span><span><b>03</b> Двигаемся к работающему результату</span></div><a className="text-link" href="/formats#mentorship">Узнать о сопровождении <span>↗</span></a></div></div></section>
+      <section className="human-edge-section"><div className="wrap human-edge-grid"><div><p className="eyebrow">02 / ПРИНЦИП CRAFT</p><h2>Тебе отвечает<br /><em>человек. Не бот.</em></h2></div><div className="human-edge-copy"><p>Вопросы не должны теряться в бесконечной ленте чата. В формате с наставником ты получаешь содержательный разбор своей задачи, помощь с инструментами и обратную связь по собственному проекту.</p><div className="human-edge-points"><span><b>01</b> Разбираем именно твою ситуацию</span><span><b>02</b> Помогаем понять ошибки, а не просто исправить их</span><span><b>03</b> Двигаемся к работающему результату</span></div><a className="text-link" href="/formats#mentorship">Узнать о сопровождении <span>↗</span></a></div></div></section>
 
       <section className="offers-section" id="formats">
         <div className="wrap">
           <div className="section-head offers-heading">
-            <div><p className="eyebrow">02 / ВЫБЕРИ ФОРМАТ УЧАСТИЯ</p><h2>Один путь.<br /><em>Три способа пройти его.</em></h2></div>
+            <div><p className="eyebrow">03 / ВЫБЕРИ ФОРМАТ УЧАСТИЯ</p><h2>Один путь.<br /><em>Три способа пройти его.</em></h2></div>
             <p>Выбирай нужный уровень участия: самостоятельная практика, персональное сопровождение или заказная разработка силами CRAFT.</p>
           </div>
           <div className="offer-grid">
@@ -87,11 +87,11 @@ export default function Home() {
             </article>
             <article className="offer-card offer-card-featured">
               <div className="offer-top"><span>02 / С НАСТАВНИКОМ</span><span className="offer-mark">✳</span></div>
-              <div className="offer-ribbon">ПОПУЛЯРНЫЙ ФОРМАТ</div>
+              <div className="offer-ribbon">ЖИВАЯ ОБРАТНАЯ СВЯЗЬ</div>
               <h3>С сопровождением</h3>
               <p className="offer-fit">Для тех, кому важны живой разбор решений, обратная связь и поддержка наставника.</p>
               <p className="offer-summary">Не просто смотришь уроки — разбираешь свои решения с человеком, который помогает двигаться дальше.</p>
-              <ul><li>Всё из самостоятельного формата</li><li>Стартовая встреча с наставником</li><li>Разбор твоего проекта и обратная связь</li><li>Групповые встречи и помощь с вопросами</li></ul>
+              <ul><li>Всё из самостоятельного формата</li><li>Персональный разбор твоего проекта</li><li>Обратная связь по выполненным этапам</li><li>Помощь с инструментами и ошибками</li></ul>
               <a className="offer-link" href="/formats#mentorship">Как устроено сопровождение <b>↗</b></a>
             </article>
             <article className="offer-card">
@@ -109,13 +109,13 @@ export default function Home() {
 
       <section className="membership-section" id="membership">
         <div className="wrap membership-grid">
-          <div><p className="eyebrow">03 / CRAFT CLUB</p><h2>Не учиться в одиночку.<br /><em>Быть среди своих.</em></h2><p className="membership-lead">Подписка для тех, кто хочет оставаться в движении, получать новые идеи и иметь место, где можно спросить, показать прогресс и найти единомышленников.</p></div>
+          <div><p className="eyebrow">04 / CRAFT CLUB</p><h2>Не учиться в одиночку.<br /><em>Быть среди своих.</em></h2><p className="membership-lead">Подписка для тех, кто хочет оставаться в движении, получать новые идеи и иметь место, где можно спросить, показать прогресс и найти единомышленников.</p></div>
           <article className="membership-card">
             <div className="offer-top"><span>ЕЖЕМЕСЯЧНАЯ ПОДПИСКА</span><span className="offer-mark">✳</span></div>
             <p className="membership-fit">Для тех, кто хочет оставаться в профессиональном движении, обмениваться опытом и регулярно практиковаться.</p>
             <ul><li>Закрытое сообщество участников CRAFT</li><li>Ежемесячные практические воркшопы</li><li>Библиотека шаблонов, инструкций и разборов</li><li>Групповые часы вопросов и ответов</li><li>Специальные цены на программы и мероприятия</li><li>Ранний доступ к новым направлениям</li></ul>
             <a className="button button-dark" href="/formats#club">Узнать о CRAFT CLUB <span>↗</span></a>
-            <small className="membership-note">Подписка не заменяет персональное наставничество и не включает индивидуальную разработку проекта.</small>
+            <small className="membership-note">Состав клуба и график активностей будут подтверждены до открытия подписки. Клуб не заменяет персональное наставничество и не включает индивидуальную разработку проекта.</small>
           </article>
         </div>
       </section>
@@ -123,7 +123,7 @@ export default function Home() {
       <section className="directions-section" id="directions">
         <div className="wrap">
           <div className="section-head">
-            <div><p className="eyebrow">03 / ОБЛАСТИ, КОТОРЫЕ МЫ ИССЛЕДУЕМ</p><h2>Найди своё<br /><em>направление.</em></h2></div>
+            <div><p className="eyebrow">05 / ОБЛАСТИ, КОТОРЫЕ МЫ ИССЛЕДУЕМ</p><h2>Найди своё<br /><em>направление.</em></h2></div>
             <p>От цифрового бизнеса и искусственного интеллекта до медиа и новых моделей торговли. Начать можно с любого уровня — основы разберём вместе.</p>
           </div>
           <div className="direction-showcase">
@@ -143,7 +143,7 @@ export default function Home() {
 
       <section className="manifesto-section" id="method">
         <div className="wrap manifesto-grid">
-          <div className="manifesto-aside"><p className="eyebrow">04 / ФИЛОСОФИЯ CRAFT</p><span className="manifesto-stamp">НЕ УЧИМ<br/>ВПУСТУЮ<span>✳</span></span></div>
+          <div className="manifesto-aside"><p className="eyebrow">06 / ФИЛОСОФИЯ CRAFT</p><span className="manifesto-stamp">НЕ УЧИМ<br/>ВПУСТУЮ<span>✳</span></span></div>
           <div className="manifesto-main">
             <h2>Здесь не заканчивают курс.<br /><em>Здесь создают свой продукт.</em></h2>
             <p>Главная идея CRAFT проста: знания должны превращаться в действие. Поэтому мы не ограничиваемся уроками и упражнениями — мы вместе с тобой проходим путь создания настоящего проекта. Ты понимаешь, почему принимаешь каждое решение, учишься на практике и видишь, как идея становится работающим продуктом.</p>
@@ -155,7 +155,7 @@ export default function Home() {
       <section className="journey-section">
         <div className="wrap">
           <div className="section-head">
-            <div><p className="eyebrow">05 / ОТ ИДЕИ ДО РЕЗУЛЬТАТА</p><h2>Шаг за шагом.<br /><em>Вместе с тобой.</em></h2></div>
+            <div><p className="eyebrow">07 / ОТ ИДЕИ ДО РЕЗУЛЬТАТА</p><h2>Шаг за шагом.<br /><em>Вместе с тобой.</em></h2></div>
             <p>Не нужно знать всё заранее. Мы выстраиваем понятный маршрут и помогаем двигаться вперёд на каждом этапе.</p>
           </div>
           <div className="journey-list">{stages.map(([number,title,description]) => (
@@ -166,13 +166,13 @@ export default function Home() {
 
       <section className="start-section">
         <div className="wrap start-grid">
-          <div><p className="eyebrow">06 / МОЖНО НАЧАТЬ С НУЛЯ</p><h2>Неважно,<br />что ты уже знаешь.<br /><em>Важно, что создашь.</em></h2></div>
+          <div><p className="eyebrow">08 / МОЖНО НАЧАТЬ С НУЛЯ</p><h2>Неважно,<br />что ты уже знаешь.<br /><em>Важно, что создашь.</em></h2></div>
           <div className="start-copy"><p>Никогда не программировал? Не знаешь, как устроен ИИ или цифровой бизнес? Это не повод откладывать идею. Мы начинаем с понятных основ, разбираем каждый шаг и постепенно переходим к практике.</p><div className="start-points"><span><b>01</b> Понятные объяснения без лишнего жаргона</span><span><b>02</b> Практика на собственном проекте</span><span><b>03</b> Поддержка и обратная связь по ходу работы</span></div><a className="text-link" href="/directions">Посмотреть направления <span>↗</span></a></div>
         </div>
       </section>
 
       <section className="apply wrap" id="join">
-        <div className="apply-panel"><p className="eyebrow">07 / ТВОЯ ИДЕЯ МОЖЕТ СТАТЬ ПРОЕКТОМ</p><h2>Давай создадим<br /><em>что-то настоящее.</em></h2><p>Изучи направления, выбери идею или приходи со своей. Следующий шаг — обсудить, что можно построить вместе.</p><a className="button button-light" href="/formats">Выбрать свой формат <span>↗</span></a><small>Программы находятся в стадии формирования. Конкретные условия и даты запуска будут опубликованы отдельно.</small></div>
+        <div className="apply-panel"><p className="eyebrow">09 / ТВОЯ ИДЕЯ МОЖЕТ СТАТЬ ПРОЕКТОМ</p><h2>Давай создадим<br /><em>что-то настоящее.</em></h2><p>Изучи направления, выбери идею или приходи со своей. Следующий шаг — обсудить, что можно построить вместе.</p><a className="button button-light" href="/formats">Выбрать свой формат <span>↗</span></a><small>Программы находятся в стадии формирования. Конкретные условия и даты запуска будут опубликованы отдельно.</small></div>
       </section>
 
       <footer className="footer wrap"><a className="brand" href="/">CRAFT<span>®</span></a><p>ШКОЛА ЦИФРОВЫХ ПРОДУКТОВ</p><span>© 2026 CRAFT. Создавай осмысленно.</span></footer>
