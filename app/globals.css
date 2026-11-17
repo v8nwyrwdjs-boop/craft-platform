@@ -480,3 +480,105 @@ body{background:var(--paper)}
  .formats-principle{padding:65px 0}
  .formats-cta{align-items:flex-start;flex-direction:column;padding-block:65px}
 }
+
+
+/* CRAFT mobile-first refinement: 360px–tablet */
+html{scroll-padding-top:76px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+img,svg,video,canvas{max-width:100%;height:auto}
+button,input,select,textarea{font:inherit}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+a,button{touch-action:manipulation}
+:focus-visible{outline:3px solid #8eae4e;outline-offset:3px}
+@media(max-width:760px){
+  .wrap{width:calc(100% - 36px);max-width:560px}
+  .header{gap:12px}
+  .header .brand{font-size:25px}
+  .header-cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 15px;white-space:nowrap}
+  .home-page .header-cta{font-size:11px}
+  .hero-actions{align-items:stretch;flex-direction:column;gap:15px}
+  .hero-actions .button,.hero-actions .text-link{justify-content:center;min-height:48px}
+  .hero-art-chip{font-size:9px;padding:8px 10px}
+  .home-page .hero h1{max-width:100%;overflow-wrap:anywhere}
+  .home-page .hero-lead{font-size:15px;line-height:1.75}
+  .home-page .hero-proof{flex-wrap:wrap;line-height:1.6}
+  .ticker div{font-size:10px;letter-spacing:1px}
+  .home-page .section-head,.showcase-heading{gap:16px}
+  .home-page .offer-grid{grid-template-columns:1fr;gap:12px}
+  .home-page .offer-card{min-height:0;padding:24px}
+  .home-page .offer-card h3{font-size:26px}
+  .home-page .offer-card li{font-size:12px;line-height:1.65}
+  .home-page .offer-fit{min-height:0}
+  .home-page .membership-card{padding:23px}
+  .home-page .membership-grid{grid-template-columns:1fr;gap:18px}
+  .home-page .human-edge-points span{line-height:1.6}
+  .home-page .apply-panel{border-radius:22px}
+  .footer{height:auto;min-height:100px;padding-block:22px;gap:12px;flex-wrap:wrap}
+  .footer p{order:3;width:100%;margin:0}
+  .formats-page .header nav{display:none}
+  .formats-page .header-account{gap:10px}
+  .formats-page .header-account>a:first-child{display:none}
+  .formats-hero h1{overflow-wrap:anywhere}
+  .format-detail-price strong{font-size:29px}
+  .format-detail-bottom li{font-size:12px}
+  .formats-cta .button{width:100%;justify-content:space-between;min-height:50px}
+  .auth-top{width:calc(100% - 36px);height:70px}
+  .auth-card{margin:42px auto 65px;width:calc(100% - 36px)}
+  .auth-card h1,.dashboard-welcome h1{font-size:clamp(38px,11vw,52px);letter-spacing:-2.5px}
+  .auth-form input,.auth-form button,.auth-submit{min-height:48px}
+  .dashboard-shell .wrap{width:calc(100% - 36px)}
+  .dashboard-content{padding-bottom:65px}
+  .dashboard-section-title{align-items:flex-start;flex-direction:column;gap:12px}
+  .dashboard-section-title h2{font-size:25px}
+  .dashboard-empty{padding:26px 21px}
+  .dashboard-empty>div{flex-direction:column;gap:16px}
+  .student-project-grid{grid-template-columns:1fr}
+  .student-project{padding:20px}
+  .new-project-panel{padding:22px 18px}
+  .new-project-panel form{width:100%;gap:10px}
+  .new-project-panel input{width:100%;min-height:48px}
+  .new-project-panel button{width:100%;min-height:48px}
+  .learning-preview{padding-block:25px}
+  .learning-preview h2{font-size:25px}
+  .admin-shell .wrap{width:calc(100% - 36px)}
+  .admin-top{height:auto;min-height:70px;gap:12px}
+  .admin-top-right{gap:10px;flex-wrap:wrap;justify-content:flex-end;font-size:10px}
+  .admin-hero{padding-block:48px 35px;align-items:stretch;flex-direction:column;gap:18px}
+  .admin-hero h1{font-size:clamp(42px,11vw,58px);letter-spacing:-3px}
+  .admin-hero-aside{min-width:0}
+  .admin-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .admin-stat{padding:16px}
+  .admin-stat strong{font-size:30px}
+  .admin-panel{padding:23px 18px;align-items:stretch;flex-direction:column;gap:15px}
+  .admin-panel form{min-width:0;width:100%;flex-direction:column}
+  .admin-panel input,.admin-panel button{width:100%;min-height:46px}
+  .admin-table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .admin-table{min-width:620px}
+  .admin-review{padding:20px 16px}
+  .admin-review .staff-review-form>div{align-items:stretch;flex-direction:column}
+  .admin-review .staff-review-form select,.admin-review .staff-review-form button{width:100%;min-height:46px}
+  .admin-footer{height:auto;min-height:70px;gap:12px;flex-wrap:wrap;padding-block:20px}
+  .learning-layout,.lesson-layout{grid-template-columns:1fr}
+  .learning-sidebar{position:static;width:100%}
+  .learning-main{min-width:0}
+}
+@media(max-width:390px){
+  .wrap,.dashboard-shell .wrap,.admin-shell .wrap{width:calc(100% - 28px)}
+  .home-page .hero h1{font-size:clamp(43px,12vw,50px);letter-spacing:-2.8px}
+  .home-page .hero-art{height:290px}
+  .home-page .hero-proof{font-size:7px}
+  .direction-showcase{grid-template-columns:1fr 1fr}
+  .direction-tile{padding:14px 11px;min-height:235px}
+  .direction-tile h3{font-size:15px}
+  .formats-hero h1{font-size:46px;letter-spacing:-3px}
+  .format-detail-card{padding:21px 16px}
+  .admin-stat{padding:13px}
+  .admin-stat strong{font-size:26px}
+}
+@media(hover:none){
+  .button:hover,.header-cta:hover,.offer-card:hover,.membership-card:hover,.direction-tile:hover{transform:none;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
