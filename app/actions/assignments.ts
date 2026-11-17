@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient, hasSupabaseConfig } from "@/lib/supabase/server";
-import { isValidLessonForModule } from "@/lib/curriculum-validation";
+import { isValidLessonForModule } from "@/lib/curriculum";
 
 export async function submitAssignment(formData: FormData) {
   if (!hasSupabaseConfig()) redirect("/login");
