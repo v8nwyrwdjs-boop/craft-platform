@@ -264,3 +264,55 @@
 @media(max-width:900px){.direction-showcase{grid-template-columns:repeat(2,1fr)}.showcase-stage{grid-template-columns:1fr}.showcase-art{min-height:350px;grid-row:1}.showcase-copy{min-height:385px}.manifesto-grid{gap:35px}.start-grid{gap:40px}}
 @media(max-width:760px){.home-page .header{height:70px}.home-page .header nav{display:none}.home-page .hero{grid-template-columns:1fr;padding-block:55px 45px;gap:35px}.home-page .hero h1{font-size:55px;letter-spacing:-3.5px}.home-page .hero-art{height:340px}.hero-art-orbit.orbit-one{width:290px;height:175px}.hero-art-orbit.orbit-two{width:360px;height:250px}.hero-art-shape{width:145px;height:145px}.hero-art-shape span{font-size:82px}.home-page .hero-proof{font-size:8px;gap:8px;margin-top:35px}.showcase-section,.directions-section,.journey-section{padding:75px 0}.showcase-heading{display:block;margin-bottom:30px}.showcase-heading h2,.home-page .section-head h2{font-size:43px;letter-spacing:-2.5px}.showcase-heading>p{margin-top:20px}.showcase-stage{display:flex;flex-direction:column}.showcase-art{min-height:285px;order:0}.showcase-copy{order:1;min-height:390px;padding:25px 22px}.showcase-tag{margin-top:30px}.showcase-copy h3{font-size:34px}.showcase-footnote{flex-direction:column;gap:7px;font-size:8px}.direction-showcase{grid-template-columns:1fr 1fr;gap:8px}.direction-tile{min-height:255px;padding:17px 14px}.direction-tile h3{font-size:16px;margin-top:45px}.direction-tile p{font-size:10px}.direction-no{font-size:7px}.direction-symbol{font-size:20px;right:13px}.directions-more{align-items:flex-start;flex-direction:column}.manifesto-section{padding:80px 0}.manifesto-grid{grid-template-columns:1fr;gap:25px}.manifesto-stamp{margin-top:25px}.manifesto-main h2{font-size:39px;letter-spacing:-2px}.manifesto-main>p{font-size:13px}.manifesto-values{gap:8px;margin-top:35px}.manifesto-values span{font-size:9px}.journey-step{grid-template-columns:38px 1fr 16px;gap:10px;padding:22px 0}.journey-step h3{font-size:18px}.start-section{padding:75px 0}.start-grid{grid-template-columns:1fr;gap:20px}.start-grid h2{font-size:44px}.home-page .apply{padding-block:55px}.home-page .apply-panel{padding:50px 24px}.home-page .apply h2{font-size:42px;letter-spacing:-2.5px}}
 @media(prefers-reduced-motion:reduce){.home-page *, .home-page *::before,.home-page *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* CRAFT 2026: friendly rounded discovery + offer system */
+.home-category-nav{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-top:18px;padding-bottom:8px;white-space:nowrap}
+.home-category-nav::-webkit-scrollbar{display:none}
+.category-pill{display:inline-flex;align-items:center;gap:9px;padding:12px 19px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:12px;font-weight:600;transition:transform .22s ease,background .22s ease,border-color .22s ease;flex:0 0 auto}
+.category-pill:hover{transform:translateY(-2px);background:var(--lime);border-color:var(--lime)}
+.category-featured{background:var(--lime);border-color:var(--lime)}
+.category-featured span{font-size:15px}
+.header nav a,.header-account a,.text-link,.offer-link{transition:color .2s ease,opacity .2s ease}
+.button,.header-cta{border-radius:999px;transition:transform .2s ease,background .2s ease}
+.button:hover,.header-cta:hover{transform:translateY(-2px)}
+.hero-art,.showcase-art,.apply-panel,.direction-tile,.offer-card,.membership-card,.journey-step{border-radius:24px}
+.showcase-stage{border-radius:28px;overflow:hidden}
+.direction-tile{border-radius:22px;transition:transform .25s ease,box-shadow .25s ease}
+.direction-tile:hover{transform:translateY(-5px);box-shadow:0 18px 40px #20221f12}
+.offers-section{padding:110px 0;background:#e8e9e0}
+.offers-heading{gap:35px}
+.offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.offer-card{position:relative;display:flex;flex-direction:column;min-height:520px;padding:28px;background:#f8f8f3;border:1px solid #d8d9d0;transition:transform .25s ease,box-shadow .25s ease}
+.offer-card:hover,.membership-card:hover{transform:translateY(-4px);box-shadow:0 18px 42px #20221f12}
+.offer-card-featured{background:#20221f;color:#f5f5ee;border-color:#20221f}
+.offer-top{display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:1.3px;color:#898c80;font-weight:700}
+.offer-card-featured .offer-top{color:#c4c8ba}
+.offer-mark{font-size:20px;color:#98bc52}
+.offer-ribbon{align-self:flex-start;margin-top:22px;padding:7px 11px;border-radius:999px;background:var(--lime);color:#20221f;font-size:9px;font-weight:800;letter-spacing:.7px}
+.offer-card h3{font:700 27px Manrope,sans-serif;letter-spacing:-1px;margin:30px 0 8px}
+.offer-price{font:800 32px Manrope,sans-serif;letter-spacing:-1.4px;margin:8px 0 14px}
+.offer-price small,.membership-price small{font:500 11px 'DM Sans',sans-serif;letter-spacing:0;color:#85877e}
+.offer-card-featured .offer-price small{color:#b8bbb1}
+.offer-summary{font-size:12px;line-height:1.75;color:#696c63;min-height:66px;margin:0 0 18px}
+.offer-card-featured .offer-summary{color:#c0c3b8}
+.offer-card ul,.membership-card ul{list-style:none;padding:0;margin:0 0 28px}
+.offer-card li,.membership-card li{position:relative;padding:11px 0 11px 20px;border-top:1px solid #dedfd6;font-size:11px;line-height:1.6;color:#55584f}
+.offer-card li:before,.membership-card li:before{content:'✓';position:absolute;left:0;color:#8eaf4b;font-weight:800}
+.offer-card-featured li{border-color:#44473f;color:#e0e2d9}
+.offer-link{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:20px;border-top:1px solid #dedfd6;font-size:12px;font-weight:700}
+.offer-card-featured .offer-link{border-color:#44473f}
+.offer-link b{color:#92b64e}
+.offer-disclaimer{max-width:850px;margin:24px 0 0;color:#77796f;font-size:10px;line-height:1.7}
+.membership-section{padding:110px 0;background:#f3f2ec}
+.membership-grid{display:grid;grid-template-columns:1fr .9fr;gap:70px;align-items:center}
+.membership-grid h2{font:700 clamp(40px,5vw,62px)/1.05 Manrope,sans-serif;letter-spacing:-3px;margin:24px 0}
+.membership-grid h2 em{font-style:normal;color:#8b8e83}
+.membership-lead{max-width:500px;color:#686a62;font-size:15px;line-height:1.85}
+.membership-card{background:#fff;border:1px solid var(--line);padding:32px;transition:transform .25s ease,box-shadow .25s ease}
+.membership-price{font:800 38px Manrope,sans-serif;letter-spacing:-1.5px;margin:28px 0 20px}
+.membership-card .button{margin-top:8px;justify-content:space-between}
+.membership-note{display:block;margin-top:18px;color:#85877e;font-size:10px;line-height:1.6}
+@media(max-width:900px){.offer-grid{grid-template-columns:1fr 1fr}.offer-card:last-child{grid-column:1/-1;min-height:450px}.membership-grid{gap:35px}}
+@media(max-width:760px){.home-category-nav{width:100%;padding-left:20px;padding-right:20px;gap:8px}.category-pill{padding:11px 15px;font-size:11px}.offers-section,.membership-section{padding:75px 0}.offer-grid{grid-template-columns:1fr}.offer-card:last-child{grid-column:auto;min-height:0}.offer-card{min-height:0;padding:25px}.offer-summary{min-height:0}.membership-grid{grid-template-columns:1fr;gap:28px}.membership-card{padding:25px}.hero-art,.showcase-art,.apply-panel{border-radius:20px}.direction-tile{border-radius:18px}}
+@media(prefers-reduced-motion:reduce){.category-pill,.button,.offer-card,.membership-card,.direction-tile{transition:none}}
