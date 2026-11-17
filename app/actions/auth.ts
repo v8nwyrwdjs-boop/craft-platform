@@ -48,7 +48,7 @@ export async function requestPasswordReset(formData: FormData) {
 }
 
 export async function updatePassword(formData: FormData) {
-  const password = value(formData, "password");
+  const password = rawValue(formData, "password");
   if (!hasSupabaseConfig()) redirect("/account/reset-password?error=setup");
   if (password.length < 8) redirect("/account/reset-password?error=password");
   const supabase = await createClient();
@@ -61,7 +61,7 @@ export async function updatePassword(formData: FormData) {
 
 export async function signIn(formData: FormData) {
   const email = value(formData, "email").toLowerCase();
-  const password = value(formData, "password");
+  const password = rawValue(formData, "password");
   const requestedNext = value(formData, "next");
   const next = safeInternalPath(requestedNext);
   if (!hasSupabaseConfig()) redirect("/login?error=setup");
