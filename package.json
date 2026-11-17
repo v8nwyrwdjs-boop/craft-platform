@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run test:security && next build",
     "start": "next start",
     "test:security": "node --experimental-strip-types --test tests/security/*.test.mjs"
   },
