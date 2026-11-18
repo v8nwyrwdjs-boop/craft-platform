@@ -85,6 +85,9 @@ create policy "Users can delete their own projects" on public.student_projects f
 drop policy if exists "Users can read their own enrollments" on public.enrollments;
 create policy "Users can read their own enrollments" on public.enrollments for select to authenticated using (auth.uid() = student_id);
 
+drop policy if exists "Staff can read all enrollments" on public.enrollments;
+create policy "Staff can read all enrollments" on public.enrollments for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
+
 drop policy if exists "Users can read their own lesson progress" on public.lesson_progress;
 create policy "Users can read their own lesson progress" on public.lesson_progress for select to authenticated using (auth.uid() = student_id);
 
