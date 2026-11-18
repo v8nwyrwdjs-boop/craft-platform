@@ -60,7 +60,7 @@ A first mobile CSS refinement has been added for homepage, formats, authenticati
 
 ## Latest Preview smoke check
 
-The Preview for commit `c4ef30045fd4d163a8bb4b5f343bd62a22172956` returned HTTP 200 for:
+The Preview for commit `9b1265b09d3239a921e0289cd9d171ccad999bdd` returned HTTP 200 for:
 `/`, `/formats`, `/directions`, `/directions/direction-01`, `/products`, `/products/C-01`, `/login`, `/register`, `/forgot-password`, `/learn`, and `/admin`.
 This is a server-response smoke check only. It does not prove visual correctness, successful authenticated journeys, or device-level layout behavior.
-The deployed CSS asset was fetched and confirmed to contain the mobile single-column hero, normal word-breaking, manual hyphenation, balanced heading rules, and narrow-phone direction-card layout. Automated CSS regression tests now guard these rules. All 21 automated tests passed in this Preview build.
+The deployed CSS asset was fetched and confirmed to contain the mobile single-column hero, normal word-breaking, manual hyphenation, balanced heading rules, and narrow-phone direction-card layout. Automated CSS regression tests now guard these rules. All 23 automated tests passed in this Preview build. Carousel controls now expose 44px targets, and automatic rotation stops when reduced motion is requested.
