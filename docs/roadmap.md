@@ -85,7 +85,7 @@
 - [x] Добавлена единая модель программы: шесть этапов, 18 уроков, задания и ожидаемые результаты.
 - [x] Добавлена серверная проверка идентификаторов уроков для прогресса и отправки заданий.
 - [x] Ограничения БД и тесты регрессии защищают идентификаторы уроков и базовые политики RLS.
-- [x] 21 automated checks added; latest full Preview build verification is pending. прошли в Preview build.
+- [x] 21 automated checks added; all 21 passed in Preview build `c4ef30045fd4d163a8bb4b5f343bd62a22172956`. прошли в Preview build.
 - [x] Trusted origin и safe internal redirect покрыты тестами.
 - [x] RLS и ограничение обновления статуса отправки задокументированы в SQL.
 - [ ] Browser-level E2E критических сценариев.
