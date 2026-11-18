@@ -671,3 +671,35 @@ a,button{touch-action:manipulation}
   .home-page .direction-no{font-size:8px}
   .home-page .direction-symbol{right:20px}
 }
+
+/* Carousel controls keep a 44px interactive target while preserving the slim visual indicators. */
+.showcase-dots button{
+  width:44px;
+  min-width:44px;
+  height:44px;
+  min-height:44px;
+  display:grid;
+  place-items:center;
+  background:transparent;
+}
+.showcase-dots button::before{
+  content:"";
+  display:block;
+  width:22px;
+  height:4px;
+  background:#d4d9cf;
+  transition:width .2s,background .2s;
+}
+.showcase-dots button.is-active::before{
+  width:42px;
+  background:#9ec94d;
+}
+.showcase-dots button.is-active{width:44px}
+.showcase-arrows button{
+  width:44px;
+  min-width:44px;
+  height:44px;
+  min-height:44px;
+  display:inline-grid;
+  place-items:center;
+}
