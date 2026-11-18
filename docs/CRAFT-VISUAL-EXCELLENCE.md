@@ -59,13 +59,26 @@ Do not put prices on the homepage. Introduce formats and pricing only after a vi
 
 ## Brand and interface direction
 
-- Palette: warm white, graphite, restrained lime.
+- Palette: warm white, graphite, true black for deliberate contrast, and restrained lime.
 - Character: confident, precise, modern, energetic, human.
 - Strong typographic hierarchy and memorable editorial headlines.
 - Rounded cards and controls, purposeful motion, clear focus states.
 - Mobile-first usability; avoid desktop-only compositions.
 - Motion must respect reduced-motion preferences.
 - Visual polish must support clarity and conversion, not obscure the offer.
+
+### 3D, shaders, and visual references
+
+The visual references supplied for CRAFT are intended as implementation direction, not merely mood-board inspiration. The target is to bring their underlying visual techniques into the product while adapting them to CRAFT's identity rather than copying another site.
+
+- **React Three Fiber / Three.js:** use for authored 3D scenes, objects, depth, and purposeful interactions.
+- **ShaderGradient:** evaluate and use for animated shader-based gradient environments, lighting, and atmospheric color transitions.
+- Combine these techniques selectively: for example, a distinctive 3D hero scene with a shader-gradient environment, then smaller visual moments in key sections where they reinforce the story.
+- Keep typography, navigation, calls to action, and learning content readable and visually dominant where needed. Avoid effects that compete with the message.
+- Build graceful fallbacks for unavailable WebGL, lazy-load heavy scenes, cap rendering cost/pixel density, and provide reduced-motion/static alternatives.
+- Treat mobile performance and usability as release criteria, not later polish.
+- Validate library compatibility against this app's actual Next.js 16 / React 19 / App Router setup before installing or upgrading dependencies. The ShaderGradient README documents React 18/19 support and an explicit Next.js 15 App Router + R3F 9 combination; Next.js 16 compatibility must be tested rather than assumed.
+- Prefer free/open-source dependencies and do not introduce paid services or usage-based costs without explicit approval.
 
 ## Trust and claims policy
 
