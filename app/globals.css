@@ -661,3 +661,13 @@ a,button{touch-action:manipulation}
   .home-page .hero h1{font-size:clamp(39px,10.8vw,46px);letter-spacing:-2.2px}
   .home-page .hero-art{height:280px}
 }
+
+/* Narrow phones: keep category cards readable instead of squeezing long Russian labels. */
+@media(max-width:390px){
+  .home-page .direction-showcase{grid-template-columns:minmax(0,1fr)}
+  .home-page .direction-tile{min-height:210px;padding:22px}
+  .home-page .direction-tile h3{font-size:19px;line-height:1.25;margin-top:34px}
+  .home-page .direction-tile p{font-size:12px;line-height:1.65}
+  .home-page .direction-no{font-size:8px}
+  .home-page .direction-symbol{right:20px}
+}
