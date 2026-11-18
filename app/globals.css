@@ -499,7 +499,7 @@ a,button{touch-action:manipulation}
   .hero-actions{align-items:stretch;flex-direction:column;gap:15px}
   .hero-actions .button,.hero-actions .text-link{justify-content:center;min-height:48px}
   .hero-art-chip{font-size:9px;padding:8px 10px}
-  .home-page .hero h1{max-width:100%;overflow-wrap:anywhere}
+  .home-page .hero h1{max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:manual}
   .home-page .hero-lead{font-size:15px;line-height:1.75}
   .home-page .hero-proof{flex-wrap:wrap;line-height:1.6}
   .ticker div{font-size:10px;letter-spacing:1px}
@@ -518,7 +518,7 @@ a,button{touch-action:manipulation}
   .formats-page .header nav{display:none}
   .formats-page .header-account{gap:10px}
   .formats-page .header-account>a:first-child{display:none}
-  .formats-hero h1{overflow-wrap:anywhere}
+  .formats-hero h1{overflow-wrap:normal;word-break:normal;hyphens:manual}
   .format-detail-price strong{font-size:29px}
   .format-detail-bottom li{font-size:12px}
   .formats-cta .button{width:100%;justify-content:space-between;min-height:50px}
@@ -610,3 +610,54 @@ a,button{touch-action:manipulation}
 /* Clear distinction between the exercise and the evidence a learner should produce. */
 .lesson-output{background:#f1f4e9;border-left:3px solid #a5c75f}
 .lesson-output>b{color:#526d31}
+
+/* Mobile typography and hero layout: never split ordinary Russian words mid-word. */
+@media(max-width:760px){
+  .home-page .hero{
+    display:grid;
+    grid-template-columns:minmax(0,1fr)!important;
+    align-items:start;
+    gap:30px;
+  }
+  .home-page .hero-copy{grid-column:1;min-width:0;width:100%}
+  .home-page .hero h1{
+    width:100%;
+    max-width:100%;
+    font-size:clamp(40px,10.5vw,54px);
+    line-height:1.04;
+    letter-spacing:-2.6px;
+    overflow-wrap:normal;
+    word-break:normal;
+    hyphens:manual;
+    text-wrap:balance;
+  }
+  .home-page .hero-lead{max-width:100%;overflow-wrap:normal;word-break:normal}
+  .home-page .hero-art{
+    grid-column:1;
+    width:min(100%,420px);
+    height:clamp(270px,78vw,340px);
+    margin-inline:auto;
+  }
+  .home-page .hero-proof{max-width:100%;flex-wrap:wrap;line-height:1.7}
+  .home-page h1,.home-page h2,.home-page h3,
+  .catalog-page h1,.catalog-page h2,.catalog-page h3,
+  .formats-page h1,.formats-page h2,.formats-page h3,
+  .auth-shell h1,.dashboard-shell h1,
+  .learning-shell h1,.learning-shell h2,
+  .admin-shell h1,.admin-shell h2{
+    overflow-wrap:normal;
+    word-break:normal;
+    hyphens:manual;
+    text-wrap:balance;
+  }
+  .home-page p,.catalog-page p,.formats-page p{
+    overflow-wrap:break-word;
+    word-break:normal;
+    hyphens:manual;
+  }
+}
+@media(max-width:390px){
+  .home-page .hero{gap:25px}
+  .home-page .hero h1{font-size:clamp(39px,10.8vw,46px);letter-spacing:-2.2px}
+  .home-page .hero-art{height:280px}
+}
