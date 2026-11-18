@@ -24,7 +24,7 @@ This document separates what exists in code from what must be verified operation
 
 - [ ] Register a dedicated test student and verify email confirmation, login, logout and password reset.
 - [ ] Confirm the deployed Supabase project is the intended environment.
-- [ ] Apply `supabase/schema.sql` and every migration in order, including `202611180001_enforce_curriculum_integrity.sql`; record the applied migration state.
+- [ ] Apply `supabase/schema.sql` and every migration in order, including `202611180001_enforce_curriculum_integrity.sql` and `202611180002_staff_read_enrollments.sql`; record the applied migration state.
 - [ ] After reviewing any existing rows, validate the new curriculum constraints with `ALTER TABLE ... VALIDATE CONSTRAINT`.
 - [ ] Test RLS with separate student, mentor and admin accounts.
 - [ ] Verify that a student cannot read another student's projects, progress, submissions or feedback.
