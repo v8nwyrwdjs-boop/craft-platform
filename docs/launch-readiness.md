@@ -15,7 +15,7 @@ This document separates what exists in code from what must be verified operation
 - [x] Server actions validate lesson IDs against the actual six-module curriculum.
 - [x] Database constraints and regression tests protect the canonical curriculum identifiers.
 - [x] Static regression checks cover RLS enablement, owner-scoped reads, trusted staff roles and restricted review updates.
-- [x] Preview build for commit `1d46b9000d642f99a4f08d488f1caa45fa1decbe` completed successfully; all 17 security tests passed, TypeScript completed, and 16 static pages were generated. Preview: `https://craft-platform-31eqfds11-v8nwyrwdjs-boop.vercel.app`.
+- [x] Preview build for commit `1d46b9000d642f99a4f08d488f1caa45fa1decbe` completed successfully; all 20 automated tests passed, TypeScript completed, and 16 static pages were generated. Preview: `https://craft-platform-31eqfds11-v8nwyrwdjs-boop.vercel.app`.
 - [ ] Verify the latest documentation-only follow-up Preview build before handing off.
 
 ## Required before inviting real students
