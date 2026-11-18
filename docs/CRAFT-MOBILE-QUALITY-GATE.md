@@ -56,3 +56,10 @@ A first mobile CSS refinement has been added for homepage, formats, authenticati
 - [x] Keep the illustration centered below the hero copy with a bounded mobile height.
 - [ ] Re-check the latest deployed Preview on iOS Safari at 320, 360, 390 and 430 CSS px; CSS correction is committed and verified in the served stylesheet, but a screenshot/device pass is still required.
 - [ ] Scan every public and authenticated route for similar clipped or mid-word heading breaks after the hero regression is confirmed fixed.
+
+## Latest Preview smoke check
+
+The Preview for commit `1d46b9000d642f99a4f08d488f1caa45fa1decbe` returned HTTP 200 for:
+`/`, `/formats`, `/directions`, `/directions/direction-01`, `/products`, `/products/C-01`, `/login`, `/register`, `/forgot-password`, `/learn`, and `/admin`.
+This is a server-response smoke check only. It does not prove visual correctness, successful authenticated journeys, or device-level layout behavior.
+The deployed CSS asset was fetched and confirmed to contain the mobile single-column hero, normal word-breaking, manual hyphenation, and balanced heading rules.
