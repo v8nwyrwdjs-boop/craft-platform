@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const css = readFileSync(new URL("../../app/globals.css", import.meta.url), "utf8");
+const showcase = readFileSync(new URL("../../components/product-showcase.tsx", import.meta.url), "utf8");
 
 test("homepage hero stacks on mobile and keeps text separate from artwork", () => {
   assert.match(css, /\.home-page \.hero\s*\{[^}]*grid-template-columns:minmax\(0,1fr\)!important/s);
@@ -18,4 +19,16 @@ test("Russian headings use normal word boundaries without automatic hyphenation"
 
 test("narrow-phone direction cards use a readable single-column layout", () => {
   assert.match(css, /@media\s*\(max-width:\s*390px\)[\s\S]*?\.home-page \.direction-showcase\s*\{grid-template-columns:minmax\(0,1fr\)\}/);
+});
+
+test("carousel controls expose comfortable touch targets", () => {
+  assert.match(css, /\.showcase-dots button\s*\{[^}]*min-width:44px/s);
+  assert.match(css, /\.showcase-dots button\s*\{[^}]*min-height:44px/s);
+  assert.match(css, /\.showcase-arrows button\s*\{[^}]*min-width:44px/s);
+  assert.match(css, /\.showcase-arrows button\s*\{[^}]*min-height:44px/s);
+});
+
+test("automatic carousel rotation respects reduced-motion preferences", () => {
+  assert.match(showcase, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
+  assert.match(showcase, /if \(paused \|\| reducedMotion\) return/);
 });
