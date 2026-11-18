@@ -63,4 +63,4 @@ A first mobile CSS refinement has been added for homepage, formats, authenticati
 The Preview for commit `1d46b9000d642f99a4f08d488f1caa45fa1decbe` returned HTTP 200 for:
 `/`, `/formats`, `/directions`, `/directions/direction-01`, `/products`, `/products/C-01`, `/login`, `/register`, `/forgot-password`, `/learn`, and `/admin`.
 This is a server-response smoke check only. It does not prove visual correctness, successful authenticated journeys, or device-level layout behavior.
-The deployed CSS asset was fetched and confirmed to contain the mobile single-column hero, normal word-breaking, manual hyphenation, and balanced heading rules.
+The deployed CSS asset was fetched and confirmed to contain the mobile single-column hero, normal word-breaking, manual hyphenation, balanced heading rules, and narrow-phone direction-card layout. Automated CSS regression tests now guard these rules.
