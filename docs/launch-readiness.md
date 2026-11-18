@@ -13,7 +13,9 @@ This document separates what exists in code from what must be verified operation
 - [x] Security helper tests run as part of every build.
 - [x] One shared curriculum source defines all six modules, 18 lessons, practical tasks and expected deliverables.
 - [x] Server actions validate lesson IDs against the actual six-module curriculum.
-- [x] Preview build for commit `495c5b87b7385b20cd38d365c817598d4e8d3058` completed successfully; 12 security tests passed and TypeScript/page generation completed.
+- [x] Database constraints and regression tests protect the canonical curriculum identifiers.
+- [x] Static regression checks cover RLS enablement, owner-scoped reads, trusted staff roles and restricted review updates.
+- [x] Preview build for commit `495c5b87b7385b20cd38d365c817598d4e8d3058` completed successfully; 17 security tests passed and TypeScript/page generation completed.
 - [ ] Verify the latest documentation-only follow-up Preview build before handing off.
 
 ## Required before inviting real students
@@ -22,7 +24,8 @@ This document separates what exists in code from what must be verified operation
 
 - [ ] Register a dedicated test student and verify email confirmation, login, logout and password reset.
 - [ ] Confirm the deployed Supabase project is the intended environment.
-- [ ] Apply `supabase/schema.sql` and every migration in order; record the applied migration state.
+- [ ] Apply `supabase/schema.sql` and every migration in order, including `202611180001_enforce_curriculum_integrity.sql`; record the applied migration state.
+- [ ] After reviewing any existing rows, validate the new curriculum constraints with `ALTER TABLE ... VALIDATE CONSTRAINT`.
 - [ ] Test RLS with separate student, mentor and admin accounts.
 - [ ] Verify that a student cannot read another student's projects, progress, submissions or feedback.
 - [ ] Verify that mentor/admin privileges are limited to the intended actions.
