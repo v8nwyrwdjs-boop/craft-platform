@@ -53,14 +53,23 @@ const products = [
 export function ProductShowcase() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (paused) return;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncPreference = () => setReducedMotion(preference.matches);
+    syncPreference();
+    preference.addEventListener("change", syncPreference);
+    return () => preference.removeEventListener("change", syncPreference);
+  }, []);
+
+  useEffect(() => {
+    if (paused || reducedMotion) return;
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % products.length);
     }, 5600);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, [paused, reducedMotion]);
 
   const product = products[active];
 
