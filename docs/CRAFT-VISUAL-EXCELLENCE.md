@@ -73,7 +73,9 @@ The visual references supplied for CRAFT are intended as implementation directio
 
 - **React Three Fiber / Three.js:** use for authored 3D scenes, objects, depth, and purposeful interactions.
 - **ShaderGradient:** evaluate and use for animated shader-based gradient environments, lighting, and atmospheric color transitions.
-- Combine these techniques selectively: for example, a distinctive 3D hero scene with a shader-gradient environment, then smaller visual moments in key sections where they reinforce the story.
+- **Liquid Logo (collidingScopes/liquid-logo):** use its liquid-metal logo treatment as a reference for a CRAFT mark reveal or restrained brand-motion moment. The repository uses WebGL/GLSL fragment shaders, edge detection, vector fields, noise, and metallic shading. Prefer adapting the shader/material technique to CRAFT's actual logo asset rather than embedding the standalone tool or its dat.GUI/export UI into the public site.
+- The liquid-metal treatment should use graphite, silver, near-black, and restrained lime reflections; it should feel premium and controlled, not like a generic chrome template.
+- Combine these techniques selectively: for example, a distinctive 3D hero scene with a shader-gradient environment and a liquid-metal CRAFT logo reveal, then smaller visual moments in key sections where they reinforce the story.
 - Keep typography, navigation, calls to action, and learning content readable and visually dominant where needed. Avoid effects that compete with the message.
 - Build graceful fallbacks for unavailable WebGL, lazy-load heavy scenes, cap rendering cost/pixel density, and provide reduced-motion/static alternatives.
 - Treat mobile performance and usability as release criteria, not later polish.
