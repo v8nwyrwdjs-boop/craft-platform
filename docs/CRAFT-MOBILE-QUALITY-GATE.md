@@ -54,5 +54,5 @@ A first mobile CSS refinement has been added for homepage, formats, authenticati
 - [x] Remove emergency mid-word wrapping from the homepage hero heading; use normal Russian word boundaries and balanced heading wrapping.
 - [x] Force the homepage hero to a single-column mobile layout so the illustration cannot occupy a narrow side column beside the headline or lead copy.
 - [x] Keep the illustration centered below the hero copy with a bounded mobile height.
-- [ ] Re-check the deployed Preview on iOS Safari at 320, 360, 390 and 430 CSS px; the CSS correction is committed, but a screenshot/device pass is still required.
+- [ ] Re-check the latest deployed Preview on iOS Safari at 320, 360, 390 and 430 CSS px; CSS correction is committed and verified in the served stylesheet, but a screenshot/device pass is still required.
 - [ ] Scan every public and authenticated route for similar clipped or mid-word heading breaks after the hero regression is confirmed fixed.
