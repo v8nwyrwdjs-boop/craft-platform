@@ -48,3 +48,11 @@ Run each critical route at these viewport widths:
 ## Current implementation status
 
 A first mobile CSS refinement has been added for homepage, formats, authentication, dashboard, learning catalogue, and admin surfaces. This is a code-level pass, not a completed device QA sign-off. The route-by-route checks above remain required before production.
+
+## Regression found and fixed from an iPhone screenshot
+
+- [x] Remove emergency mid-word wrapping from the homepage hero heading; use normal Russian word boundaries and balanced heading wrapping.
+- [x] Force the homepage hero to a single-column mobile layout so the illustration cannot occupy a narrow side column beside the headline or lead copy.
+- [x] Keep the illustration centered below the hero copy with a bounded mobile height.
+- [ ] Re-check the deployed Preview on iOS Safari at 320, 360, 390 and 430 CSS px; the CSS correction is committed, but a screenshot/device pass is still required.
+- [ ] Scan every public and authenticated route for similar clipped or mid-word heading breaks after the hero regression is confirmed fixed.
