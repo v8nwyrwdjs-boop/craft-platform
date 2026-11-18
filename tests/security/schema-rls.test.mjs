@@ -40,7 +40,7 @@ test("staff roles are read from trusted app_metadata claims", () => {
 });
 
 test("mentors can read enrollment status but cannot manage enrollments", () => {
-  assert.match(schema, /create policy "Staff can read all enrollments" on public\\.enrollments for select/i);
+  assert.match(schema, /create policy "Staff can read all enrollments" on public\.enrollments for select/i);
   assert.match(schema, /create policy "Admins can manage enrollments" on public\\.enrollments for all/i);
 });
 
