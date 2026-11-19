@@ -836,3 +836,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   .header nav a:after{transition:none}
   .journey-step,.direction-card,.product-card,.format-detail-card,.student-project{transition:none}
 }
+
+/* Liquid-metal CRAFT wordmark: SVG turbulence is a short brand accent, not UI text. */
+.craft-liquid-defs{position:absolute;width:0;height:0;overflow:hidden}
+.craft-liquid-wordmark{
+  position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);
+  font:800 clamp(30px,4.8vw,54px)/1 Manrope,Arial,sans-serif;letter-spacing:-.095em;
+  padding-right:.095em;color:transparent;
+  background:linear-gradient(112deg,#596354 0%,#fafff1 22%,#8e9a88 39%,#ffffff 52%,#7c8974 68%,#eaf1dd 82%,#58634f 100%);
+  background-size:220% 100%;background-position:0 50%;background-clip:text;-webkit-background-clip:text;
+  filter:url(#craft-liquid-filter);opacity:.88;mix-blend-mode:screen;
+  text-shadow:0 2px 24px rgba(200,241,105,.24);pointer-events:none;white-space:nowrap;
+  animation:craft-metal-sheen 8s ease-in-out infinite alternate;
+}
+@keyframes craft-metal-sheen{from{background-position:0 50%}to{background-position:100% 50%}}
+@media(max-width:760px){.craft-liquid-wordmark{font-size:clamp(27px,8vw,40px)}}
+@media(prefers-reduced-motion:reduce){.craft-liquid-wordmark{animation:none;filter:none;background-position:50% 50%}}
