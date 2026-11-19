@@ -4,7 +4,8 @@ This is the project context index for humans and coding agents (including Codex 
 
 ## Read in this order
 
-1. Product strategy and offer model — docs/CRAFT-PRODUCT.md.
+1. Canonical project, design, 3D-storytelling and engineering requirements — docs/CRAFT-MASTER-SPEC.md.
+2. Product strategy and offer model — docs/CRAFT-PRODUCT.md.
 2. Design system and experience principles — docs/CRAFT-DESIGN-SYSTEM.md.
 3. Visual references and implementation intent — docs/CRAFT-VISUAL-REFERENCES.md.
 4. Architecture and technical constraints — docs/CRAFT-ARCHITECTURE.md.
@@ -20,7 +21,7 @@ CRAFT is a Russian-language platform for people worldwide who want to create dig
 
 The repository uses Next.js 16 App Router, React 19, TypeScript, Supabase Auth/SSR and PostgreSQL with RLS. The package manifest lists Next 16.4.6 and React 19.3.0. The product includes public pages and catalogues, account flows, student projects, a six-stage/18-lesson learning route, progress and text submissions, and a basic mentor/admin area. Payments are not implemented.
 
-The active work branch is craft/visual-excellence. The homepage now uses a dedicated dark product-story visual foundation and a scroll-controlled R3F scene. Its particle forms transform from binary data into a computer, a digital asset and a connected ecosystem. See docs/CRAFT-ROADMAP.md for implementation and validation status.
+The active work branch is craft/visual-excellence. The homepage currently uses a scroll-controlled R3F scene, but its primary morph is still a legacy 1,800-point particle system and the physical models currently reveal/hide independently. This is a known gap against the target architecture in docs/CRAFT-MASTER-SPEC.md. Replace the particle-cloud morph with authored component assemblies and deterministic component-to-component transforms. See docs/CRAFT-ROADMAP.md for implementation and validation status.
 
 The current visual implementation uses stable React Three Fiber v9 and custom Three.js GLSL; ShaderGradient itself was not added because Next.js 16 compatibility was not proven. The previous standalone liquid-metal hero component remains in the repository but is no longer mounted by the homepage.
 
