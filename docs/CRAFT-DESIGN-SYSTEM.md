@@ -112,3 +112,37 @@ A design change is not complete because it looks good in one desktop screenshot.
 The current visual-excellence branch applies a consolidated CRAFT token layer over the existing warm-white / graphite / black / restrained-lime palette. Public navigation uses a translucent sticky treatment; the homepage carries the signature WebGL moment; catalogues and formats use editorial layouts and quieter depth; authenticated learning and admin surfaces receive focus, form, surface and hover refinements without unnecessary 3D.
 
 The hero scene uses a custom GLSL atmosphere and liquid-metal material in React Three Fiber rather than importing ShaderGradient before Next.js 16 compatibility is proven. Rendering is capped to a 1.25 device-pixel ratio, uses a low-power WebGL preference, pauses outside the viewport and freezes motion for reduced-motion users. Critical copy and actions remain in semantic DOM.
+
+
+## Context-aware art direction and motion quality gate
+
+CRAFT combines three complementary disciplines: distinctive art direction and a real-browser finish gate; evidence-based UI/UX pattern selection; and context-aware motion design. These are reference lenses, not three competing design systems. Existing CRAFT tokens and product truth remain authoritative.
+
+### Art direction
+- Design each page around its real audience, promise, primary action and available evidence.
+- Make every visual earn its place: product demonstration, explanation, atmosphere or a deliberate narrative moment.
+- Avoid generic SaaS section formulas, interchangeable card grids and decorative imagery unrelated to the product.
+- Plan the page as a sequence of readable screens with consistent content edges and a clear first-screen message.
+- Verify the rendered result at desktop, tablet and phone sizes; a successful build is not visual approval.
+
+### UX discipline
+- Audit the existing route, components, tokens and behavior before changing them.
+- Preserve one semantic token system; do not layer a competing preset palette over CRAFT.
+- Prioritize hierarchy, navigation, legibility, forms and feedback, keyboard access, responsive behavior and touch targets.
+- Use patterns that fit the task, not patterns chosen because they are fashionable.
+
+### Motion discipline
+- Product UI: default to restraint, speed and precise feedback.
+- Marketing and storytelling: allow more expressive motion when it explains the product or strengthens the narrative.
+- Audit both missing state-transition feedback and excessive decorative motion.
+- Avoid blanket hover scaling, constant pulsing, blur on every entrance, excessive stagger, uniform timing and bouncy motion on utility actions.
+- Every effect must have a purpose, tuned easing/timing, interruption and cleanup behavior, reduced-motion treatment and low-power fallback.
+
+### Scroll-driven storytelling
+A signature CRAFT homepage chapter may use one continuous 3D transformation tied to native scroll progress: scattered binary digits gather into a computer, the computer transforms into a digital product/asset, and that asset expands into a connected ecosystem. Russian copy explains each transformation as it happens.
+- The scroll position controls the timeline and reverse scrolling reverses the sequence.
+- Do not hijack native scrolling or make text part of the WebGL canvas.
+- Keep headings, chapter copy and calls to action in accessible DOM.
+- Simplify the scene on mobile without losing the story.
+- Lazy-load, cap DPR, pause offscreen, dispose GPU resources and provide a meaningful static/reduced-motion fallback.
+- Build this only if it improves understanding of CRAFT's promise; do not turn every route into a spectacle.
