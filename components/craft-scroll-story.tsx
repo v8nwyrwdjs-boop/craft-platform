@@ -71,7 +71,7 @@ export function CraftScrollStory() {
     let frame = 0;
     const updateProgress = () => {
       if (reducedMotion) {
-        progressRef.current = 1 / 3;
+        progressRef.current = 0.25;
         setActiveChapter(1);
         invalidateRef.current?.();
         return;
@@ -132,7 +132,7 @@ export function CraftScrollStory() {
         <div className="craft-story-copy">
           <p className="craft-kicker"><span className="craft-kicker-dot" /> 01 / ОТ ИДЕИ К ПРОДУКТУ</p>
           <div className="craft-story-active" aria-live="polite" aria-atomic="true">
-            <p className="craft-story-index">{chapter.number} <span>/ 04 — {chapter.label}</span></p>
+            <p className="craft-story-index">{chapter.number} <span>/ 05 — {chapter.label}</span></p>
             <h2>{chapter.title}</h2>
             <p className="craft-story-description">{chapter.description}</p>
             {activeChapter === 4 && (
@@ -155,7 +155,7 @@ export function CraftScrollStory() {
           </div>
           <p className="craft-story-hint">
             <span className="craft-story-hint-mark">↓</span>
-            {reducedMotion ? "История CRAFT — четыре этапа одного пути" : "Прокручивай, чтобы увидеть трансформацию"}
+            {reducedMotion ? "История CRAFT — пять этапов одного пути" : "Прокручивай, чтобы увидеть трансформацию"}
           </p>
         </div>
 
