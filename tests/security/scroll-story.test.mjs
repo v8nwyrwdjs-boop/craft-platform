@@ -53,8 +53,9 @@ test("dark visual system covers mobile and reduced-motion layouts", () => {
 
 test("scroll stages include physical monitor, metallic asset, and spatial ecosystem models", () => {
   assert.match(scene, /function PhysicalProductObjects/);
-  assert.match(scene, /boxGeometry args=\{\[3\.2, 2\.02, 0\.18\]\}/);
-  assert.match(scene, /cylinderGeometry args=\{\[1\.12, 1\.12, 0\.2, 96\]\}/);
+  assert.match(scene, /monitorFrameGeometry/);
+  assert.match(scene, /coinBodyGeometry/);
+  assert.match(scene, /createCoinBodyGeometry/);
   assert.match(scene, /icosahedronGeometry/);
   assert.match(scene, /torusGeometry/);
   assert.match(scene, /monitorTarget/);
@@ -74,4 +75,16 @@ test("monitor housing uses a beveled enclosure and restrained interface details"
   assert.match(scene, /monitorFrameGeometry/);
   assert.match(scene, /bevelThickness: 0\.035/);
   assert.match(scene, /position=\{\[-0\.78, 0\.66, 0\.112\]\}/);
+});
+
+test("CRAFT coin has milled metal edges, surface microtexture, and raised engraving", () => {
+  assert.match(scene, /function createCoinSurfaceTexture/);
+  assert.match(scene, /roughnessMap: coinSurfaceTexture/);
+  assert.match(scene, /bumpMap: coinSurfaceTexture/);
+  assert.match(scene, /Math\.cos\(angle \* 96\) \* 0\.0055/);
+  assert.match(scene, /function createCoinEngravingGeometry/);
+  assert.match(scene, /new THREE\.ExtrudeGeometry\(shape/);
+  assert.match(scene, /function createCoinEtchingGeometry/);
+  assert.match(scene, /const divisions = 144/);
+  assert.match(scene, /coinSurfaceTexture\.dispose\(\)/);
 });
