@@ -252,10 +252,27 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
   const silver = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c7cbd0", metalness: 0.96, roughness: 0.2 }), []);
   const lime = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c8f169", metalness: 0.62, roughness: 0.24, emissive: "#789c37", emissiveIntensity: 0.28 }), []);
   const dark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#24292c", metalness: 0.92, roughness: 0.26 }), []);
+  const monitorFrameGeometry = useMemo(() => {
+    const shape = new THREE.Shape();
+    const width = 3.2;
+    const height = 2.02;
+    const radius = 0.13;
+    shape.moveTo(-width / 2 + radius, -height / 2);
+    shape.lineTo(width / 2 - radius, -height / 2);
+    shape.quadraticCurveTo(width / 2, -height / 2, width / 2, -height / 2 + radius);
+    shape.lineTo(width / 2, height / 2 - radius);
+    shape.quadraticCurveTo(width / 2, height / 2, width / 2 - radius, height / 2);
+    shape.lineTo(-width / 2 + radius, height / 2);
+    shape.quadraticCurveTo(-width / 2, height / 2, -width / 2, height / 2 - radius);
+    shape.lineTo(-width / 2, -height / 2 + radius);
+    shape.quadraticCurveTo(-width / 2, -height / 2, -width / 2 + radius, -height / 2);
+    return new THREE.ExtrudeGeometry(shape, { depth: 0.16, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: 0.035, bevelThickness: 0.035, curveSegments: 8 });
+  }, []);
 
   useEffect(() => () => {
+    monitorFrameGeometry.dispose();
     monitorMaterial.dispose(); screenMaterial.dispose(); silver.dispose(); lime.dispose(); dark.dispose();
-  }, [monitorMaterial, screenMaterial, silver, lime, dark]);
+  }, [monitorFrameGeometry, monitorMaterial, screenMaterial, silver, lime, dark]);
 
   useFrame((_, delta) => {
     const stage = THREE.MathUtils.clamp(progressRef.current * 3, 0, 3);
@@ -275,20 +292,31 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
     const coinMoving = setScale(coin.current, coinTarget);
     const ecosystemMoving = setScale(ecosystem.current, ecosystemTarget);
     const transitioning = monitorMoving || coinMoving || ecosystemMoving;
-    if (monitor.current) monitor.current.rotation.y = THREE.MathUtils.damp(monitor.current.rotation.y, -0.16, 3, delta);
+    let monitorRotating = false;
+    if (monitor.current) {
+      const currentRotation = monitor.current.rotation.y;
+      monitor.current.rotation.y = THREE.MathUtils.damp(currentRotation, -0.16, 3, delta);
+      monitorRotating = Math.abs(monitor.current.rotation.y - -0.16) > 0.001;
+    }
     if (coin.current && coinTarget > 0.02) coin.current.rotation.y += delta * 0.12;
     if (ecosystem.current && ecosystemTarget > 0.02) ecosystem.current.rotation.y += delta * 0.045;
-    if (transitioning || coinTarget > 0.02 || ecosystemTarget > 0.02) invalidate();
+    if (transitioning || monitorRotating || coinTarget > 0.02 || ecosystemTarget > 0.02) invalidate();
   });
 
   return (
     <>
       <group ref={monitor} position={[0, 0, 0.18]} scale={0.001}>
-        <mesh position={[0, 0.12, 0]} material={monitorMaterial}><boxGeometry args={[3.2, 2.02, 0.18]} /></mesh>
-        <mesh position={[0, 0.12, 0.101]} material={screenMaterial}><planeGeometry args={[2.94, 1.76]} /></mesh>
+        <mesh position={[0, 0.12, -0.08]} geometry={monitorFrameGeometry} material={monitorMaterial} />
+        <mesh position={[0, 0.12, 0.105]} material={screenMaterial}><planeGeometry args={[2.91, 1.72]} /></mesh>
+        <mesh position={[-0.78, 0.66, 0.112]} material={silver}><boxGeometry args={[0.34, 0.035, 0.012]} /></mesh>
+        <mesh position={[-0.78, 0.51, 0.112]} material={lime}><boxGeometry args={[0.52, 0.018, 0.012]} /></mesh>
+        <mesh position={[0.15, 0.53, 0.112]} material={dark}><boxGeometry args={[1.34, 0.018, 0.012]} /></mesh>
+        <mesh position={[-0.76, -0.08, 0.112]} material={silver}><boxGeometry args={[0.42, 0.026, 0.012]} /></mesh>
+        <mesh position={[-0.76, -0.22, 0.112]} material={dark}><boxGeometry args={[0.68, 0.018, 0.012]} /></mesh>
+        <mesh position={[0.56, -0.2, 0.116]} rotation={[0, 0, -0.12]} material={lime}><boxGeometry args={[0.035, 0.72, 0.018]} /></mesh>
         <mesh position={[0, -1.08, -0.02]} material={silver}><boxGeometry args={[0.2, 0.42, 0.16]} /></mesh>
         <mesh position={[0, -1.32, 0.02]} material={dark}><boxGeometry args={[1.16, 0.1, 0.62]} /></mesh>
-        <mesh position={[0, 0.12, 0.115]} material={lime}><boxGeometry args={[0.44, 0.018, 0.012]} /></mesh>
+        <mesh position={[0, 0.12, 0.125]} material={lime}><boxGeometry args={[0.44, 0.018, 0.012]} /></mesh>
       </group>
       <group ref={coin} position={[0, 0, 0.12]} scale={0.001}>
         <mesh rotation={[Math.PI / 2, 0, 0]} material={silver}><cylinderGeometry args={[1.12, 1.12, 0.2, 96]} /></mesh>
