@@ -134,8 +134,6 @@ function ObjectField({ reducedMotion }: { reducedMotion: boolean }) {
           uniforms={{ uTime: { value: 0 } }}
           vertexShader={liquidVertexShader}
           fragmentShader={liquidFragmentShader}
-          metalness={0.95}
-          roughness={0.16}
         />
       </mesh>
       <mesh ref={ring} rotation={[1.1, 0.25, 0.2]}>
@@ -160,10 +158,22 @@ function ObjectField({ reducedMotion }: { reducedMotion: boolean }) {
 
 export function CraftHeroScene() {
   const reducedMotion = usePrefersReducedMotion();
+  const [isVisible, setIsVisible] = useState(true);
+  const container = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const node = container.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { rootMargin: "120px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="craft-scene" aria-hidden="true">
+    <div ref={container} className="craft-scene" aria-hidden="true">
       <Canvas
-        dpr={[1, 1.35]}
+        frameloop={reducedMotion || !isVisible ? "demand" : "always"}
+        dpr={[1, 1.25]}
         camera={{ position: [0, 0, 5.4], fov: 36 }}
         gl={{ alpha: true, antialias: true, powerPreference: "low-power", stencil: false }}
         fallback={<div className="craft-scene-fallback" />}
