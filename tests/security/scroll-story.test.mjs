@@ -10,8 +10,8 @@ const home = readFileSync(new URL("../../app/page.tsx", import.meta.url), "utf8"
 test("homepage replaces the disconnected sphere and carousel with one scroll story", () => {
   assert.match(home, /CraftScrollStory/);
   assert.doesNotMatch(home, /ProductShowcase|CraftHeroScene/);
-  assert.match(story, /binary|КОД/);
-  assert.match(story, /КОМПЬЮТЕР/);
+  assert.match(story, /binary|ПРОГРАММИРОВАНИЕ/);
+  assert.match(story, /ЦИФРОВЫЕ ПРОДУКТЫ/);
   assert.match(story, /цифровой актив|цифровые активы/);
   assert.match(story, /ПРОГРАММИРОВАНИЕ/);
   assert.match(story, /КРИПТОВАЛЮТА/);
