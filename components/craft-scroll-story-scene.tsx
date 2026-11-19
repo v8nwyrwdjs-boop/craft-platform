@@ -252,6 +252,22 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
   const silver = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c7cbd0", metalness: 0.96, roughness: 0.2 }), []);
   const lime = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c8f169", metalness: 0.62, roughness: 0.24, emissive: "#789c37", emissiveIntensity: 0.28 }), []);
   const dark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#24292c", metalness: 0.92, roughness: 0.26 }), []);
+  const networkMaterial = useMemo(() => new THREE.LineBasicMaterial({ color: "#b9dc78", transparent: true, opacity: 0.72 }), []);
+  const ecosystemLinksGeometry = useMemo(() => {
+    const nodes = [
+      [0, 1.3, 0], [1.08, 0.62, 0.16], [1.2, -0.42, 0.14], [0.12, -1.28, 0],
+      [-1.08, -0.58, -0.12], [-1.2, 0.5, -0.1], [0.18, 0.05, 1.22], [-0.14, -0.05, -1.22],
+    ];
+    const pairs = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0], [0, 6], [2, 6], [4, 7], [5, 7], [6, 7]];
+    const positions = new Float32Array(pairs.length * 6);
+    pairs.forEach(([from, to], index) => {
+      positions.set(nodes[from], index * 6);
+      positions.set(nodes[to], index * 6 + 3);
+    });
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    return geometry;
+  }, []);
   const monitorFrameGeometry = useMemo(() => {
     const shape = new THREE.Shape();
     const width = 3.2;
@@ -271,8 +287,10 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
 
   useEffect(() => () => {
     monitorFrameGeometry.dispose();
+    ecosystemLinksGeometry.dispose();
+    networkMaterial.dispose();
     monitorMaterial.dispose(); screenMaterial.dispose(); silver.dispose(); lime.dispose(); dark.dispose();
-  }, [monitorFrameGeometry, monitorMaterial, screenMaterial, silver, lime, dark]);
+  }, [monitorFrameGeometry, ecosystemLinksGeometry, networkMaterial, monitorMaterial, screenMaterial, silver, lime, dark]);
 
   useFrame((_, delta) => {
     const stage = THREE.MathUtils.clamp(progressRef.current * 3, 0, 3);
@@ -325,6 +343,7 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
         <mesh position={[0, 0, 0.13]} material={silver}><boxGeometry args={[0.12, 0.58, 0.055]} /></mesh>
       </group>
       <group ref={ecosystem} position={[0, 0, 0]} scale={0.001}>
+        <lineSegments geometry={ecosystemLinksGeometry} material={networkMaterial} />
         <mesh material={dark}><icosahedronGeometry args={[0.7, 2]} /></mesh>
         <mesh rotation={[0.4, 0.2, 0.1]} material={lime}><torusGeometry args={[1.18, 0.012, 8, 128]} /></mesh>
         <mesh rotation={[1.1, 0.7, 0.4]} material={silver}><torusGeometry args={[1.42, 0.009, 8, 128]} /></mesh>
