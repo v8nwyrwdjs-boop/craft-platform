@@ -75,7 +75,7 @@ test("application forms use mobile-safe full-width controls and readable input s
 
 test("admin data tables remain contained in horizontal scroll regions", () => {
   const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
-  assert.match(theme, /\.admin-table-wrap \{ max-width: 100%; overscroll-behavior-x: contain; \}/);
+  assert.match(theme, /\.admin-table-wrap \{ max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain;/);
   assert.match(theme, /\.admin-table-wrap \{[^}]*overflow-x: auto/s);
 });
 
@@ -96,6 +96,6 @@ test("detail catalogue pages label their primary navigation landmarks", () => {
 test("learning and admin layouts preserve constrained content containers", () => {
   const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
   assert.match(theme, /\.module-lesson \{ grid-template-columns: minmax\(0,1fr\); \}/);
-  assert.match(theme, /\.admin-table-wrap \{ max-width: 100%; overscroll-behavior-x: contain; \}/);
+  assert.match(theme, /\.admin-table-wrap \{ max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain;/);
   assert.match(theme, /\.admin-review-answer \{ white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1\.75; \}/);
 });
