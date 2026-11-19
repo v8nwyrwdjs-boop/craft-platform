@@ -11,27 +11,33 @@ const ScrollScene = dynamic(
 const chapters = [
   {
     number: "01",
-    label: "КОД",
+    label: "ПРОГРАММИРОВАНИЕ",
     title: "Всё начинается с кода.",
-    description: "Нули и единицы — чистый материал. Из них складываются интерфейсы, инструменты и новые способы решать задачи.",
+    description: "Нули и единицы становятся программами. Из алгоритмов и логики рождаются интерфейсы, инструменты и технологии, которые решают реальные задачи.",
   },
   {
     number: "02",
-    label: "КОМПЬЮТЕР",
+    label: "ЦИФРОВЫЕ ПРОДУКТЫ",
     title: "Код обретает форму.",
-    description: "Идея собирается в понятный интерфейс и первую работающую версию: сайт, приложение или сервис.",
+    description: "Идея превращается в сайт, приложение или цифровой бизнес: с интерфейсом, собственной логикой и понятной ценностью для людей.",
   },
   {
     number: "03",
-    label: "ПРОДУКТ",
+    label: "КРИПТОВАЛЮТА",
     title: "Появляется цифровой актив.",
-    description: "У продукта появляется собственная логика, данные и сценарий использования. Он начинает решать конкретную задачу для людей.",
+    description: "Блокчейн, криптовалюты, токены и цифровые активы. Разбираемся, как распределённые сети фиксируют операции и позволяют создавать новые экономические модели.",
   },
   {
     number: "04",
     label: "ЭКОСИСТЕМА",
     title: "От продукта — к системе.",
-    description: "Сервисы, AI-агенты, автоматизация и люди соединяются в экосистему, которую можно развивать дальше.",
+    description: "Сервисы, AI-агенты, автоматизация, данные и люди соединяются в единую цифровую экосистему, которую можно развивать дальше.",
+  },
+  {
+    number: "05",
+    label: "КАТАЛОГ CRAFT",
+    title: "Выбирай, что создавать.",
+    description: "Изучай направления и примеры цифровых продуктов CRAFT. Найди технологию, инструмент или идею для собственного проекта.",
   },
 ];
 
@@ -78,7 +84,7 @@ export function CraftScrollStory() {
         const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
         const progress = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / travel));
         progressRef.current = progress;
-        setActiveChapter(Math.min(3, Math.round(progress * 3)));
+        setActiveChapter(Math.min(4, Math.round(progress * 4)));
         invalidateRef.current?.();
       });
     };
@@ -129,6 +135,11 @@ export function CraftScrollStory() {
             <p className="craft-story-index">{chapter.number} <span>/ 04 — {chapter.label}</span></p>
             <h2>{chapter.title}</h2>
             <p className="craft-story-description">{chapter.description}</p>
+            {activeChapter === 4 && (
+              <a className="craft-text-link craft-story-catalog-link" href="#products">
+                Открыть каталог CRAFT <span aria-hidden="true">↗</span>
+              </a>
+            )}
           </div>
           <div className="craft-story-progress" aria-hidden="true">
             <div className="craft-story-progress-track">
@@ -149,7 +160,7 @@ export function CraftScrollStory() {
         </div>
 
         <div className="craft-story-visual" aria-hidden="true">
-          <div className="craft-story-visual-top"><span>CRAFT / PROCESS STUDY</span><span>FIG. 001—004</span></div>
+          <div className="craft-story-visual-top"><span>CRAFT / PROCESS STUDY</span><span>FIG. 001—005</span></div>
           {isVisible ? (
             <ScrollScene progressRef={progressRef} invalidateRef={invalidateRef} />
           ) : (
@@ -159,7 +170,7 @@ export function CraftScrollStory() {
         </div>
       </div>
 
-      <ol className="craft-story-archive" aria-label="Этапы создания цифрового продукта">
+      <ol className="craft-story-archive" aria-label="Этапы создания цифрового продукта и цифровой экосистемы">
         {chapters.map((item) => (
           <li key={item.number}>
             <span>{item.number} / {item.label}</span>
