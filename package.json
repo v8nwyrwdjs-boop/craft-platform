@@ -13,12 +13,15 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "@supabase/ssr": "^0.6.1",
-    "@supabase/supabase-js": "^2.49.1"
+    "@supabase/supabase-js": "^2.49.1",
+    "@react-three/fiber": "^9.1.2",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.3",
     "@types/react-dom": "^19.2.3",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "@types/three": "^0.180.0"
   }
 }
