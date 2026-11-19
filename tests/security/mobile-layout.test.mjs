@@ -43,4 +43,8 @@ test("the signature hero scene keeps WebGL bounded and motion-aware", async () =
   assert.match(scene, /fallback=\{<div className="craft-scene-fallback"/);
   assert.match(scene, /liquidFragmentShader/);
   assert.match(scene, /atmosphereFragmentShader/);
+
+  assert.match(scene, /craft-liquid-filter/);
+  assert.match(scene, /craft-liquid-wordmark/);
+
 });
