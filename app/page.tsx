@@ -1,4 +1,5 @@
 import { ProductShowcase } from "../components/product-showcase";
+import { CraftHeroScene } from "../components/craft-hero-scene-loader";
 
 const directions = [
   { no: "01", title: "SaaS и цифровые продукты", text: "Сервисы по подписке, приложения, платформы и модели цифрового бизнеса.", mark: "S" },
@@ -55,10 +56,9 @@ export default function Home() {
           </div>
           <div className="hero-proof"><span>С НУЛЯ</span><i/><span>ЖИВАЯ ОБРАТНАЯ СВЯЗЬ</span><i/><span>СО СВОИМ ПРОЕКТОМ</span></div>
         </div>
-        <div className="hero-art" aria-label="Графическая композиция о создании цифрового продукта">
-          <div className="hero-art-label">CRAFT / WORKSHOP № 001</div>
-          <div className="hero-art-orbit orbit-one"/><div className="hero-art-orbit orbit-two"/>
-          <div className="hero-art-shape"><span>C</span></div>
+        <div className="hero-art" aria-label="Интерактивная трёхмерная композиция CRAFT: идея превращается в цифровой продукт">
+          <CraftHeroScene />
+          <div className="hero-art-label">CRAFT / DIGITAL OBJECT 001</div>
           <div className="hero-art-chip chip-one">ИДЕЯ</div><div className="hero-art-chip chip-two">ПРОДУКТ</div>
           <div className="hero-art-bottom"><span>ОТ ПЕРВОГО ШАГА</span><b>ДО ЗАПУСКА ↗</b></div>
         </div>
