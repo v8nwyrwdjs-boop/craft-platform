@@ -241,6 +241,69 @@ function MorphingParticles({ progressRef, invalidateRef }: SceneProps) {
   );
 }
 
+
+function PhysicalProductObjects({ progressRef, invalidateRef }: SceneProps) {
+  const invalidate = useThree((state) => state.invalidate);
+  const monitor = useRef<THREE.Group>(null);
+  const coin = useRef<THREE.Group>(null);
+  const ecosystem = useRef<THREE.Group>(null);
+  const monitorMaterial = useMemo(() => new THREE.MeshStandardMaterial({ color: "#171a1d", metalness: 0.88, roughness: 0.24 }), []);
+  const screenMaterial = useMemo(() => new THREE.MeshStandardMaterial({ color: "#101820", metalness: 0.35, roughness: 0.18, emissive: "#172a2c", emissiveIntensity: 0.55 }), []);
+  const silver = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c7cbd0", metalness: 0.96, roughness: 0.2 }), []);
+  const lime = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c8f169", metalness: 0.62, roughness: 0.24, emissive: "#789c37", emissiveIntensity: 0.28 }), []);
+  const dark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#24292c", metalness: 0.92, roughness: 0.26 }), []);
+
+  useEffect(() => () => {
+    monitorMaterial.dispose(); screenMaterial.dispose(); silver.dispose(); lime.dispose(); dark.dispose();
+  }, [monitorMaterial, screenMaterial, silver, lime, dark]);
+
+  useFrame((_, delta) => {
+    const stage = THREE.MathUtils.clamp(progressRef.current * 3, 0, 3);
+    const reveal = (start: number, end: number) => THREE.MathUtils.smoothstep(stage, start, end);
+    const setScale = (group: THREE.Group | null, amount: number) => {
+      if (!group) return;
+      const next = THREE.MathUtils.damp(group.scale.x, THREE.MathUtils.clamp(amount, 0, 1), 9, delta);
+      group.scale.setScalar(next);
+      group.visible = next > 0.008;
+    };
+    setScale(monitor.current, reveal(0.62, 1.12) * (1 - reveal(1.18, 1.48)));
+    setScale(coin.current, reveal(1.62, 2.08) * (1 - reveal(2.18, 2.48)));
+    setScale(ecosystem.current, reveal(2.55, 2.96));
+    if (monitor.current) monitor.current.rotation.y = THREE.MathUtils.damp(monitor.current.rotation.y, -0.16, 3, delta);
+    if (coin.current) coin.current.rotation.y += delta * 0.12;
+    if (ecosystem.current) ecosystem.current.rotation.y += delta * 0.045;
+    invalidate();
+  });
+
+  return (
+    <>
+      <group ref={monitor} position={[0, 0, 0.18]} scale={0.001}>
+        <mesh position={[0, 0.12, 0]} material={monitorMaterial}><boxGeometry args={[3.2, 2.02, 0.18]} /></mesh>
+        <mesh position={[0, 0.12, 0.101]} material={screenMaterial}><planeGeometry args={[2.94, 1.76]} /></mesh>
+        <mesh position={[0, -1.08, -0.02]} material={silver}><boxGeometry args={[0.2, 0.42, 0.16]} /></mesh>
+        <mesh position={[0, -1.32, 0.02]} material={dark}><boxGeometry args={[1.16, 0.1, 0.62]} /></mesh>
+        <mesh position={[0, 0.12, 0.115]} material={lime}><boxGeometry args={[0.44, 0.018, 0.012]} /></mesh>
+      </group>
+      <group ref={coin} position={[0, 0, 0.12]} scale={0.001}>
+        <mesh rotation={[Math.PI / 2, 0, 0]} material={silver}><cylinderGeometry args={[1.12, 1.12, 0.2, 96]} /></mesh>
+        <mesh rotation={[Math.PI / 2, 0, 0]} material={lime}><torusGeometry args={[0.91, 0.025, 12, 96]} /></mesh>
+        <mesh position={[0, 0, 0.13]} material={silver}><torusGeometry args={[0.25, 0.055, 16, 48]} /></mesh>
+        <mesh position={[0, 0, 0.13]} material={silver}><boxGeometry args={[0.12, 0.58, 0.055]} /></mesh>
+      </group>
+      <group ref={ecosystem} position={[0, 0, 0]} scale={0.001}>
+        <mesh material={dark}><icosahedronGeometry args={[0.7, 2]} /></mesh>
+        <mesh rotation={[0.4, 0.2, 0.1]} material={lime}><torusGeometry args={[1.18, 0.012, 8, 128]} /></mesh>
+        <mesh rotation={[1.1, 0.7, 0.4]} material={silver}><torusGeometry args={[1.42, 0.009, 8, 128]} /></mesh>
+        {[[0,1.3,0],[1.08,0.62,0.16],[1.2,-0.42,0.14],[0.12,-1.28,0],[-1.08,-0.58,-0.12],[-1.2,0.5,-0.1],[0.18,0.05,1.22],[-0.14,-0.05,-1.22]].map(([x,y,z], index) => (
+          <mesh key={index} position={[x,y,z]} material={index % 3 === 0 ? lime : silver}>
+            <sphereGeometry args={[index % 3 === 0 ? 0.09 : 0.055, 20, 20]} />
+          </mesh>
+        ))}
+      </group>
+    </>
+  );
+}
+
 export function CraftScrollStoryScene({ progressRef, invalidateRef }: SceneProps) {
   return (
     <Canvas
@@ -251,7 +314,7 @@ export function CraftScrollStoryScene({ progressRef, invalidateRef }: SceneProps
       fallback={<div className="craft-story-fallback" />}
     >
       <color attach="background" args={["#08090b"]} />
-      <MorphingParticles progressRef={progressRef} invalidateRef={invalidateRef} />
+      <ambientLight intensity={0.72} />\n      <directionalLight position={[3, 4, 5]} intensity={2.1} color="#ffffff" />\n      <pointLight position={[-3, -2, 2]} intensity={9} distance={8} color="#c8f169" />\n      <MorphingParticles progressRef={progressRef} invalidateRef={invalidateRef} />\n      <PhysicalProductObjects progressRef={progressRef} invalidateRef={invalidateRef} />
     </Canvas>
   );
 }
