@@ -320,7 +320,11 @@ export function CraftScrollStoryScene({ progressRef, invalidateRef }: SceneProps
       fallback={<div className="craft-story-fallback" />}
     >
       <color attach="background" args={["#08090b"]} />
-      <ambientLight intensity={0.72} />\n      <directionalLight position={[3, 4, 5]} intensity={2.1} color="#ffffff" />\n      <pointLight position={[-3, -2, 2]} intensity={9} distance={8} color="#c8f169" />\n      <MorphingParticles progressRef={progressRef} invalidateRef={invalidateRef} />\n      <PhysicalProductObjects progressRef={progressRef} invalidateRef={invalidateRef} />
+      <ambientLight intensity={0.72} />
+      <directionalLight position={[3, 4, 5]} intensity={2.1} color="#ffffff" />
+      <pointLight position={[-3, -2, 2]} intensity={9} distance={8} color="#c8f169" />
+      <MorphingParticles progressRef={progressRef} invalidateRef={invalidateRef} />
+      <PhysicalProductObjects progressRef={progressRef} invalidateRef={invalidateRef} />
     </Canvas>
   );
 }
