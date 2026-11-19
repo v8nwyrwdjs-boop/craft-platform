@@ -2,7 +2,7 @@
 
 Before making changes, read:
 1. `docs/CRAFT-PROJECT-BRAIN.md`
-2. The linked product, design, visual-reference, architecture and roadmap documents.
+2. The linked product, design, visual-reference, architecture and roadmap documents, including `docs/CRAFT-APPLE-REFERENCE.md` for Apple-inspired product storytelling and implementation measurements.
 3. Existing `README.md`, `docs/roadmap.md`, `docs/launch-readiness.md`, and `docs/CRAFT-MOBILE-QUALITY-GATE.md` when relevant.
 
 ## Non-negotiable repository and release rules
