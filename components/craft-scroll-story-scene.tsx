@@ -55,7 +55,7 @@ function createCoinBodyGeometry() {
     const y = positions.getY(index);
     const z = positions.getZ(index);
     const radius = Math.hypot(x, z);
-    if (radius < 1.1 || Math.abs(y) > 0.099) continue;
+    if (radius < 1.1) continue;
     const angle = Math.atan2(z, x);
     const milledRadius = radius + Math.cos(angle * 96) * 0.0055;
     positions.setXYZ(index, (x / radius) * milledRadius, y, (z / radius) * milledRadius);
@@ -488,6 +488,63 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
   );
 }
 
+function StudioEnvironment() {
+  const scene = useThree((state) => state.scene);
+  const environment = useMemo(() => {
+    const width = 256;
+    const height = 128;
+    const data = new Uint8Array(width * height * 4);
+    const smooth = (edge0: number, edge1: number, value: number) => {
+      const amount = THREE.MathUtils.clamp((value - edge0) / (edge1 - edge0), 0, 1);
+      return amount * amount * (3 - 2 * amount);
+    };
+    const panel = (u: number, v: number, left: number, right: number, top: number, bottom: number) => (
+      smooth(left, left + 0.018, u) *
+      (1 - smooth(right - 0.018, right, u)) *
+      smooth(top, top + 0.025, v) *
+      (1 - smooth(bottom - 0.025, bottom, v))
+    );
+
+    for (let y = 0; y < height; y += 1) {
+      for (let x = 0; x < width; x += 1) {
+        const u = x / width;
+        const v = y / height;
+        const verticalSoftbox = panel(u, v, 0.16, 0.235, 0.2, 0.79);
+        const overheadSoftbox = panel(u, v, 0.48, 0.78, 0.12, 0.205);
+        const sideStrip = panel(u, v, 0.84, 0.875, 0.29, 0.7);
+        const limeBounce = panel(u, v, 0.34, 0.365, 0.48, 0.72);
+        const base = 0.025 + (1 - v) * 0.035;
+        const white = Math.max(verticalSoftbox * 0.94, overheadSoftbox * 0.82, sideStrip * 0.62);
+        const lime = limeBounce * 0.48;
+        const index = (y * width + x) * 4;
+        data[index] = Math.round(THREE.MathUtils.clamp(base * 0.78 + white + lime * 0.62, 0, 1) * 255);
+        data[index + 1] = Math.round(THREE.MathUtils.clamp(base * 0.84 + white + lime, 0, 1) * 255);
+        data[index + 2] = Math.round(THREE.MathUtils.clamp(base + white + lime * 0.5, 0, 1) * 255);
+        data[index + 3] = 255;
+      }
+    }
+
+    const texture = new THREE.DataTexture(data, width, height, THREE.RGBAFormat);
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearFilter;
+    texture.needsUpdate = true;
+    return texture;
+  }, []);
+
+  useEffect(() => {
+    const previousEnvironment = scene.environment;
+    scene.environment = environment;
+    return () => {
+      if (scene.environment === environment) scene.environment = previousEnvironment;
+      environment.dispose();
+    };
+  }, [environment, scene]);
+
+  return null;
+}
+
 export function CraftScrollStoryScene({ progressRef, invalidateRef }: SceneProps) {
   return (
     <Canvas
@@ -501,6 +558,7 @@ export function CraftScrollStoryScene({ progressRef, invalidateRef }: SceneProps
       <ambientLight intensity={0.72} />
       <directionalLight position={[3, 4, 5]} intensity={2.1} color="#ffffff" />
       <pointLight position={[-3, -2, 2]} intensity={9} distance={8} color="#c8f169" />
+      <StudioEnvironment />
       <MorphingParticles progressRef={progressRef} invalidateRef={invalidateRef} />
       <PhysicalProductObjects progressRef={progressRef} invalidateRef={invalidateRef} />
     </Canvas>
