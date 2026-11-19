@@ -617,7 +617,7 @@ button { font: inherit; }
   border-radius: 999px;
   background: var(--craft-lime);
   color: #11150d;
-  font: 700 12px/1.2 inherit;
+  font-family: inherit; font-size: 12px; font-weight: 700; line-height: 1.2;
   cursor: pointer;
   transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
 }
@@ -645,7 +645,7 @@ button { font: inherit; }
 .dashboard-user { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; color: var(--craft-muted); }
 .dashboard-user > span { max-width: 260px; }
 .dashboard-user a,
-.dashboard-user button { color: var(--craft-muted); font: 600 11px inherit; }
+.dashboard-user button { color: var(--craft-muted); font-family: inherit; font-size: 11px; font-weight: 600; }
 .dashboard-user a:hover,
 .dashboard-user button:hover { color: var(--craft-lime); }
 .dashboard-user button { min-height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; }
