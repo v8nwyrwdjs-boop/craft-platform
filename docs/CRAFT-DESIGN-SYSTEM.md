@@ -8,12 +8,15 @@ Avoid generic SaaS templates, noisy gradients everywhere, crypto-bro visual trop
 
 ## Color direction
 
-Core palette:
-- Warm white / soft ivory for open, calm content surfaces.
-- Graphite for the principal dark surface and brand depth.
-- Near-black for deliberate contrast and typography.
-- Restrained lime/green for focus, action, progress and small moments of energy.
-- Silver/metallic highlights for selected brand-motion and 3D details, not as a replacement for the core palette.
+Dark-first palette:
+- Obsidian / near-black for hero stages, full-bleed product imagery and signature storytelling chapters.
+- Graphite / charcoal for navigation, content bands and elevated dark surfaces.
+- Porcelain / soft white for high-contrast typography on dark stages.
+- Restrained lime/green for CRAFT's signature focus, action and progress accents.
+- Silver/metallic highlights for selected 3D and product-artifact details.
+- Warm-white / pale neutral surfaces only as deliberate visual resets, not the dominant canvas.
+
+Map semantic roles to CRAFT tokens. Do not copy Apple's blue, orange or yellow accents as new CRAFT brand colors.
 
 Use semantic tokens rather than scattering raw colors. Before introducing tokens, inspect existing CSS variables and consolidate without causing a broad visual regression. Check contrast for text, controls, focus rings and status states.
 
@@ -31,7 +34,7 @@ Do not add a paid font service. Prefer existing local/system fonts or a free, ap
 ## Layout and composition
 
 - Use generous but purposeful whitespace and a consistent spacing rhythm.
-- Combine light and dark sections to create pacing, not arbitrary alternation.
+- Lead public marketing pages with immersive dark product stages and graphite bands. Use occasional warm-white/pale sections as deliberate contrast, not arbitrary alternation.
 - Use rounded cards and controls with consistent radii, restrained borders and subtle depth.
 - Keep content widths readable and align sections to a coherent grid.
 - Give key content a clear hierarchy; avoid turning every block into a card.
@@ -109,7 +112,7 @@ A design change is not complete because it looks good in one desktop screenshot.
 
 ## Applied visual foundation — 2026-11-19
 
-The current visual-excellence branch applies a consolidated CRAFT token layer over the existing warm-white / graphite / black / restrained-lime palette. Public navigation uses a translucent sticky treatment; the homepage carries the signature WebGL moment; catalogues and formats use editorial layouts and quieter depth; authenticated learning and admin surfaces receive focus, form, surface and hover refinements without unnecessary 3D.
+The current visual-excellence branch should evolve toward a dark-first CRAFT product-gallery direction: obsidian stages, graphite bands, porcelain typography, restrained lime and silver highlights. Warm-white chapters remain selective contrast rather than the default. Public navigation uses a translucent sticky treatment; the homepage carries the signature WebGL moment; catalogues and formats use editorial layouts and quieter depth; authenticated learning and admin surfaces receive focus, form, surface and hover refinements without unnecessary 3D.
 
 The hero scene uses a custom GLSL atmosphere and liquid-metal material in React Three Fiber rather than importing ShaderGradient before Next.js 16 compatibility is proven. Rendering is capped to a 1.25 device-pixel ratio, uses a low-power WebGL preference, pauses outside the viewport and freezes motion for reduced-motion users. Critical copy and actions remain in semantic DOM.
 
@@ -153,3 +156,8 @@ A signature CRAFT homepage chapter may use one continuous 3D transformation tied
 The owner supplied an Apple product-page design specification in `DESIGN.md`. Its detailed interpretation and implementation notes are preserved in `docs/CRAFT-APPLE-REFERENCE.md`. Use it as a benchmark for spacious product storytelling, quiet navigation, precise editorial typography, oversized product imagery, restrained controls, shadowless rounded media and deliberate section pacing.
 
 This is a structural and craft reference, not a brand-copying instruction. CRAFT retains its own warm-white / graphite / restrained-lime identity, product truth and accessibility requirements. Do not copy Apple marks, product assets, proprietary fonts or exact copy. Map reference roles to existing CRAFT tokens; do not introduce a competing Apple-blue palette. Use system/legal font fallbacks unless licensed font assets are supplied. The Apple-style showroom treatment is primarily for public marketing/product-story pages; authenticated learning and admin surfaces remain task-focused.
+
+
+## Dark Apple-stage direction — owner update 2026-11-19
+
+The owner's second Apple product-page specification is a dark, midnight hardware gallery. It supersedes the earlier light-gallery preference as the primary visual reference. Public homepage and flagship storytelling should lead with Obsidian full-bleed stages, Graphite/Carbon bands, porcelain typography, cinematic product-first imagery, restrained lime and silver highlights. Use occasional white/porcelain comparison surfaces only as deliberate visual resets. Keep 28px media corners, fine 1px keylines and almost no shadows. Use compact quiet navigation and concise display copy. Scroll chapters may transform one continuous 3D artifact from idea to code to computer/interface to digital product to connected ecosystem, synchronized with Russian copy. Preserve CRAFT identity; do not import Apple Blue or proprietary assets/fonts. Keep authenticated learning/admin surfaces task-focused. This dark reference is now the lead art-direction benchmark; do not revert to the prior all-light Apple gallery treatment.
