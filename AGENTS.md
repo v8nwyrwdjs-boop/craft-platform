@@ -2,7 +2,7 @@
 
 Before making changes, read:
 1. `docs/CRAFT-PROJECT-BRAIN.md`
-2. The linked product, design, visual-reference, architecture and roadmap documents, including `docs/CRAFT-APPLE-REFERENCE.md` for Apple-inspired product storytelling and implementation measurements.
+2. The linked product, design, visual-reference, architecture and roadmap documents, including `docs/CRAFT-APPLE-REFERENCE.md` for the dark Apple product-stage reference and implementation measurements.
 3. Existing `README.md`, `docs/roadmap.md`, `docs/launch-readiness.md`, and `docs/CRAFT-MOBILE-QUALITY-GATE.md` when relevant.
 
 ## Non-negotiable repository and release rules
@@ -38,7 +38,7 @@ Core themes include SaaS and digital products, AI, AI-assisted development, auto
 ## Design and experience priorities
 
 - Mobile usability is a first-class requirement and outranks decorative effects.
-- Brand palette: warm white, graphite, black used intentionally for contrast, restrained lime/green accents, with silver/metallic treatments only as controlled visual accents.
+- Visual direction: lead with deep black/obsidian and graphite product stages, precise porcelain typography, restrained lime/green brand accents and silver/metallic 3D highlights. Use warm-white/pale surfaces selectively as deliberate contrast chapters, not as the default overall direction.
 - Strong editorial typography, clear hierarchy, rounded but purposeful shapes, confident spacing, visual depth, and polished transitions.
 - Build a coherent system across public pages, catalogues, auth, dashboard, learning and admin.
 - 3D, shaders and motion should make CRAFT memorable without obscuring content, navigation or calls to action.
@@ -100,7 +100,7 @@ Reference: `nextlevelbuilder/ui-ux-pro-max-skill`.
 - Use mobile-first layouts, semantic color roles, legible body text, visible keyboard focus, touch-friendly controls and no page-level horizontal overflow.
 - Motion must communicate state, causality or spatial continuity; avoid animating width/height when transforms or opacity can do the job.
 - Use stack-specific guidance only after verifying the actual framework and dependency versions in this repository.
-- Use this skill as a searchable UX/pattern reference, not as a generator of arbitrary presets. CRAFT's warm-white / graphite / restrained-lime brand tokens remain the source of truth.
+- Use this skill as a searchable UX/pattern reference, not as a generator of arbitrary presets. CRAFT's obsidian / graphite / porcelain / restrained-lime brand tokens remain the source of truth.
 
 ### 3. Motion design: restraint, polish and experimentation
 Reference: `kylezantos/design-motion-principles`, synthesizing three lenses:
