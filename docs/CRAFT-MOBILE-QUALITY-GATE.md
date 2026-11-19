@@ -72,3 +72,18 @@ The Preview for commit `9b1265b09d3239a921e0289cd9d171ccad999bdd` returned HTTP 
 `/`, `/formats`, `/directions`, `/directions/direction-01`, `/products`, `/products/C-01`, `/login`, `/register`, `/forgot-password`, `/learn`, and `/admin`.
 This is a server-response smoke check only. It does not prove visual correctness, successful authenticated journeys, or device-level layout behavior.
 The deployed CSS asset was fetched and confirmed to contain the mobile single-column hero, normal word-breaking, manual hyphenation, balanced heading rules, and narrow-phone direction-card layout. Automated CSS regression tests now guard these rules. All 23 automated tests passed in this Preview build. Carousel controls now expose 44px targets, and automatic rotation stops when reduced motion is requested.
+
+
+## Cross-platform application refinements (source-level)
+
+- [x] Catalog and format navigation uses a horizontally scrollable mobile row with 44px link targets.
+- [x] Authentication, assignment, and staff-review controls are full-width constrained and use 16px input text to avoid iOS focus zoom.
+- [x] Lesson content and learner responses can wrap long strings without widening the viewport.
+- [x] Admin tables remain inside touch-scrollable containers; identifiers and review responses can wrap.
+- [x] Hover-only elevation is removed on touch devices and interaction transitions respect reduced-motion.
+- [x] Detail-page navigation landmarks have explicit accessible names.
+- [ ] Run the Node security/mobile test suite and Next.js production build on the latest branch head.
+- [ ] Inspect latest Preview screenshots at all supported widths and complete authenticated journeys.
+- [ ] Verify on physical iOS Safari and Android Chrome.
+
+The CSS and test assertions are source-level changes only. The final three items remain release blockers until execution evidence is recorded.
