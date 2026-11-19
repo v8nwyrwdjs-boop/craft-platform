@@ -87,4 +87,7 @@ test("CRAFT coin has milled metal edges, surface microtexture, and raised engrav
   assert.match(scene, /function createCoinEtchingGeometry/);
   assert.match(scene, /const divisions = 144/);
   assert.match(scene, /coinSurfaceTexture\.dispose\(\)/);
+  assert.match(scene, /function StudioEnvironment/);
+  assert.match(scene, /EquirectangularReflectionMapping/);
+  assert.match(scene, /scene\.environment = environment/);
 });
