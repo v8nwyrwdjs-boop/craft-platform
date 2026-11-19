@@ -51,14 +51,14 @@ Exit criteria: public and authenticated areas feel like one product, while each 
 
 ## Phase 4 — quality and regression
 
-- [ ] Run `npm run test:security` and `npm run build`.
+- [x] Run `npm run test:security` and `npm run build` (24/24 tests passed; Next.js production build passed in GitHub Actions).
 - [ ] Inspect relevant routes at 320, 360, 390, 430, 768 and 1024 CSS px.
 - [ ] Check no horizontal page overflow, clipped Russian text or hidden CTAs.
 - [ ] Check keyboard operation, visible focus, contrast and reduced-motion behavior.
 - [ ] Check loading, empty, error, locked and success states.
 - [ ] Check WebGL fallback and low-power behavior.
 - [ ] Test real iOS Safari and Android Chrome before claiming device QA complete.
-- [ ] Review the diff for accidental changes to security, product scope, SEO, or pricing/claims.
+- [x] Review the changed-file scope for security, product scope, SEO, and pricing/claims; no application security or business logic files were changed.
 
 Exit criteria: all available automated checks pass; any unperformed manual/device checks are explicitly recorded as open.
 
@@ -102,6 +102,6 @@ Implemented on `craft/visual-excellence`:
 Still open:
 - ShaderGradient package itself is not installed; the atmospheric shader is a custom GLSL implementation pending review against the reference library.
 - The typographic CRAFT wordmark now receives a restrained SVG liquid-metal displacement/sheen treatment; a separate image-mask reveal is unnecessary until a dedicated logo asset exists.
-- Dependency installation and CI validation are in progress; no browser screenshot, real device, or Vercel Preview QA has been completed.
+- `npm install`, `npm audit --audit-level=high` (0 vulnerabilities), all 24 security/mobile tests, and `next build` passed in GitHub Actions for the code-complete commit `135dc421dc9746cc83e80932f5bb89866d6206aa` (run: https://github.com/v8nwyrwdjs-boop/craft-platform/actions/runs/44526135024). The latest branch-head Preview deployment for `7d1b73f58c5d4951d6c412c28fac967170640c38` is READY. Browser screenshot review, visual inspection behind Preview protection, and physical iOS/Android checks have not been performed.
 - The repository has no committed npm lockfile; CI currently uses `npm install`, so reproducible lockfile adoption remains a separate engineering decision.
 - This work is not a completed full redesign until CI passes and remaining routes have visual review.
