@@ -242,7 +242,7 @@ function MorphingParticles({ progressRef, invalidateRef }: SceneProps) {
 }
 
 
-function PhysicalProductObjects({ progressRef, invalidateRef }: SceneProps) {
+function PhysicalProductObjects({ progressRef }: SceneProps) {
   const invalidate = useThree((state) => state.invalidate);
   const monitor = useRef<THREE.Group>(null);
   const coin = useRef<THREE.Group>(null);
