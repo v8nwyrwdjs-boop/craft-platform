@@ -57,7 +57,7 @@ function createCoinBodyGeometry() {
     if (radius < 1.1) continue;
     const angle = Math.atan2(z, x);
     const milledRadius = radius + Math.cos(angle * 96) * 0.0055;
-    positions.setXYZ(index, (x / radius) * milledRadius, y, (z / radius) * milledRadius);
+    positions.setXYZ(index, (x / radius) * milledRadius, positions.getY(index), (z / radius) * milledRadius);
   }
   positions.needsUpdate = true;
   geometry.computeVertexNormals();
@@ -116,6 +116,7 @@ function createMorphData() {
   const monitor = new Float32Array(PARTICLE_COUNT * 3);
   const asset = new Float32Array(PARTICLE_COUNT * 3);
   const system = new Float32Array(PARTICLE_COUNT * 3);
+  const catalog = new Float32Array(PARTICLE_COUNT * 3);
   const colors = new Float32Array(PARTICLE_COUNT * 3);
   const zero = [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1];
   const one = [0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1];
@@ -197,6 +198,19 @@ function createMorphData() {
       system[offset + 2] = Math.sin(theta) * planar * radius;
     }
 
+    const catalogCard = index % 3;
+    const catalogX = (catalogCard - 1) * 1.08;
+    const catalogBorder = random() > 0.62;
+    const catalogEdge = Math.floor(random() * 4);
+    const catalogT = random() * 2 - 1;
+    catalog[offset] = catalogBorder
+      ? catalogX + (catalogEdge < 2 ? catalogT * 0.42 : catalogEdge === 2 ? -0.42 : 0.42)
+      : catalogX + (random() - 0.5) * 0.76;
+    catalog[offset + 1] = catalogBorder
+      ? (catalogEdge < 2 ? (catalogEdge === 0 ? -0.58 : 0.58) : catalogT * 0.58)
+      : (random() - 0.5) * 1.02;
+    catalog[offset + 2] = (random() - 0.5) * 0.18 + catalogCard * 0.035;
+
     const accent = random() > 0.83;
     colors[offset] = accent ? 0.76 : 0.7 + random() * 0.18;
     colors[offset + 1] = accent ? 0.96 : 0.73 + random() * 0.18;
@@ -221,6 +235,7 @@ function createMorphData() {
   geometry.setAttribute("aMonitor", new THREE.BufferAttribute(monitor, 3));
   geometry.setAttribute("aAsset", new THREE.BufferAttribute(asset, 3));
   geometry.setAttribute("aSystem", new THREE.BufferAttribute(system, 3));
+  geometry.setAttribute("aCatalog", new THREE.BufferAttribute(catalog, 3));
   geometry.setAttribute("aColor", new THREE.BufferAttribute(colors, 3));
 
   const lineGeometry = new THREE.BufferGeometry();
@@ -234,18 +249,20 @@ const particleVertexShader = [
   "attribute vec3 aMonitor;",
   "attribute vec3 aAsset;",
   "attribute vec3 aSystem;",
+  "attribute vec3 aCatalog;",
   "attribute vec3 aColor;",
   "uniform float uProgress;",
   "varying vec3 vColor;",
   "varying float vAlpha;",
   "void main() {",
-  "  float stage = clamp(uProgress * 3.0, 0.0, 3.0);",
+  "  float stage = clamp(uProgress * 4.0, 0.0, 4.0);",
   "  float segment = fract(stage);",
   "  vec3 pointPosition;",
   "  if (stage < 1.0) { pointPosition = mix(aBinary, aMonitor, smoothstep(0.0, 1.0, segment)); }",
   "  else if (stage < 2.0) { pointPosition = mix(aMonitor, aAsset, smoothstep(0.0, 1.0, segment)); }",
   "  else if (stage < 3.0) { pointPosition = mix(aAsset, aSystem, smoothstep(0.0, 1.0, segment)); }",
-  "  else { pointPosition = aSystem; }",
+  "  else if (stage < 4.0) { pointPosition = mix(aSystem, aCatalog, smoothstep(0.0, 1.0, segment)); }",
+  "  else { pointPosition = aCatalog; }",
   "  vec4 viewPosition = modelViewMatrix * vec4(pointPosition, 1.0);",
   "  gl_Position = projectionMatrix * viewPosition;",
   "  gl_PointSize = clamp(3.2 * (6.5 / max(-viewPosition.z, 1.0)), 1.1, 4.6);",
@@ -411,7 +428,7 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
   }, [monitorFrameGeometry, ecosystemLinksGeometry, coinBodyGeometry, coinEngravingGeometry, coinEtchingGeometry, coinSurfaceTexture, coinDetailMaterial, coinSilver, networkMaterial, monitorMaterial, screenMaterial, silver, lime, dark]);
 
   useFrame((_, delta) => {
-    const stage = THREE.MathUtils.clamp(progressRef.current * 3, 0, 3);
+    const stage = THREE.MathUtils.clamp(progressRef.current * 4, 0, 4);
     const reveal = (start: number, end: number) => THREE.MathUtils.smoothstep(stage, start, end);
     const setScale = (group: THREE.Group | null, amount: number) => {
       if (!group) return false;
@@ -423,7 +440,7 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
     };
     const monitorTarget = reveal(0.62, 1.12) * (1 - reveal(1.18, 1.48));
     const coinTarget = reveal(1.62, 2.08) * (1 - reveal(2.18, 2.48));
-    const ecosystemTarget = reveal(2.55, 2.96);
+    const ecosystemTarget = reveal(2.55, 2.96) * (1 - reveal(3.12, 3.55));
     const monitorMoving = setScale(monitor.current, monitorTarget);
     const coinMoving = setScale(coin.current, coinTarget);
     const ecosystemMoving = setScale(ecosystem.current, ecosystemTarget);
