@@ -1,202 +1,129 @@
-# Apple product-page reference for CRAFT
+# CRAFT — dark Apple product-stage reference
 
-Status: approved visual/implementation reference, not a request to copy Apple's identity.
-Source: owner-provided `DESIGN.md` describing an Apple foldable-device product page. The measurements below are taken from that source file.
+Status: primary art-direction benchmark, based on the owner's second uploaded Apple design specification (dark theme). This supersedes the earlier light Apple gallery preference.
 
-## How to use this reference
+## Visual thesis
+The reference describes a midnight hardware gallery: each section is a dark, museum-like plinth for one precisely lit product detail. Oversized SF Pro Display headlines sit beneath meticulously rendered hardware imagery. The page moves between absolute-black hero scenes, charcoal information bands and occasional white comparison surfaces. Blue is reserved for purchase/navigation controls in the source; CRAFT must retain its own restrained lime accent instead.
 
-Use Apple as the benchmark for product storytelling, composition, spacing, typographic discipline, image scale, quiet controls and finish quality. Do not copy Apple's logo, product names, proprietary assets, exact copy, or claim CRAFT is affiliated with Apple.
+For CRAFT, translate this into a dark-first digital-product gallery: a meaningful artifact or continuous 3D transformation is the visual event, while Russian copy explains what the viewer is seeing and why it matters. This is a composition and craft reference, not an instruction to copy Apple's identity.
 
-CRAFT remains CRAFT: warm white / graphite / near-black with restrained lime-green and silver accents. Apple’s monochrome palette and blue conversion controls are reference examples, not a mandate to replace CRAFT brand colors. Translate the principles into CRAFT's own design language.
+## Source colors and CRAFT mapping
+| Source role | Value | CRAFT interpretation |
+|---|---|---|
+| Obsidian | #000000 | Main hero and full-bleed product stage |
+| Graphite | #0e0e0e | Navigation and raised dark surfaces |
+| Carbon | #1d1d1f | Charcoal content bands and panels |
+| Steel | #333336 | Fine borders and translucent controls |
+| Slate | #6e6e73 | Outlines and subdued dividers |
+| Ash | #86868b | Muted explanatory copy |
+| Porcelain | #f5f5f7 | Main text on dark surfaces |
+| White | #ffffff | High-contrast details and deliberate comparison surfaces |
+| Apple Blue | #0071e3 | Source-only CTA reference; do not add to CRAFT brand palette |
+| Electric Link | #2997ff | Source-only dark-surface link |
+| Cobalt Link | #0066cc | Source-only pale-surface link |
+| Copper New | #b64400 | Source-only release marker |
+| Optical Yellow | #ffd500 | Source-only technical accent |
 
-## Core visual thesis
+CRAFT mapping: obsidian/graphite/porcelain, restrained lime for brand actions and focus, silver-metallic highlights for selected 3D moments. Warm-white surfaces are occasional contrast resets, not the dominant page canvas. Do not import Apple's blue, copper or yellow as CRAFT identity colors.
 
-Apple's product page behaves like a white product gallery:
-- Large, centered, high-resolution product imagery is the visual event.
-- Typography and controls remain quiet and precise around the imagery.
-- Seamless white editorial sections alternate with pale gray feature bands.
-- Feature media sits in large rounded, shadowless surfaces rather than dense dashboard cards.
-- Product UI is shown as evidence inside device imagery.
-- Long-form storytelling uses spacious chapters and optional in-page anchor navigation.
-- The page relies on image scale, whitespace, crop and hierarchy for depth, not layers of decoration.
+## Source typography measurements
+The source uses SF Pro Text for navigation/body/controls and SF Pro Display for product labels and display statements. Do not redistribute proprietary font files; use existing CRAFT fonts or lawful system fallbacks unless licensed assets are supplied.
 
-For CRAFT, the analogous visual event should be a meaningful digital artifact or continuous 3D transformation (idea → code → computer/interface → digital product → ecosystem), with readable Russian copy and accessible controls.
-
-## Source tokens and measurements
-
-### Source palette
-| Role | Value |
-|---|---|
-| Gallery White | `#ffffff` |
-| Studio Mist | `#f5f5f7` |
-| Paper Frost | `#fafafc` |
-| Hairline Silver | `#d6d6d6` |
-| Control Gray | `#e6e6e8` |
-| Ink | `#1d1d1f` |
-| Slate | `#707070` |
-| Steel | `#86868b` |
-| Apple Blue (text links) | `#0066cc` |
-| Pricing Blue (compact filled CTA) | `#0071e3` |
-| Launch Orange (plain status label) | `#b64400` |
-
-Use these as a reference for contrast and roles. In CRAFT, map roles to existing CRAFT tokens; do not introduce Apple Blue as a universal action color or displace the lime accent.
-
-### Typography
-The reference describes:
-- SF Pro Display for product names, display headlines and feature claims; weights 400/500/600.
-- SF Pro Text for navigation, body, links, compact controls and footnotes; weights 400/500/600.
-- Arial only for a specific observed search-input fallback.
-- If Apple's proprietary font files are not licensed and supplied by the project, do not download, bundle or redistribute them. Use the existing CRAFT font stack or a lawful system fallback such as `-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif`.
-
-Source type scale:
 | Role | Size | Weight | Line height | Tracking |
 |---|---:|---:|---:|---:|
-| Global nav | 12px | 400 | 1 | -0.12px |
-| Compact control | 12px | 400 | 1.33 | -0.12px |
-| Body small | 14px | 400 | 1.29 | -0.224px |
-| Body | 17px | 400 | 1.47 | -0.374px |
-| Feature copy | 17px | 400 | 1.24 | -0.374px |
-| Product nav title | 19px | 600 | 1.21 | +0.228px |
-| Product kicker | 21px | 600 | 1 | +0.231px |
-| Feature heading | 40px | 600 | 1 | 0 |
-| Hero display | 80px | 600 | 1.05 | -1.2px |
+| Utility nav | 12px | 400 | 1.33 | -0.12px |
+| Body | 14px | 400 | 1.29 | -0.224px |
+| Body strong | 14px | 600 | 1.29 | -0.224px |
+| Section nav | 17px | 500 | 1.47 | -0.374px |
+| Product label | 19px | 600 | 1.21 | +0.228px |
+| Feature stat | 28px | 600 | 1 | +0.196px |
+| Hero product name | 32px | 600 | 1.13 | +0.128px |
+| Display | 80px | 600 | 1.05 | -1.2px |
+| Display XL | 96px | 600 | 1.04 | -1.44px |
 
-Treat these as desktop reference measurements, not fixed values on narrow screens. Scale fluidly and preserve natural Russian wrapping.
+Treat measurements as desktop reference values; scale fluidly for mobile and preserve natural Russian wrapping.
 
-### Spacing, shape and surface
-- Base spacing unit: 4px.
-- Source spacing scale: 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 52, 64, 76, 80, 128, 144px.
-- Major section gap: 90px.
-- Related element gap: 20px.
-- Card padding: 28px.
-- Cards and media: 28px radius.
-- Product-local navigation: 20px radius.
-- Pills/buttons: fully rounded.
-- Hairline outlines: 1px; source uses `#d6d6d6`, `#86868b`, and `#e6e6e8`.
-- Feature cards and floating price callouts: no cast shadow; separate surfaces by background contrast and fine outlines.
+## Spacing, shapes and elevation
+- Comfortable density; source spacing scale includes 4, 6, 7, 8, 10, 12, 14, 16, 20, 24, 28, 32, 48, 90, 144 and 210px.
+- 28px radius for cards, media and feature tiles; 20px for contained local navigation.
+- Fully rounded pills; compact control radius around 36px.
+- 16px card padding and 4px element gap inside dense feature modules.
+- Spacious 90–210px pauses between major storytelling moments where appropriate.
+- No heavy drop shadows. Separate layers through near-black/graphite shifts, fine 1px keylines, lighting, scale and crop.
+- Source carbon band has a restrained fade from #1d1d1f to black over 288px; use only when it supports a transition.
 
-## Component and page patterns
+## Components and layout patterns
+- **Global utility navigation:** compact 44px-high black bar, quiet 12px labels, monochrome controls.
+- **Product-local navigation:** contained graphite bar, 20px radius, subtle 1px keyline, compact secondary links.
+- **Announcement strip:** restrained charcoal strip with 14px copy; never louder than the hero.
+- **Hero product stage:** full-bleed black canvas, one photorealistic or art-directed 3D artifact, 32px product label, concise 80px display statement, compact CTA near the lower edge. No generic card around the hero object.
+- **Highlights media:** cinematic image/video in 28px-radius frame, no shadow, minimal overlay copy and compact translucent playback controls.
+- **Feature metric tile:** black surface, 28px radius, real technical visual, 28px metric and muted support copy. Avoid dashboard-like stacks.
+- **Comparison panel:** graphite surface, 28px radius, soft-white heading, muted support copy and carefully arranged near-black feature tiles; occasional white comparison surfaces can reset the rhythm.
+- **Editorial chapter:** small label, oversized statement, readable 14–17px copy and one large product/technical visual.
 
-### Global navigation
-Compact, approximately 44px high; understated text and monochrome controls; controls generally unboxed. Expanded navigation may use a very light frosted surface and a subtle 1px edge. For CRAFT, preserve existing nav behavior and brand mark.
+## Imagery and lighting
+Product-first, not lifestyle-first: large isolated product renders, extreme technical close-ups, pure-black/deep-graphite environments, high-contrast rim lighting, glossy metal and controlled reflections. Visuals should explain actual systems or capabilities. For CRAFT, use product UI, code structures, binary particles, abstract digital artifacts, liquid-metal/chrome objects and restrained lime light. Avoid generic stock imagery as the main visual event.
 
-### Product-local navigation
-A product/section title at left, compact secondary outlined pill and one compact primary action at right. A floated local bar may use a 20px radius and hairline edge.
+## Motion and scroll storytelling
+The dark gallery should feel like a directed exhibition, not an autoplaying effects demo. A suitable CRAFT homepage narrative:
+1. Binary digits and fragments float separately in dark space.
+2. On scroll, fragments converge and assemble into a computer/interface.
+3. The computer morphs into a digital product/asset.
+4. The asset expands into a connected ecosystem.
 
-### Hero product stage
-Full-bleed white/light canvas. Center a small product kicker, then one large, concise display statement. Put the hero object/render directly beneath the text; do not wrap the main visual in a generic card. Keep the headline and CTA in DOM.
+Russian copy explains each stage. Scroll progress controls the timeline and reverse scrolling reverses the transformation. Keep native scrolling, accessible DOM text, keyboard/touch usability and reduced-motion/static alternatives. Prefer one controlled scene; lazy-load, cap DPR, pause offscreen and dispose GPU resources.
 
-### Feature band / highlights
-A full-width pale neutral section with a large heading and a restrained text link. Place feature media in white rounded 28px surfaces with no shadow. Carousel controls should be small and visually quiet.
+## Responsive and accessibility
+- Keep the dark visual language on mobile while reducing geometry, particles, lighting complexity and camera travel.
+- Recompose rather than shrink a desktop composition.
+- Keep text and CTAs outside the WebGL canvas.
+- Preserve 44×44px touch targets where practical, keyboard focus and no horizontal page overflow.
+- Reduced-motion users receive a meaningful static composition and all copy in document order.
 
-### Editorial feature chapter
-A small kicker, a strong left-aligned statement, readable body copy, and oversized media that may enter from the opposite side or crop beyond its frame. Use generous whitespace and a clear chapter rhythm.
-
-### Floating callout
-Only use when the callout is contextually attached to the product visual. Keep it compact, rounded and shadowless; do not cover important imagery or content.
-
-### Search
-The reference describes a hidden-until-expanded rounded search field, white fill, 1px outline and generous horizontal padding. Apply only if it fits CRAFT's current navigation IA.
-
-## Visual rules distilled from the reference
-
-Do:
-- Let one large, meaningful visual dominate a hero.
-- Use white as the main editorial canvas and pale neutral bands to pace chapters.
-- Use large image scale, cropping and whitespace instead of decorative UI chrome.
-- Keep controls compact and typography carefully tuned.
-- Use large rounded media frames, fine borders and little or no shadow.
-- Make long product stories feel like a sequence of deliberate chapters.
-- Use product screenshots/renders as evidence, not generic stock decoration.
-
-Avoid:
-- Dense dashboard-like card stacks on marketing pages.
-- Heavy shadows, arbitrary gradients, thick borders and decorative containers around every image.
-- Oversized colorful CTA blocks or making every link a filled button.
-- Overly bold display type, excessive letter spacing or cramped Russian text.
-- Tiny copy and controls that become hard to tap on mobile.
-
-## CRAFT-specific translation
-
-- White gallery → CRAFT warm-white editorial canvas.
-- Studio Mist → existing light neutral section token.
-- Ink → CRAFT graphite/near-black text.
-- Apple Blue text-link role → use CRAFT's restrained lime only where it is already the semantic accent; neutral links remain neutral.
-- Pricing Blue CTA → use CRAFT's existing primary action style; do not add a new blue brand color.
-- Product photography → custom product UI, real project artifacts, carefully art-directed 3D objects and truthful visuals.
-- Apple product chapters → CRAFT narrative chapters, with Russian copy explaining each stage.
-- The Apple reference is strongest for public marketing pages. Learning, dashboard, forms and admin should borrow its clarity and restraint, not its product-showroom layout.
-
-## Engineering translation
-
-The source's Quick Start CSS/Tailwind token examples are illustrative implementation references, not code to paste blindly. Before coding:
-1. Inspect `app/globals.css`, current semantic variables, typography setup, shared components and responsive breakpoints.
-2. Map reference roles onto existing CRAFT tokens; consolidate rather than creating duplicate variables.
-3. Keep Next.js App Router, React 19 and existing component architecture.
-4. Keep critical text and actions in semantic HTML; do not put copy inside canvas or image renders.
-5. For scroll-driven 3D storytelling, tie one scene's timeline to native scroll progress; reverse scroll reverses the morph. Do not hijack scroll.
-6. Lazy-load heavy scenes, cap DPR, pause offscreen, dispose GPU resources, and provide no-WebGL/reduced-motion poster states.
-7. On mobile, simplify the scene and typography fluidly; maintain readable copy, touch targets and no horizontal page overflow.
+## Implementation guidance
+1. Inspect current CRAFT tokens and components before changing CSS.
+2. Map source roles to CRAFT semantic variables; do not paste Apple-specific colors or proprietary font declarations as-is.
+3. Preserve Next.js App Router, React 19 and existing architecture.
+4. Use DOM for headings, paragraphs, navigation and CTAs; WebGL is visual support only.
+5. Prefer one scroll-driven scene over several independent canvases.
+6. Use transforms/opacity for transitions where possible; avoid layout-thrashing animation.
+7. Respect reduced motion, visibility pausing, low-power devices and no-WebGL fallback.
 8. Validate actual rendered routes at 320, 360, 390, 430, 768 and 1024 CSS px. Build/test success is not visual QA sign-off.
 
-## CSS reference snippet
-
-Use only after mapping the roles to the current CRAFT token names:
-
+## CSS reference
 ```css
-/* Apple-reference proportions; adapt values to CRAFT tokens and responsive breakpoints. */
-.product-story {
-  --story-surface: #fff;
-  --story-muted-surface: #f5f5f7;
-  --story-ink: #1d1d1f;
-  --story-secondary: #707070;
-  --story-hairline: #d6d6d6;
-  --story-media-radius: 28px;
-  --story-section-gap: 90px;
-  --story-element-gap: 20px;
-  --story-card-padding: 28px;
+:root {
+  --reference-obsidian: #000000;
+  --reference-graphite: #0e0e0e;
+  --reference-carbon: #1d1d1f;
+  --reference-steel: #333336;
+  --reference-slate: #6e6e73;
+  --reference-ash: #86868b;
+  --reference-porcelain: #f5f5f7;
+  --reference-white: #ffffff;
+  --reference-media-radius: 28px;
 }
-
-.product-story__hero-title {
-  font-size: clamp(2.75rem, 7vw, 5rem);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+.dark-product-stage {
+  background: var(--craft-obsidian, var(--reference-obsidian));
+  color: var(--craft-porcelain, var(--reference-porcelain));
+}
+.dark-product-stage__title {
+  font-size: clamp(2.75rem, 7vw, 6rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
   font-weight: 600;
   text-wrap: balance;
 }
-
-.product-story__body {
-  max-width: 38rem;
-  font-size: 17px;
-  line-height: 1.47;
-  letter-spacing: -0.022em;
+.dark-product-stage__copy {
+  max-width: 42rem;
+  color: var(--craft-muted, var(--reference-ash));
+  font-size: clamp(.875rem, 1.1vw, 1.0625rem);
+  line-height: 1.45;
 }
-
-.product-story__media {
+.dark-product-stage__media {
   overflow: hidden;
-  border-radius: var(--story-media-radius);
+  border-radius: var(--reference-media-radius);
   box-shadow: none;
-}
-
-@media (max-width: 700px) {
-  .product-story__chapter {
-    padding-block: clamp(3.5rem, 12vw, 5rem);
-  }
-
-  .product-story__hero-title {
-    font-size: clamp(2.5rem, 12vw, 3.75rem);
-    letter-spacing: -0.035em;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .product-story *,
-  .product-story *::before,
-  .product-story *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }
 ```
