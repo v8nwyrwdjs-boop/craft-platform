@@ -261,18 +261,24 @@ function PhysicalProductObjects({ progressRef, invalidateRef }: SceneProps) {
     const stage = THREE.MathUtils.clamp(progressRef.current * 3, 0, 3);
     const reveal = (start: number, end: number) => THREE.MathUtils.smoothstep(stage, start, end);
     const setScale = (group: THREE.Group | null, amount: number) => {
-      if (!group) return;
-      const next = THREE.MathUtils.damp(group.scale.x, THREE.MathUtils.clamp(amount, 0, 1), 9, delta);
+      if (!group) return false;
+      const target = THREE.MathUtils.clamp(amount, 0, 1);
+      const next = THREE.MathUtils.damp(group.scale.x, target, 9, delta);
       group.scale.setScalar(next);
       group.visible = next > 0.008;
+      return Math.abs(target - next) > 0.001;
     };
-    setScale(monitor.current, reveal(0.62, 1.12) * (1 - reveal(1.18, 1.48)));
-    setScale(coin.current, reveal(1.62, 2.08) * (1 - reveal(2.18, 2.48)));
-    setScale(ecosystem.current, reveal(2.55, 2.96));
+    const monitorTarget = reveal(0.62, 1.12) * (1 - reveal(1.18, 1.48));
+    const coinTarget = reveal(1.62, 2.08) * (1 - reveal(2.18, 2.48));
+    const ecosystemTarget = reveal(2.55, 2.96);
+    const transitioning =
+      setScale(monitor.current, monitorTarget) |
+      setScale(coin.current, coinTarget) |
+      setScale(ecosystem.current, ecosystemTarget);
     if (monitor.current) monitor.current.rotation.y = THREE.MathUtils.damp(monitor.current.rotation.y, -0.16, 3, delta);
-    if (coin.current) coin.current.rotation.y += delta * 0.12;
-    if (ecosystem.current) ecosystem.current.rotation.y += delta * 0.045;
-    invalidate();
+    if (coin.current && coinTarget > 0.02) coin.current.rotation.y += delta * 0.12;
+    if (ecosystem.current && ecosystemTarget > 0.02) ecosystem.current.rotation.y += delta * 0.045;
+    if (transitioning || coinTarget > 0.02 || ecosystemTarget > 0.02) invalidate();
   });
 
   return (
