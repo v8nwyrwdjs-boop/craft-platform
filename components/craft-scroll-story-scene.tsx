@@ -37,7 +37,7 @@ function createLayout(): StageLayout[] {
     item.rotations.set([rx, ry, rz], offset);
   };
 
-  // 01 — 0/1 typography built from 600 machined micro-components.
+  // 01 — readable binary typography: eight 0/1 glyphs built from 520 machined bar components, plus a 120-part baseline rail.
   const binaryPixels: { glyph: number; row: number; column: number }[] = [];
   for (let glyph = 0; glyph < 8; glyph += 1) {
     for (let row = 0; row < 7; row += 1) {
