@@ -1,9 +1,10 @@
 # CRAFT — instructions for coding agents
 
 Before making changes, read:
-1. `docs/CRAFT-PROJECT-BRAIN.md`
-2. The linked product, design, visual-reference, architecture and roadmap documents, including `docs/CRAFT-APPLE-REFERENCE.md` for the dark Apple product-stage reference and implementation measurements.
-3. Existing `README.md`, `docs/roadmap.md`, `docs/launch-readiness.md`, and `docs/CRAFT-MOBILE-QUALITY-GATE.md` when relevant.
+1. `docs/CRAFT-MASTER-SPEC.md` — canonical product, design, 3D-storytelling and engineering requirements.
+2. `docs/CRAFT-PROJECT-BRAIN.md`
+3. The linked product, design, visual-reference, architecture and roadmap documents, including `docs/CRAFT-APPLE-REFERENCE.md` for the dark Apple product-stage reference and implementation measurements.
+4. Existing `README.md`, `docs/roadmap.md`, `docs/launch-readiness.md`, and `docs/CRAFT-MOBILE-QUALITY-GATE.md` when relevant.
 
 ## Non-negotiable repository and release rules
 
