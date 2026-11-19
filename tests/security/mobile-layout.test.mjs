@@ -32,3 +32,15 @@ test("automatic carousel rotation respects reduced-motion preferences", () => {
   assert.match(showcase, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)/);
   assert.match(showcase, /if \(paused \|\| reducedMotion\) return/);
 });
+
+
+test("the signature hero scene keeps WebGL bounded and motion-aware", async () => {
+  const scene = readFileSync(new URL("../../components/craft-hero-scene.tsx", import.meta.url), "utf8");
+  assert.match(scene, /IntersectionObserver/);
+  assert.match(scene, /frameloop=\{reducedMotion \|\| !isVisible \? "demand" : "always"\}/);
+  assert.match(scene, /dpr=\{\[1, 1\.25\]\}/);
+  assert.match(scene, /powerPreference: "low-power"/);
+  assert.match(scene, /fallback=\{<div className="craft-scene-fallback"/);
+  assert.match(scene, /liquidFragmentShader/);
+  assert.match(scene, /atmosphereFragmentShader/);
+});
