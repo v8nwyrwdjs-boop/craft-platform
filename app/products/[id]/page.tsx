@@ -29,7 +29,7 @@ export default async function ConceptDetailPage({ params }: { params: Promise<{ 
   if (!item) notFound();
   return (
     <main className="catalog-page">
-      <header className="header wrap"><Link className="brand" href="/">CRAFT<span>®</span></Link><nav><Link href="/directions">Направления</Link><Link href="/products">Все концепции</Link><Link href="/formats">Форматы</Link></nav><Link className="header-cta" href="/dashboard">Личный кабинет ↗</Link></header>
+      <header className="header wrap"><Link className="brand" href="/">CRAFT<span>®</span></Link><nav aria-label="Основная навигация"><Link href="/directions">Направления</Link><Link href="/products">Все концепции</Link><Link href="/formats">Форматы</Link></nav><Link className="header-cta" href="/dashboard">Личный кабинет ↗</Link></header>
       <section className="catalog-hero wrap">
         <p className="eyebrow"><i /> CRAFT / {item.id}</p><p className="catalog-kicker">{item.type}</p>
         <h1>{item.title}</h1><p className="catalog-lead">{item.problem}</p>
