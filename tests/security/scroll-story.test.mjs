@@ -6,6 +6,7 @@ const story = readFileSync(new URL("../../components/craft-scroll-story.tsx", im
 const scene = readFileSync(new URL("../../components/craft-scroll-story-scene.tsx", import.meta.url), "utf8");
 const css = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
 const home = readFileSync(new URL("../../app/page.tsx", import.meta.url), "utf8");
+const masterSpec = readFileSync(new URL("../../docs/CRAFT-MASTER-SPEC.md", import.meta.url), "utf8");
 
 test("homepage replaces the disconnected sphere and carousel with one scroll story", () => {
   assert.match(home, /CraftScrollStory/);
@@ -34,18 +35,47 @@ test("scroll progress uses passive native scrolling and cleans up listeners", ()
   assert.doesNotMatch(story, /wheel|touchmove/);
 });
 
-test("3D morph uses one demand-rendered scene with a mobile GPU budget", () => {
+test("3D story uses a bounded mobile GPU budget and demand rendering", () => {
   assert.match(scene, /frameloop="demand"/);
   assert.match(scene, /dpr=\{\[1, 1\.15\]\}/);
   assert.match(scene, /powerPreference: "low-power"/);
-  assert.match(scene, /aBinary/);
-  assert.match(scene, /aMonitor/);
-  assert.match(scene, /aAsset/);
-  assert.match(scene, /aSystem/);
-  assert.match(scene, /aCatalog/);
-  assert.match(scene, /uProgress \* 4\.0/);
-  assert.match(scene, /lineSegments/);
+  assert.match(scene, /<instancedMesh/);
+  assert.match(scene, /COMPONENT_COUNT = 640/);
+  assert.match(scene, /instance\.instanceMatrix\.needsUpdate = true/);
   assert.match(scene, /dispose\(\)/);
+});
+
+test("legacy point-cloud morph is removed from the active scene", () => {
+  assert.doesNotMatch(scene, /MorphingParticles/);
+  assert.doesNotMatch(scene, /<points\b/);
+  assert.doesNotMatch(scene, /gl_PointSize/);
+  assert.doesNotMatch(scene, /particleVertexShader|particleFragmentShader/);
+  assert.match(scene, /function ComponentAssembly/);
+});
+
+test("five authored component layouts provide deterministic reversible morph targets", () => {
+  assert.match(scene, /function createLayout/);
+  assert.match(scene, /Array\.from\(\{ length: 5 \}/);
+  assert.match(scene, /const from = layouts\[stage\]/);
+  assert.match(scene, /const to = layouts\[Math\.min\(stage \+ 1, 4\)\]/);
+  assert.match(scene, /THREE\.MathUtils\.lerp/);
+  assert.match(scene, /progressRef\.current/);
+  assert.match(scene, /Components travel on deterministic shallow arcs/);
+});
+
+test("binary typography is structured and catalogue resolves into three authored panels", () => {
+  assert.match(scene, /BINARY_GLYPHS/);
+  assert.match(scene, /readable binary typography/i);
+  assert.match(scene, /three catalogue panels/i);
+  assert.match(scene, /Math\.min\(2, Math\.floor\(index \/ 214\)\)/);
+});
+
+test("studio environment and material response remain part of the scene", () => {
+  assert.match(scene, /MeshStandardMaterial/);
+  assert.match(scene, /metalness: 0\.92/);
+  assert.match(scene, /EquirectangularReflectionMapping/);
+  assert.match(scene, /scene\.environment = environment/);
+  assert.match(scene, /environment\.dispose\(\)/);
 });
 
 test("dark visual system covers mobile and reduced-motion layouts", () => {
@@ -56,43 +86,8 @@ test("dark visual system covers mobile and reduced-motion layouts", () => {
   assert.match(css, /craft-story-archive/);
 });
 
-test("scroll stages include physical monitor, metallic asset, and spatial ecosystem models", () => {
-  assert.match(scene, /function PhysicalProductObjects/);
-  assert.match(scene, /monitorFrameGeometry/);
-  assert.match(scene, /coinBodyGeometry/);
-  assert.match(scene, /createCoinBodyGeometry/);
-  assert.match(scene, /icosahedronGeometry/);
-  assert.match(scene, /torusGeometry/);
-  assert.match(scene, /monitorTarget/);
-  assert.match(scene, /coinTarget/);
-  assert.match(scene, /ecosystemTarget/);
-});
-
-test("physical 3D objects respect demand rendering outside active stages", () => {
-  assert.match(scene, /if \(transitioning \|\| monitorRotating \|\| coinTarget > 0\.02 \|\| ecosystemTarget > 0\.02\) invalidate\(\)/);
-  assert.match(scene, /monitorRotating = Math\.abs\(monitor\.current\.rotation\.y - -0\.16\) > 0\.001/);
-  assert.match(scene, /group\.visible = next > 0\.008/);
-});
-
-test("monitor housing uses a beveled enclosure and restrained interface details", () => {
-  assert.match(scene, /new THREE\.ExtrudeGeometry\(shape/);
-  assert.match(scene, /bevelEnabled: true/);
-  assert.match(scene, /monitorFrameGeometry/);
-  assert.match(scene, /bevelThickness: 0\.035/);
-  assert.match(scene, /position=\{\[-0\.78, 0\.66, 0\.112\]\}/);
-});
-
-test("CRAFT coin has milled metal edges, surface microtexture, and raised engraving", () => {
-  assert.match(scene, /function createCoinSurfaceTexture/);
-  assert.match(scene, /roughnessMap: coinSurfaceTexture/);
-  assert.match(scene, /bumpMap: coinSurfaceTexture/);
-  assert.match(scene, /Math\.cos\(angle \* 96\) \* 0\.0055/);
-  assert.match(scene, /function createCoinEngravingGeometry/);
-  assert.match(scene, /new THREE\.ExtrudeGeometry\(shape/);
-  assert.match(scene, /function createCoinEtchingGeometry/);
-  assert.match(scene, /const divisions = 144/);
-  assert.match(scene, /coinSurfaceTexture\.dispose\(\)/);
-  assert.match(scene, /function StudioEnvironment/);
-  assert.match(scene, /EquirectangularReflectionMapping/);
-  assert.match(scene, /scene\.environment = environment/);
+test("master specification is indexed and records the no-particle architecture", () => {
+  assert.match(masterSpec, /Continuous component-to-component transformation/);
+  assert.match(masterSpec, /replace the particle-cloud model/i);
+  assert.match(masterSpec, /Mobile-first delivery/);
 });
