@@ -58,3 +58,29 @@ test("CRAFT homepage keeps its primary navigation reachable on mobile", async ()
   assert.match(theme, /@media \(max-width: 760px\)[\s\S]*?\.craft-header-inner\s*\{[^}]*min-height:\s*104px/s);
   assert.match(theme, /@media \(max-width: 760px\)[\s\S]*?\.craft-story-pin\s*\{[^}]*top:\s*104px/s);
 });
+
+
+test("catalog and format navigation remains reachable on mobile", () => {
+  const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
+  assert.match(theme, /\.catalog-page \.header nav, \.formats-page \.header nav[\s\S]*?overflow-x: auto/);
+  assert.match(theme, /\.catalog-page \.header nav a, \.formats-page \.header nav a[\s\S]*?min-height: 44px/);
+});
+
+test("application forms use mobile-safe full-width controls and readable input sizing", () => {
+  const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
+  assert.match(theme, /\.auth-form input, \.auth-form select, \.auth-form textarea,[\s\S]*?width: 100%/);
+  assert.match(theme, /\.auth-form input, \.auth-form select, \.auth-form textarea,[\s\S]*?font-size: 16px/);
+  assert.match(theme, /\.assignment-form button, \.lesson-status button \{ width: 100%; \}/);
+});
+
+test("admin data tables remain contained in horizontal scroll regions", () => {
+  const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
+  assert.match(theme, /\.admin-table-wrap \{ max-width: 100%; overscroll-behavior-x: contain; \}/);
+  assert.match(theme, /\.admin-table-wrap \{[^}]*overflow-x: auto/s);
+});
+
+test("application motion and touch behavior retain accessible fallbacks", () => {
+  const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
+  assert.match(theme, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.format-detail-card, \.direction-card, \.product-card \{[\s\S]*?transition: none !important/s);
+  assert.match(theme, /@media \(hover: none\)[\s\S]*?\.student-project:hover[\s\S]*?transform: none/s);
+});
