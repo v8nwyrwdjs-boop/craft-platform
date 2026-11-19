@@ -12,14 +12,8 @@ type SceneProps = {
 
 const COMPONENT_COUNT = 640;
 const BINARY_GLYPHS = [
-  ["01110","10001","10011","10101","11001","10001","01110"],
+  ["01110","10001","10001","10001","10001","10001","01110"],
   ["00100","01100","00100","00100","00100","00100","01110"],
-  ["11110","00001","00001","01110","10000","10000","11111"],
-  ["11110","00001","00001","01110","00001","00001","11110"],
-  ["10010","10010","10010","11111","00010","00010","00010"],
-  ["11111","10000","10000","11110","00001","00001","11110"],
-  ["01110","10000","10000","11110","10001","10001","01110"],
-  ["11111","00001","00010","00100","01000","01000","01000"],
 ] as const;
 
 type StageLayout = {
@@ -43,16 +37,28 @@ function createLayout(): StageLayout[] {
     item.rotations.set([rx, ry, rz], offset);
   };
 
-  // 01 — readable binary typography. Every active block belongs to a glyph.
+  // 01 — 0/1 typography built from 600 machined micro-components.
+  const binaryPixels: { glyph: number; row: number; column: number }[] = [];
+  for (let glyph = 0; glyph < 8; glyph += 1) {
+    for (let row = 0; row < 7; row += 1) {
+      for (let column = 0; column < 5; column += 1) {
+        if (BINARY_GLYPHS[glyph % 2][row][column] === "1") binaryPixels.push({ glyph, row, column });
+      }
+    }
+  }
   for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-    const glyph = Math.floor(index / 35);
-    const cell = index % 35;
-    const row = Math.floor(cell / 5);
-    const column = cell % 5;
-    const active = glyph < BINARY_GLYPHS.length && BINARY_GLYPHS[glyph][row][column] === "1";
-    const x = (glyph - 3.5) * 0.68 + (column - 2) * 0.105;
-    const y = (3 - row) * 0.105;
-    write(0, index, active ? x : 0, active ? y : 0, 0, active ? 0.078 : 0, active ? 0.078 : 0, active ? 0.035 : 0);
+    if (index < binaryPixels.length * 5) {
+      const pixel = binaryPixels[Math.floor(index / 5)];
+      const subPart = index % 5;
+      const x = (pixel.glyph - 3.5) * 0.68 + (pixel.column - 2) * 0.105 + (subPart - 2) * 0.0145;
+      const y = (3 - pixel.row) * 0.105;
+      write(0, index, x, y, 0.015, 0.011, 0.078, 0.026);
+    } else {
+      const rail = index - binaryPixels.length * 5;
+      const glyph = rail % 8;
+      const row = Math.floor(rail / 8);
+      write(0, index, (glyph - 3.5) * 0.68, -0.49 - row * 0.014, -0.005, 0.22, 0.006, 0.012);
+    }
   }
 
   // 02 — monitor: continuous bezel, pixel-like screen tiles, stand and base.
