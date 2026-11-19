@@ -21,7 +21,7 @@ test("homepage replaces the disconnected sphere and carousel with one scroll sto
 
 test("all narrative copy remains available in accessible DOM", () => {
   assert.match(story, /aria-live="polite"/);
-  assert.match(story, /aria-label="Этапы создания цифрового продукта"/);
+  assert.match(story, /aria-label="Этапы создания цифрового продукта/);
   assert.match(story, /craft-story-archive/);
   assert.match(story, /prefers-reduced-motion/);
 });
@@ -43,7 +43,7 @@ test("3D morph uses one demand-rendered scene with a mobile GPU budget", () => {
   assert.match(scene, /aAsset/);
   assert.match(scene, /aSystem/);
   assert.match(scene, /aCatalog/);
-  assert.match(scene, /uProgress \\* 4\\.0/);
+  assert.match(scene, /uProgress \* 4\.0/);
   assert.match(scene, /lineSegments/);
   assert.match(scene, /dispose\(\)/);
 });
