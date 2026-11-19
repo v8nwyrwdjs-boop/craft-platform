@@ -12,7 +12,10 @@ test("homepage replaces the disconnected sphere and carousel with one scroll sto
   assert.doesNotMatch(home, /ProductShowcase|CraftHeroScene/);
   assert.match(story, /binary|КОД/);
   assert.match(story, /КОМПЬЮТЕР/);
-  assert.match(story, /цифровой актив/);
+  assert.match(story, /цифровой актив|цифровые активы/);
+  assert.match(story, /ПРОГРАММИРОВАНИЕ/);
+  assert.match(story, /КРИПТОВАЛЮТА/);
+  assert.match(story, /КАТАЛОГ CRAFT/);
   assert.match(story, /ЭКОСИСТЕМА/);
 });
 
@@ -39,6 +42,8 @@ test("3D morph uses one demand-rendered scene with a mobile GPU budget", () => {
   assert.match(scene, /aMonitor/);
   assert.match(scene, /aAsset/);
   assert.match(scene, /aSystem/);
+  assert.match(scene, /aCatalog/);
+  assert.match(scene, /uProgress \\* 4\\.0/);
   assert.match(scene, /lineSegments/);
   assert.match(scene, /dispose\(\)/);
 });
