@@ -49,6 +49,14 @@ Run each critical route at these viewport widths:
 
 A first mobile CSS refinement has been added for homepage, formats, authentication, dashboard, learning catalogue, and admin surfaces. This is a code-level pass, not a completed device QA sign-off. The route-by-route checks above remain required before production.
 
+## Mobile navigation regression fixed
+
+- [x] Keep the homepage's four primary section links visible below the brand/action row at widths up to 760 CSS px.
+- [x] Allow horizontal navigation scrolling without hiding links or requiring hover.
+- [x] Preserve 44px minimum navigation link height for touch interaction.
+- [x] Offset the sticky scroll-story panel by the expanded mobile header height.
+- [ ] Verify the expanded header and sticky story together in browser screenshots at 320, 360, 390 and 430 CSS px.
+
 ## Regression found and fixed from an iPhone screenshot
 
 - [x] Remove emergency mid-word wrapping from the homepage hero heading; use normal Russian word boundaries and balanced heading wrapping.
