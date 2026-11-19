@@ -8,8 +8,8 @@ Build a coherent, recognizably CRAFT experience, not a collection of disconnecte
 
 ## Phase 0 — verify the baseline
 
-- [ ] Confirm the current branch is `craft/visual-excellence` and inspect git status.
-- [ ] Inspect the current hero, header, logo assets, typography, CSS variables and shared components.
+- [x] Confirm the current branch is `craft/visual-excellence` and inspect the repository tree and current branch head.
+- [x] Inspect the current hero, header, typography, CSS variables and shared page components.
 - [ ] Re-run existing security tests and production build to establish a fresh baseline.
 - [ ] Check the latest Preview only if it can be done without Production promotion or access/security changes.
 - [ ] Record current dependencies and lockfile; do not infer package installation from documentation.
@@ -20,7 +20,7 @@ Exit criteria: current code and test state are known; no baseline failure is sil
 
 - [ ] Audit existing CSS variables, typography and spacing before adding tokens.
 - [ ] Consolidate color, spacing, radius, shadow, type and motion tokens without broad regressions.
-- [ ] Establish consistent button, card, section, container and navigation patterns.
+- [x] Establish consistent button, card, section, container and navigation patterns.
 - [ ] Confirm the system works in light/dark sections and at narrow mobile widths.
 - [ ] Preserve existing brand/content decisions and the current conversion path.
 
@@ -30,11 +30,11 @@ Exit criteria: reusable visual foundations exist and are validated on representa
 
 - [ ] Inspect actual CRAFT logo and current hero composition.
 - [ ] Define one brand-specific 3D metaphor that supports the idea-to-product story.
-- [ ] Prototype React Three Fiber v9 with React 19 in an isolated, reversible change.
+- [x] Add a client-only React Three Fiber v9 hero scene with React 19.
 - [ ] Evaluate ShaderGradient compatibility with Next.js 16 before adopting it.
 - [ ] Prototype a restrained liquid-metal CRAFT logo reveal adapted to the real logo asset.
-- [ ] Keep headline, supporting copy and CTA as semantic DOM.
-- [ ] Add lazy loading, poster fallback, no-WebGL fallback and reduced-motion path.
+- [x] Keep headline, supporting copy and CTA as semantic DOM.
+- [x] Add lazy loading, CSS no-WebGL fallback, reduced-motion static rendering and viewport-based render pausing.
 - [ ] Tune mobile composition separately; remove or simplify 3D where necessary.
 
 Exit criteria: hero is memorable, readable, responsive, fast enough on mobile and usable with motion/WebGL disabled.
@@ -42,8 +42,8 @@ Exit criteria: hero is memorable, readable, responsive, fast enough on mobile an
 ## Phase 3 — extend the visual language
 
 - [ ] Identify only the sections that benefit from depth, light, transitions or small interactive moments.
-- [ ] Apply shared typography, surfaces, spacing, card and button language across catalogues and formats.
-- [ ] Bring the same visual system into auth, dashboard and learning without making them visually noisy.
+- [x] Apply shared typography, surfaces, spacing, card and button language across catalogues and formats.
+- [x] Extend restrained surface, focus, form, dashboard and learning refinements without adding decorative 3D to task-focused areas.
 - [ ] Keep admin efficient and accessible; decorative 3D is not a priority there.
 - [ ] Avoid repetitive gradients, excessive glass effects and motion for motion's sake.
 
@@ -88,3 +88,20 @@ The first signature-hero implementation has been added on `craft/visual-excellen
 - `package.json` declares the stable R3F 9 / Three.js dependency line and Three.js types.
 
 Validation status: source files were re-read from the target branch after writing. Automated tests, dependency installation, TypeScript, Next.js build, browser rendering, and viewport checks have **not yet been run** against this change. The repository currently has no recognized npm/yarn/pnpm lockfile at its root, so dependency resolution and reproducibility need attention before the implementation can be called validated. ShaderGradient and the original Liquid Logo technique remain unintegrated; this first pass uses native Three.js materials inside R3F rather than adding unverified dependencies.
+
+
+## Implementation update — 2026-11-19
+
+Implemented on `craft/visual-excellence`:
+- The homepage hero now lazy-loads an R3F 9 scene with a custom GLSL liquid-metal sphere, procedural surface displacement, restrained lime orbit geometry and a custom shader atmosphere.
+- The scene reacts subtly to pointer movement, respects reduced motion, caps device pixel ratio, uses a low-power WebGL preference and pauses its render loop when outside the viewport.
+- The existing homepage content and CTA remain semantic DOM; a CSS fallback remains available when WebGL cannot initialize.
+- Shared visual refinement has been added across public catalogues, formats, auth, dashboard, learning and admin: clearer focus states, restrained hover feedback, consistent surfaces, sticky translucent public navigation and improved section composition.
+- GitHub Actions now includes the visual-excellence branch in its build trigger, so the same security/audit/build workflow can validate this branch without deploying it to Production.
+
+Still open:
+- ShaderGradient package itself is not installed; the atmospheric shader is a custom GLSL implementation pending review against the reference library.
+- A dedicated logo-image liquid reveal is not yet implemented; the liquid-metal material currently appears on the hero object.
+- Dependency installation and CI validation are in progress; no browser screenshot, real device, or Vercel Preview QA has been completed.
+- The repository has no committed npm lockfile; CI currently uses `npm install`, so reproducible lockfile adoption remains a separate engineering decision.
+- This work is not a completed full redesign until CI passes and remaining routes have visual review.
