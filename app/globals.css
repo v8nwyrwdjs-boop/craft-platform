@@ -703,3 +703,20 @@ a,button{touch-action:manipulation}
   display:inline-grid;
   place-items:center;
 }
+
+
+/* Signature WebGL hero — accessible DOM remains the source of truth. */
+.hero-art{isolation:isolate;background:radial-gradient(ellipse at 52% 48%,#e4e9d8 0%,#e8e9df 48%,#dfe1d6 100%)}
+.hero-art:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(135deg,#ffffff75,transparent 42%,#c8f16918 78%);mix-blend-mode:screen}
+.craft-scene{position:absolute;inset:0;z-index:1}
+.craft-scene canvas{display:block;width:100%!important;height:100%!important}
+.craft-scene-fallback{background:radial-gradient(circle at 50% 48%,#c8f16955 0,transparent 38%),radial-gradient(ellipse at 50% 50%,#d4d9c8 0,#e8e9df 68%)}
+.craft-scene-static-label{position:absolute;left:28px;top:28px;font:700 9px "DM Sans",sans-serif;letter-spacing:1.5px;color:#74796a}
+.hero-art-label,.hero-art-chip,.hero-art-bottom{z-index:2;pointer-events:none}
+.hero-art-label{position:absolute;top:30px;left:30px;font-size:9px;font-weight:700;letter-spacing:1.5px;color:#77796f}
+.hero-art-chip{position:absolute;padding:9px 12px;border:1px solid #aeb5a2;background:#f3f2ecb8;backdrop-filter:blur(10px);font-size:9px;font-weight:700;letter-spacing:1.2px}
+.chip-one{left:9%;top:42%}.chip-two{right:8%;bottom:30%}
+.hero-art-bottom{position:absolute;left:30px;right:30px;bottom:28px;display:flex;justify-content:space-between;gap:12px;font-size:8px;letter-spacing:1.1px;color:#77796f}
+.hero-art-bottom b{color:#4f5940}
+@media(max-width:760px){.hero-art{height:310px}.hero-art-label{top:20px;left:20px}.hero-art-bottom{left:20px;right:20px;bottom:20px;font-size:7px}.hero-art-chip{font-size:8px;padding:8px 9px}.chip-one{left:5%;top:43%}.chip-two{right:5%;bottom:32%}}
+@media(prefers-reduced-motion:reduce){.craft-scene canvas{animation:none!important}}
