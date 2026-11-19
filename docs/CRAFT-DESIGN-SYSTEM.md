@@ -146,3 +146,10 @@ A signature CRAFT homepage chapter may use one continuous 3D transformation tied
 - Simplify the scene on mobile without losing the story.
 - Lazy-load, cap DPR, pause offscreen, dispose GPU resources and provide a meaningful static/reduced-motion fallback.
 - Build this only if it improves understanding of CRAFT's promise; do not turn every route into a spectacle.
+
+
+## Apple product-page benchmark — 2026-11-19
+
+The owner supplied an Apple product-page design specification in `DESIGN.md`. Its detailed interpretation and implementation notes are preserved in `docs/CRAFT-APPLE-REFERENCE.md`. Use it as a benchmark for spacious product storytelling, quiet navigation, precise editorial typography, oversized product imagery, restrained controls, shadowless rounded media and deliberate section pacing.
+
+This is a structural and craft reference, not a brand-copying instruction. CRAFT retains its own warm-white / graphite / restrained-lime identity, product truth and accessibility requirements. Do not copy Apple marks, product assets, proprietary fonts or exact copy. Map reference roles to existing CRAFT tokens; do not introduce a competing Apple-blue palette. Use system/legal font fallbacks unless licensed font assets are supplied. The Apple-style showroom treatment is primarily for public marketing/product-story pages; authenticated learning and admin surfaces remain task-focused.
