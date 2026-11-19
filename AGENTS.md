@@ -127,3 +127,20 @@ When a page narrative benefits from it, design one continuous, user-controlled t
 4. Expressive motion and visual experimentation.
 
 Do not run multiple design systems as competing authorities. Combine Taste's art direction/finish discipline, UI/UX Pro Max's structured UX intelligence, and Design Motion Principles' context-aware motion review under one CRAFT design system.
+
+
+## Frontend quality, component architecture and motion engineering references
+
+The following references are part of the CRAFT engineering playbook. Apply them as review/build methods, not as a mandate to install packages or copy another product's visual identity. Full operating details live in `docs/CRAFT-ENGINEERING-PLAYBOOK.md`.
+
+- **Vercel Web Interface Guidelines** (`vercel-labs/agent-skills/skills/web-design-guidelines`): before a UI quality sign-off, inspect relevant source files against the current guideline set. Check semantics, keyboard/accessibility, focus, forms, motion/reduced-motion, typography, content edge cases, image loading/dimensions, performance, URL/state, touch, safe areas, theming, localization and hydration. Report actionable `file:line` findings; this is a source audit, not proof of rendered browser quality.
+- **shadcn/ui** (`shadcn-ui/ui`): treat components as open code to own and compose, not a black-box theme or a visual template. Prefer accessible primitives, composable APIs, variants, consistent tokens and local customization. Reuse existing CRAFT components first; add/adapt only the needed component. Do not add the shadcn package or replace the component system wholesale without a concrete need and compatibility review.
+- **Emil Kowalski skills** (`emilkowalski/skills`): use design-engineering taste, animation decision gates, choreography, performance review, Apple-inspired motion principles, mobile-native details, worst-case UI testing and session-level taste learning. Key defaults: decide whether motion is needed before coding; name its purpose; use the cheapest suitable tool; extend existing tokens; prefer transform/opacity; tune easing and duration to frequency; make motion interruptible; honor reduced motion and hover capability; remove decorative motion that harms frequent workflows.
+
+### Required UI review sequence
+1. Inspect the relevant route, components, tokens, package versions and current behavior.
+2. Make the smallest coherent implementation; keep CRAFT's dark-first Apple-stage direction and CRAFT-specific lime identity.
+3. Run the Vercel guideline audit mentally/source-wise against touched files and record exact file/line issues; never claim this audit was run by a separate executable unless it was.
+4. Review animation decisions using Emil's gates: frequency → purpose → cheapest tool → properties → easing/duration → interruption/exit → accessibility/performance.
+5. Exercise edge cases using long text, empty states, loading/error states, narrow screens, touch, keyboard and reduced-motion.
+6. Validate actual rendering separately when browser access is available. A source audit or successful build is not visual QA.
