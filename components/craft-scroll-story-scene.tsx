@@ -286,7 +286,7 @@ function PhysicalProductObjects({ progressRef, invalidateRef }: SceneProps) {
       </group>
       <group ref={coin} position={[0, 0, 0.12]} scale={0.001}>
         <mesh rotation={[Math.PI / 2, 0, 0]} material={silver}><cylinderGeometry args={[1.12, 1.12, 0.2, 96]} /></mesh>
-        <mesh rotation={[Math.PI / 2, 0, 0]} material={lime}><torusGeometry args={[0.91, 0.025, 12, 96]} /></mesh>
+        <mesh material={lime}><torusGeometry args={[0.91, 0.025, 12, 96]} /></mesh>
         <mesh position={[0, 0, 0.13]} material={silver}><torusGeometry args={[0.25, 0.055, 16, 48]} /></mesh>
         <mesh position={[0, 0, 0.13]} material={silver}><boxGeometry args={[0.12, 0.58, 0.055]} /></mesh>
       </group>
@@ -294,7 +294,7 @@ function PhysicalProductObjects({ progressRef, invalidateRef }: SceneProps) {
         <mesh material={dark}><icosahedronGeometry args={[0.7, 2]} /></mesh>
         <mesh rotation={[0.4, 0.2, 0.1]} material={lime}><torusGeometry args={[1.18, 0.012, 8, 128]} /></mesh>
         <mesh rotation={[1.1, 0.7, 0.4]} material={silver}><torusGeometry args={[1.42, 0.009, 8, 128]} /></mesh>
-        {[[0,1.3,0],[1.08,0.62,0.16],[1.2,-0.42,0.14],[0.12,-1.28,0],[-1.08,-0.58,-0.12],[-1.2,0.5,-0.1],[0.18,0.05,1.22],[-0.14,-0.05,-1.22]].map(([x,y,z], index) => (
+        {[[0,1.3,0],[1.08,0.62,0.16],[1.2,-0.42,0.14],[0.12,-1.28,0],[-1.08,-0.58,-0.12],[-1.2,0.5,-0.1],[0.18,0.05,1.22],[-0.14,-0.05,-1.22]] as const).map(([x,y,z], index) => (
           <mesh key={index} position={[x,y,z]} material={index % 3 === 0 ? lime : silver}>
             <sphereGeometry args={[index % 3 === 0 ? 0.09 : 0.055, 20, 20]} />
           </mesh>
