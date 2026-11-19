@@ -50,3 +50,19 @@ test("dark visual system covers mobile and reduced-motion layouts", () => {
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
   assert.match(css, /craft-story-archive/);
 });
+
+test("scroll stages include physical monitor, metallic asset, and spatial ecosystem models", () => {
+  assert.match(scene, /function PhysicalProductObjects/);
+  assert.match(scene, /boxGeometry args=\{\[3\.2, 2\.02, 0\.18\]\}/);
+  assert.match(scene, /cylinderGeometry args=\{\[1\.12, 1\.12, 0\.2, 96\]\}/);
+  assert.match(scene, /icosahedronGeometry/);
+  assert.match(scene, /torusGeometry/);
+  assert.match(scene, /monitorTarget/);
+  assert.match(scene, /coinTarget/);
+  assert.match(scene, /ecosystemTarget/);
+});
+
+test("physical 3D objects respect demand rendering outside active stages", () => {
+  assert.match(scene, /if \(transitioning \|\| coinTarget > 0\.02 \|\| ecosystemTarget > 0\.02\) invalidate\(\)/);
+  assert.match(scene, /group\.visible = next > 0\.008/);
+});
