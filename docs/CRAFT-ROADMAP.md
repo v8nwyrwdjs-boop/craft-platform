@@ -101,7 +101,7 @@ Implemented on `craft/visual-excellence`:
 
 Still open:
 - ShaderGradient package itself is not installed; the atmospheric shader is a custom GLSL implementation pending review against the reference library.
-- A dedicated logo-image liquid reveal is not yet implemented; the liquid-metal material currently appears on the hero object.
+- The typographic CRAFT wordmark now receives a restrained SVG liquid-metal displacement/sheen treatment; a separate image-mask reveal is unnecessary until a dedicated logo asset exists.
 - Dependency installation and CI validation are in progress; no browser screenshot, real device, or Vercel Preview QA has been completed.
 - The repository has no committed npm lockfile; CI currently uses `npm install`, so reproducible lockfile adoption remains a separate engineering decision.
 - This work is not a completed full redesign until CI passes and remaining routes have visual review.
