@@ -337,8 +337,10 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
         <mesh position={[0, 0.12, 0.125]} material={lime}><boxGeometry args={[0.44, 0.018, 0.012]} /></mesh>
       </group>
       <group ref={coin} position={[0, 0, 0.12]} scale={0.001}>
-        <mesh rotation={[Math.PI / 2, 0, 0]} material={silver}><cylinderGeometry args={[1.12, 1.12, 0.2, 96]} /></mesh>
-        <mesh material={lime}><torusGeometry args={[0.91, 0.025, 12, 96]} /></mesh>
+        <mesh rotation={[Math.PI / 2, 0, 0]} material={silver}><cylinderGeometry args={[1.12, 1.12, 0.2, 128]} /></mesh>
+        <mesh position={[0, 0, 0.105]} material={dark}><torusGeometry args={[1.075, 0.022, 12, 128]} /></mesh>
+        <mesh position={[0, 0, 0.12]} material={lime}><torusGeometry args={[0.91, 0.025, 12, 96]} /></mesh>
+        <mesh position={[0, 0, -0.105]} material={dark}><torusGeometry args={[1.075, 0.022, 12, 128]} /></mesh>
         <mesh position={[0, 0, 0.13]} material={silver}><torusGeometry args={[0.25, 0.055, 16, 48]} /></mesh>
         <mesh position={[0, 0, 0.13]} material={silver}><boxGeometry args={[0.12, 0.58, 0.055]} /></mesh>
       </group>
