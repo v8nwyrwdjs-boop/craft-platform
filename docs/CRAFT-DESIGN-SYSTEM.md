@@ -105,3 +105,10 @@ A design change is not complete because it looks good in one desktop screenshot.
 - Keyboard and reduced-motion behavior.
 - Reasonable performance on mid-range mobile devices.
 - Existing security and application behavior.
+
+
+## Applied visual foundation — 2026-11-19
+
+The current visual-excellence branch applies a consolidated CRAFT token layer over the existing warm-white / graphite / black / restrained-lime palette. Public navigation uses a translucent sticky treatment; the homepage carries the signature WebGL moment; catalogues and formats use editorial layouts and quieter depth; authenticated learning and admin surfaces receive focus, form, surface and hover refinements without unnecessary 3D.
+
+The hero scene uses a custom GLSL atmosphere and liquid-metal material in React Three Fiber rather than importing ShaderGradient before Next.js 16 compatibility is proven. Rendering is capped to a 1.25 device-pixel ratio, uses a low-power WebGL preference, pauses outside the viewport and freezes motion for reduced-motion users. Critical copy and actions remain in semantic DOM.
