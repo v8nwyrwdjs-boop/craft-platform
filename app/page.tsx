@@ -71,7 +71,7 @@ export default function Home() {
           <Link className="craft-brand" href="/" aria-label="CRAFT — главная">CRAFT<span>®</span></Link>
           <nav className="craft-nav" aria-label="Основная навигация">
             <Link href="#story">История</Link>
-            <Link href="#products">Что создаём</Link>
+            <Link href="#products">Каталог</Link>
             <Link href="#directions">Направления</Link>
             <Link href="#method">Метод CRAFT</Link>
           </nav>
@@ -123,11 +123,11 @@ export default function Home() {
         <div className="craft-section-inner">
           <div className="craft-section-head">
             <div>
-              <p className="craft-kicker"><span className="craft-kicker-dot" /> 02 / ЧТО МОЖНО СОЗДАТЬ</p>
-              <h2>Не просто изучать технологии.<br /><em>Собирать из них своё.</em></h2>
+              <p className="craft-kicker"><span className="craft-kicker-dot" /> 02 / КАТАЛОГ CRAFT</p>
+              <h2>Найди направление.<br /><em>Создай своё.</em></h2>
             </div>
             <p className="craft-section-intro">
-              Отдельные идеи для практики. Конкретный проект начинается с задачи, аудитории и проверки гипотезы — не с обещания результата.
+              Примеры цифровых продуктов, которые можно изучать, проектировать и собирать. Каждый начинается с задачи, аудитории и проверки гипотезы.
             </p>
           </div>
           <div className="craft-product-grid">
@@ -145,6 +145,7 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <Link className="craft-text-link" href="/directions">Открыть все направления CRAFT <span aria-hidden="true">↗</span></Link>
         </div>
       </section>
 
