@@ -271,10 +271,10 @@ function PhysicalProductObjects({ progressRef, invalidateRef }: SceneProps) {
     const monitorTarget = reveal(0.62, 1.12) * (1 - reveal(1.18, 1.48));
     const coinTarget = reveal(1.62, 2.08) * (1 - reveal(2.18, 2.48));
     const ecosystemTarget = reveal(2.55, 2.96);
-    const transitioning =
-      setScale(monitor.current, monitorTarget) |
-      setScale(coin.current, coinTarget) |
-      setScale(ecosystem.current, ecosystemTarget);
+    const monitorMoving = setScale(monitor.current, monitorTarget);
+    const coinMoving = setScale(coin.current, coinTarget);
+    const ecosystemMoving = setScale(ecosystem.current, ecosystemTarget);
+    const transitioning = monitorMoving || coinMoving || ecosystemMoving;
     if (monitor.current) monitor.current.rotation.y = THREE.MathUtils.damp(monitor.current.rotation.y, -0.16, 3, delta);
     if (coin.current && coinTarget > 0.02) coin.current.rotation.y += delta * 0.12;
     if (ecosystem.current && ecosystemTarget > 0.02) ecosystem.current.rotation.y += delta * 0.045;
