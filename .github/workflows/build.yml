@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [main, "feature/**", "security/**"]
+    branches: [main, "feature/**", "security/**", "craft/visual-excellence"]
   pull_request:
     branches: [main, "feature/**"]
 
