@@ -10,7 +10,107 @@ type SceneProps = {
   invalidateRef: MutableRefObject<(() => void) | null>;
 };
 
+
 const PARTICLE_COUNT = 1800;
+
+function createCoinSurfaceTexture() {
+  const size = 256;
+  const data = new Uint8Array(size * size * 4);
+  let seed = 48271;
+  const random = () => {
+    seed = (seed * 16807) % 2147483647;
+    return seed / 2147483647;
+  };
+
+  for (let y = 0; y < size; y += 1) {
+    for (let x = 0; x < size; x += 1) {
+      const index = (y * size + x) * 4;
+      const fineGrain = (random() - 0.5) * 42;
+      const brushedGrain = Math.sin(y * 0.44 + x * 0.012) * 7;
+      const hairline = ((x * 17 + y * 31) % 127 === 0) ? -24 : 0;
+      const value = THREE.MathUtils.clamp(190 + fineGrain + brushedGrain + hairline, 112, 244);
+      data[index] = value;
+      data[index + 1] = value;
+      data[index + 2] = value;
+      data[index + 3] = 255;
+    }
+  }
+
+  const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat);
+  texture.colorSpace = THREE.NoColorSpace;
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.magFilter = THREE.LinearFilter;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.generateMipmaps = true;
+  texture.needsUpdate = true;
+  return texture;
+}
+
+function createCoinBodyGeometry() {
+  const geometry = new THREE.CylinderGeometry(1.12, 1.12, 0.2, 384, 1, false);
+  const positions = geometry.getAttribute("position");
+  for (let index = 0; index < positions.count; index += 1) {
+    const x = positions.getX(index);
+    const y = positions.getY(index);
+    const z = positions.getZ(index);
+    const radius = Math.hypot(x, z);
+    if (radius < 1.1 || Math.abs(y) > 0.099) continue;
+    const angle = Math.atan2(z, x);
+    const milledRadius = radius + Math.cos(angle * 96) * 0.0055;
+    positions.setXYZ(index, (x / radius) * milledRadius, y, (z / radius) * milledRadius);
+  }
+  positions.needsUpdate = true;
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+function createCoinEngravingGeometry() {
+  const shape = new THREE.Shape();
+  shape.moveTo(0.34, 0.48);
+  shape.lineTo(0.13, 0.59);
+  shape.lineTo(-0.16, 0.5);
+  shape.lineTo(-0.34, 0.24);
+  shape.lineTo(-0.34, -0.24);
+  shape.lineTo(-0.16, -0.5);
+  shape.lineTo(0.13, -0.59);
+  shape.lineTo(0.34, -0.48);
+  shape.lineTo(0.22, -0.3);
+  shape.lineTo(0.08, -0.39);
+  shape.lineTo(-0.08, -0.33);
+  shape.lineTo(-0.19, -0.15);
+  shape.lineTo(-0.19, 0.15);
+  shape.lineTo(-0.08, 0.33);
+  shape.lineTo(0.08, 0.39);
+  shape.lineTo(0.22, 0.3);
+  shape.closePath();
+  return new THREE.ExtrudeGeometry(shape, {
+    depth: 0.035,
+    bevelEnabled: true,
+    bevelSegments: 3,
+    bevelSize: 0.012,
+    bevelThickness: 0.012,
+    curveSegments: 12,
+  });
+}
+
+function createCoinEtchingGeometry() {
+  const positions: number[] = [];
+  const divisions = 144;
+  for (let index = 0; index < divisions; index += 1) {
+    const angle = (index / divisions) * Math.PI * 2;
+    const longMark = index % 6 === 0;
+    const innerRadius = longMark ? 0.955 : 0.978;
+    const outerRadius = 1.025;
+    positions.push(
+      Math.cos(angle) * innerRadius, Math.sin(angle) * innerRadius, 0.139,
+      Math.cos(angle) * outerRadius, Math.sin(angle) * outerRadius, 0.139,
+    );
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  return geometry;
+}
 
 function createMorphData() {
   const binary = new Float32Array(PARTICLE_COUNT * 3);
@@ -250,6 +350,19 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
   const monitorMaterial = useMemo(() => new THREE.MeshStandardMaterial({ color: "#171a1d", metalness: 0.88, roughness: 0.24 }), []);
   const screenMaterial = useMemo(() => new THREE.MeshStandardMaterial({ color: "#101820", metalness: 0.35, roughness: 0.18, emissive: "#172a2c", emissiveIntensity: 0.55 }), []);
   const silver = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c7cbd0", metalness: 0.96, roughness: 0.2 }), []);
+  const coinSurfaceTexture = useMemo(() => createCoinSurfaceTexture(), []);
+  const coinSilver = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#d1d5d8",
+    metalness: 1,
+    roughness: 0.24,
+    roughnessMap: coinSurfaceTexture,
+    bumpMap: coinSurfaceTexture,
+    bumpScale: 0.014,
+  }), [coinSurfaceTexture]);
+  const coinDetailMaterial = useMemo(() => new THREE.LineBasicMaterial({ color: "#596166", transparent: true, opacity: 0.9 }), []);
+  const coinBodyGeometry = useMemo(() => createCoinBodyGeometry(), []);
+  const coinEngravingGeometry = useMemo(() => createCoinEngravingGeometry(), []);
+  const coinEtchingGeometry = useMemo(() => createCoinEtchingGeometry(), []);
   const lime = useMemo(() => new THREE.MeshStandardMaterial({ color: "#c8f169", metalness: 0.62, roughness: 0.24, emissive: "#789c37", emissiveIntensity: 0.28 }), []);
   const dark = useMemo(() => new THREE.MeshStandardMaterial({ color: "#24292c", metalness: 0.92, roughness: 0.26 }), []);
   const networkMaterial = useMemo(() => new THREE.LineBasicMaterial({ color: "#b9dc78", transparent: true, opacity: 0.72 }), []);
@@ -288,9 +401,15 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
   useEffect(() => () => {
     monitorFrameGeometry.dispose();
     ecosystemLinksGeometry.dispose();
+    coinBodyGeometry.dispose();
+    coinEngravingGeometry.dispose();
+    coinEtchingGeometry.dispose();
+    coinSurfaceTexture.dispose();
+    coinDetailMaterial.dispose();
+    coinSilver.dispose();
     networkMaterial.dispose();
     monitorMaterial.dispose(); screenMaterial.dispose(); silver.dispose(); lime.dispose(); dark.dispose();
-  }, [monitorFrameGeometry, ecosystemLinksGeometry, networkMaterial, monitorMaterial, screenMaterial, silver, lime, dark]);
+  }, [monitorFrameGeometry, ecosystemLinksGeometry, coinBodyGeometry, coinEngravingGeometry, coinEtchingGeometry, coinSurfaceTexture, coinDetailMaterial, coinSilver, networkMaterial, monitorMaterial, screenMaterial, silver, lime, dark]);
 
   useFrame((_, delta) => {
     const stage = THREE.MathUtils.clamp(progressRef.current * 3, 0, 3);
@@ -337,12 +456,22 @@ function PhysicalProductObjects({ progressRef }: SceneProps) {
         <mesh position={[0, 0.12, 0.125]} material={lime}><boxGeometry args={[0.44, 0.018, 0.012]} /></mesh>
       </group>
       <group ref={coin} position={[0, 0, 0.12]} scale={0.001}>
-        <mesh rotation={[Math.PI / 2, 0, 0]} material={silver}><cylinderGeometry args={[1.12, 1.12, 0.2, 128]} /></mesh>
-        <mesh position={[0, 0, 0.105]} material={dark}><torusGeometry args={[1.075, 0.022, 12, 128]} /></mesh>
-        <mesh position={[0, 0, 0.12]} material={lime}><torusGeometry args={[0.91, 0.025, 12, 96]} /></mesh>
-        <mesh position={[0, 0, -0.105]} material={dark}><torusGeometry args={[1.075, 0.022, 12, 128]} /></mesh>
-        <mesh position={[0, 0, 0.13]} material={silver}><torusGeometry args={[0.25, 0.055, 16, 48]} /></mesh>
-        <mesh position={[0, 0, 0.13]} material={silver}><boxGeometry args={[0.12, 0.58, 0.055]} /></mesh>
+        <mesh geometry={coinBodyGeometry} rotation={[Math.PI / 2, 0, 0]} material={coinSilver} />
+        <mesh position={[0, 0, 0.105]} material={dark}><torusGeometry args={[1.083, 0.024, 12, 192]} /></mesh>
+        <mesh position={[0, 0, 0.12]} material={lime}><torusGeometry args={[0.91, 0.022, 12, 192]} /></mesh>
+        <mesh position={[0, 0, 0.132]} material={dark}><torusGeometry args={[0.84, 0.009, 8, 192]} /></mesh>
+        <mesh position={[0, 0, 0.132]} material={silver}><torusGeometry args={[0.77, 0.012, 8, 192]} /></mesh>
+        <mesh position={[0, 0, -0.105]} material={dark}><torusGeometry args={[1.083, 0.024, 12, 192]} /></mesh>
+        <lineSegments geometry={coinEtchingGeometry} material={coinDetailMaterial} />
+        <mesh geometry={coinEngravingGeometry} position={[0, 0, 0.145]} material={lime} />
+        {Array.from({ length: 12 }, (_, index) => {
+          const angle = (index / 12) * Math.PI * 2;
+          return (
+            <mesh key={index} position={[Math.cos(angle) * 0.69, Math.sin(angle) * 0.69, 0.145]} material={silver}>
+              <sphereGeometry args={[0.018, 10, 10]} />
+            </mesh>
+          );
+        })}
       </group>
       <group ref={ecosystem} position={[0, 0, 0]} scale={0.001}>
         <lineSegments geometry={ecosystemLinksGeometry} material={networkMaterial} />
