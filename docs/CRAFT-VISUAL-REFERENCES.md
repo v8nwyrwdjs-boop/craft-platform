@@ -1,93 +1,88 @@
 # CRAFT — visual references and implementation intent
 
-The references in this document were supplied by the project owner with the explicit intention that their visual techniques should be brought into CRAFT. They are implementation direction, not merely optional mood-board inspiration. Adapt the techniques to CRAFT's identity; do not clone another website or embed a reference project's demo UI.
+The references supplied by the project owner are implementation direction, not merely a mood board. Adapt their techniques to CRAFT's identity and product truth; do not clone another website or embed another product's demo UI.
 
-## 1. React Three Fiber / Three.js
+## 1. Visual art direction
 
-Reference: https://github.com/pmndrs/react-three-fiber
+The dark Apple product-page specification supersedes the earlier light-gallery direction as the main benchmark:
+- Obsidian / near-black full-bleed product stages.
+- Graphite and carbon secondary surfaces.
+- Porcelain typography with precise, editorial hierarchy.
+- Restrained CRAFT lime as the primary color accent.
+- Silver and metallic 3D details used sparingly.
+- Spacious page pacing, fine keylines, almost no heavy shadows and media corners near 28px.
+- Selective pale sections as deliberate contrast resets, not as the default page canvas.
 
-Intent:
-- Declarative React renderer for Three.js.
-- Use for authored 3D objects, scenes, lighting, depth and purposeful interactions.
-- Likely first application: a distinctive CRAFT homepage hero scene.
+Preserve CRAFT's own identity. Do not copy Apple logos, product assets, proprietary fonts, Apple Blue or exact marketing copy.
 
-Implementation guardrails:
-- The documented app baseline is React 19. Use the stable React Three Fiber v9 line for React 19; do not adopt an alpha major version without explicit technical justification.
-- Evaluate `three`, `@react-three/fiber` and selected `@react-three/drei` helpers only after inspecting the current lockfile and testing compatibility.
-- Keep the Canvas client-only and lazy-loaded where appropriate.
-- Never put essential text, navigation or CTA only inside WebGL.
-- Provide a static fallback and reduced-motion behavior.
-- Limit device pixel ratio, scene complexity and animation work on mobile.
+## 2. Continuous scroll storytelling
 
-## 2. ShaderGradient
+The pasta / noodle-twirl reference demonstrates a continuous, staged transformation rather than unrelated animated sections. The CRAFT-specific story is:
+1. Binary digits (0101) float in space.
+2. The digits gather into a computer / monitor.
+3. The computer morphs into a digital coin / digital asset.
+4. The asset expands into a connected digital ecosystem.
 
-Reference: https://github.com/ruucm/shadergradient
+Implementation requirements:
+- One continuous 3D scene and one particle system where practical.
+- Native scroll progress drives the transformation; scrolling upward reverses the same timeline.
+- Russian-language DOM copy changes in sync with the current visual chapter.
+- Essential text, navigation and calls to action never live only in WebGL.
+- Mobile simplifies the composition without removing the narrative.
+- Reduced-motion users receive a static, understandable composition and all four narrative chapters.
+- Lazy-load the WebGL scene, cap DPR, prefer low-power rendering, unmount it offscreen, use demand rendering and dispose GPU resources.
+- Never let motion block touch, keyboard access, reading or primary actions.
 
-Intent:
-- Use animated shader gradients to create atmospheric color, light, depth and a living environment around the CRAFT hero.
-- Use selectively in key visual moments; do not place a distracting animated gradient behind every section.
+The TikTok video itself is not available in the current repository context. No shot-by-shot details are asserted or invented; implementation uses the explicit CRAFT story specification above.
 
-Compatibility caution:
-- The library README documents React 18/19 support and an explicit Next.js 15 App Router + R3F 9 combination.
-- CRAFT's documented baseline is Next.js 16 App Router and React 19. Next.js 16 compatibility is not established by the reference alone. Test in an isolated branch/local environment before adopting it.
-- If compatibility or performance is poor, implement a smaller custom shader or CSS/WebGL alternative only if it is maintainable and accessible; do not force a dependency into the app.
+## 3. 3D and shader references
 
-## 3. Liquid Logo
+React Three Fiber / Three.js:
+https://github.com/pmndrs/react-three-fiber
+Use the stable R3F v9 line for React 19. Keep WebGL client-only, lazy-loaded and separate from semantic content.
 
-Reference: https://github.com/collidingScopes/liquid-logo
+ShaderGradient:
+https://github.com/ruucm/shadergradient
+Use shader atmosphere selectively. The documented Next.js 15 integration does not prove Next.js 16 compatibility, so CRAFT uses a custom GLSL implementation rather than an unverified dependency.
 
-Intent:
-- Use the liquid-metal treatment as inspiration for a distinctive CRAFT logo reveal or restrained brand-motion moment.
-- The referenced project describes client-side WebGL, GLSL fragment shaders, edge detection, vector fields, noise and metallic shading, with a logo-image input and export tooling.
-- Adapt the material/shader technique to the actual CRAFT logo asset and brand palette.
+Liquid Logo:
+https://github.com/collidingScopes/liquid-logo
+The liquid-metal surface informs CRAFT's restrained silver/lime material language. Do not embed the original tool UI/assets. The former sphere/wordmark treatment remains separate until reviewed for reuse.
 
-Visual treatment:
-- Graphite, silver, near-black and restrained lime reflections.
-- Premium, controlled liquid metal rather than generic chrome.
-- Keep the logo recognizable and legible.
-- Prefer a short reveal or intentional transition over a permanently animated logo that drains battery or distracts.
+## 4. Taste, UX, component and motion references
 
-Do not:
-- Embed the reference tool's standalone editor, dat.GUI controls or export interface into the public CRAFT site.
-- Assume the tool's implementation can be dropped into Next.js without adaptation.
-- Copy assets or code without checking the license and attribution requirements.
-- Introduce a separate animation system if a lightweight custom treatment can achieve the effect safely.
+- Taste / product truth and intentional art direction: https://github.com/Leonxlnx/taste-skill
+- UI/UX Pro Max / context-matched patterns and semantic tokens: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+- Vercel Web Interface Guidelines / source-level review: https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines
+- shadcn/ui / open, inspectable, composable components: https://github.com/shadcn-ui/ui
+- Design Motion Principles / restraint, polish and purposeful expressive motion: https://github.com/kylezantos/design-motion-principles
+- Emil Kowalski / choreography, performance, mobile-native details, worst-case UI testing: https://github.com/emilkowalski/skills
 
-## Combined visual direction
+These references are lenses, not competing design systems. Reuse the project's existing stack and CRAFT tokens; do not install unnecessary packages or copy another product's default look.
 
-A potential signature composition:
-1. A readable DOM-based CRAFT hero headline and CTA.
-2. A lazy-loaded 3D scene built with React Three Fiber.
-3. ShaderGradient atmosphere and lighting, if compatibility is verified.
-4. A liquid-metal CRAFT logo reveal integrated into the scene or a separate brand moment.
-5. A graceful poster/static version for reduced-motion, unsupported WebGL and low-power devices.
+## 5. Codex and Claude Code workflows
 
-The composition should feel like CRAFT, not a technical demo. The 3D should support the story of moving from idea to product — for example, forms assembling, connecting or resolving into a clear product-oriented visual metaphor. Choose a visual metaphor only after inspecting the current brand assets and hero content.
+Codex and Claude Code should use the same project constraints and review loop:
+- Keep durable project instructions in AGENTS.md.
+- Keep a Claude Code entry point in CLAUDE.md that imports the same source of truth rather than duplicating it.
+- Scope work with the intended outcome, context, constraints and observable completion criteria.
+- Inspect current source before editing.
+- Validate with tests/build, inspect the diff, correct findings and repeat.
+- Distinguish source review from rendered browser/device QA.
+- Preserve human approval boundaries for Production, security, secrets and paid resources.
 
-## Adoption checklist
+References:
+- Codex best practices: https://learn.chatgpt.com/docs/learn/best-practices
+- Claude Code best practices: https://www.anthropic.com/engineering/claude-code-best-practices
+- Claude Code project memory and workflow files: https://claude.com/resources/articles/steering-claude-code-skills-hooks-subagents-and-more
 
-Before installing:
-- [ ] Confirm current branch and clean working tree.
-- [ ] Inspect Next.js, React, TypeScript, bundler and lockfile versions.
-- [ ] Check package maintenance, license, peer dependencies and known Next.js 16 issues.
-- [ ] Build a minimal isolated proof of concept before wiring into the main homepage.
-- [ ] Check SSR/client boundaries and hydration.
-- [ ] Check mobile GPU cost and reduced-motion fallback.
-- [ ] Confirm no paid account, API, asset subscription or usage-based service is required.
+## 6. Page hierarchy and acceptance rules
 
-Before accepting:
-- [ ] First content and CTA are visible without waiting for WebGL.
-- [ ] No hydration or console errors.
-- [ ] Static fallback looks intentional.
-- [ ] Reduced motion disables or substantially simplifies animation.
-- [ ] No horizontal overflow or clipped content at required widths.
-- [ ] Scene does not block scrolling, keyboard navigation or touch.
-- [ ] Performance is acceptable on a mid-range mobile device.
-- [ ] No production deployment is triggered.
+- Homepage: signature narrative, clear product promise, real areas to explore, human guidance, participation formats and one obvious next step.
+- Catalogues and formats: editorial presentation, accurate scope and no unsupported guarantees.
+- Learning and dashboard: task-focused, clear progress, forms and useful empty/error/locked states.
+- Admin: efficient and predictable; no decorative 3D.
+- Mobile: deliberate layouts at 320, 360, 390, 430, 768 and 1024 CSS px; no horizontal page overflow or clipped Russian text.
+- Motion: no scroll hijacking, no animation-only information, reduced-motion fallback and explicit cleanup.
 
-
-## Implementation status — 2026-11-19
-
-The first production-minded visual implementation uses React Three Fiber v9 and custom GLSL shaders on the CRAFT hero. The custom shader provides the moving atmospheric gradient and liquid-metal surface treatment without adding ShaderGradient as an unverified dependency under Next.js 16. This is a deliberate compatibility-first substitute, not a claim that the ShaderGradient package has been integrated.
-
-The liquid-metal treatment is applied to the hero object through a custom GLSL material and to the CRAFT wordmark through a restrained SVG turbulence/displacement filter. The current repository has no separate logo image asset, so the existing typographic CRAFT wordmark is used to preserve the brand lettering.
+A passing build is necessary, not visual sign-off. Rendered desktop/tablet/phone checks and real iOS/Android validation remain separate acceptance gates.

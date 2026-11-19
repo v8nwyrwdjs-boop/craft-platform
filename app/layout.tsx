@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./craft-theme.css";
 
 const title = "CRAFT — школа создания цифровых продуктов";
 const description =
@@ -21,10 +22,7 @@ const metadataBase = (() => {
 
 export const metadata: Metadata = {
   metadataBase,
-  title: {
-    default: title,
-    template: "%s | CRAFT",
-  },
+  title: { default: title, template: "%s | CRAFT" },
   description,
   applicationName: "CRAFT",
   category: "education",
@@ -32,18 +30,15 @@ export const metadata: Metadata = {
     process.env.VERCEL_ENV === "production"
       ? { index: true, follow: true, googleBot: { index: true, follow: true } }
       : { index: false, follow: false, googleBot: { index: false, follow: false } },
-  openGraph: {
-    type: "website",
-    locale: "ru_RU",
-    siteName: "CRAFT",
-    title,
-    description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-  },
+  openGraph: { type: "website", locale: "ru_RU", siteName: "CRAFT", title, description },
+  twitter: { card: "summary_large_image", title, description },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#08090b",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

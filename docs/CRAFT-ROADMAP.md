@@ -1,107 +1,75 @@
 # CRAFT — visual excellence implementation roadmap
 
-This is the focused roadmap for the visual-excellence branch. The broader product roadmap remains in [roadmap.md](roadmap.md); launch blockers remain in [launch-readiness.md](launch-readiness.md).
+This roadmap tracks the dark-first redesign on the visual-excellence branch. The broader product roadmap remains in roadmap.md; launch blockers remain in launch-readiness.md.
 
 ## Guiding principle
 
-Build a coherent, recognizably CRAFT experience, not a collection of disconnected effects. The homepage should earn the strongest visual moment; learning and admin should prioritize focus, readability and speed. Mobile quality is a release criterion throughout.
+Build a coherent, recognizably CRAFT experience, not a collection of disconnected effects. The homepage carries the expressive story; learning and admin prioritize focus, readability and speed. Mobile quality is a release criterion throughout.
 
-## Phase 0 — verify the baseline
+## Phase 0 — baseline and constraints
 
-- [x] Confirm the current branch is `craft/visual-excellence` and inspect the repository tree and current branch head.
-- [x] Inspect the current hero, header, typography, CSS variables and shared page components.
-- [ ] Re-run existing security tests and production build to establish a fresh baseline.
-- [ ] Check the latest Preview only if it can be done without Production promotion or access/security changes.
-- [ ] Record current dependencies and lockfile; do not infer package installation from documentation.
+- [x] Confirm branch, branch head and latest workflow status.
+- [x] Inspect homepage, global styles, route structure, installed stack and current interactions.
+- [x] Confirm the mismatch between the light-first homepage implementation and the approved dark product-stage direction.
+- [ ] Re-run automated tests and production build on the redesigned commit.
+- [ ] Render and inspect the actual Preview when access permits; do not bypass protection.
 
-Exit criteria: current code and test state are known; no baseline failure is silently attributed to the visual work.
+## Phase 1 — visual system
 
-## Phase 1 — design foundation
+- [x] Establish obsidian, graphite, porcelain, restrained lime and silver tokens.
+- [x] Add a dedicated dark-first stylesheet without rewriting existing global CSS.
+- [x] Use deliberate media radii, keylines, editorial type scale and one pale contrast chapter.
+- [ ] Refine every secondary route using rendered screenshots, not only source styling.
 
-- [ ] Audit existing CSS variables, typography and spacing before adding tokens.
-- [ ] Consolidate color, spacing, radius, shadow, type and motion tokens without broad regressions.
-- [x] Establish consistent button, card, section, container and navigation patterns.
-- [ ] Confirm the system works in light/dark sections and at narrow mobile widths.
-- [ ] Preserve existing brand/content decisions and the current conversion path.
+## Phase 2 — signature narrative
 
-Exit criteria: reusable visual foundations exist and are validated on representative public and authenticated routes.
+- [x] Replace the sphere-only homepage hero interaction and timed carousel with one scroll-driven story.
+- [x] Define the four stages: binary code, computer/monitor, digital asset, connected ecosystem.
+- [x] Use one particle system with continuous morph targets rather than four separate animations.
+- [x] Drive the scene from native scroll progress; reverse the same timeline on upward scroll.
+- [x] Keep headings and chapter copy in accessible DOM, synchronized to scroll.
+- [x] Lazy-load the client-only scene; cap DPR; prefer low-power, demand rendering.
+- [x] Pause and unmount the scene offscreen, cleaning up GPU resources.
+- [x] Provide a CSS fallback and a reduced-motion path with all story chapters visible.
+- [ ] Review the real rendered motion and performance on desktop and physical mobile devices.
 
-## Phase 2 — signature homepage hero
+## Phase 3 — product-first homepage
 
-- [ ] Inspect actual CRAFT logo and current hero composition.
-- [ ] Define one brand-specific 3D metaphor that supports the idea-to-product story.
-- [x] Add a client-only React Three Fiber v9 hero scene with React 19.
-- [ ] Evaluate ShaderGradient compatibility with Next.js 16 before adopting it.
-- [ ] Prototype a restrained liquid-metal CRAFT logo reveal adapted to the real logo asset.
-- [x] Keep headline, supporting copy and CTA as semantic DOM.
-- [x] Add lazy loading, CSS no-WebGL fallback, reduced-motion static rendering and viewport-based render pausing.
-- [ ] Tune mobile composition separately; remove or simplify 3D where necessary.
+- [x] Preserve the truthful product promise and a clear first-screen action.
+- [x] Preserve the eight areas of exploration, human-feedback principle, six-step method and three participation formats.
+- [x] Keep routes to login, registration, directions and formats intact.
+- [x] Keep unapproved prices, fabricated proof and CRAFT CLUB launch claims off the homepage.
+- [ ] Align the secondary catalogues and formats with the homepage through visual browser review.
 
-Exit criteria: hero is memorable, readable, responsive, fast enough on mobile and usable with motion/WebGL disabled.
+## Phase 4 — quality gate
 
-## Phase 3 — extend the visual language
+- [x] Add source-level regression tests for scroll progress, accessibility, reduced motion, resource cleanup and responsive styles.
+- [ ] Run the complete security suite and Next.js production build against this branch head.
+- [ ] Inspect 320, 360, 390, 430, 768 and 1024 CSS px for overflow, clipped Russian text and visible actions.
+- [ ] Exercise keyboard navigation, focus, forms, fallback rendering and empty/error/locked states.
+- [ ] Test real iOS Safari and Android Chrome before calling device QA complete.
 
-- [ ] Identify only the sections that benefit from depth, light, transitions or small interactive moments.
-- [x] Apply shared typography, surfaces, spacing, card and button language across catalogues and formats.
-- [x] Extend restrained surface, focus, form, dashboard and learning refinements without adding decorative 3D to task-focused areas.
-- [ ] Keep admin efficient and accessible; decorative 3D is not a priority there.
-- [ ] Avoid repetitive gradients, excessive glass effects and motion for motion's sake.
+## Phase 5 — controlled delivery
 
-Exit criteria: public and authenticated areas feel like one product, while each area remains optimized for its task.
+- [x] Keep the implementation on craft/visual-excellence.
+- [x] Keep main unchanged and do not merge a pull request.
+- [x] Keep Production untouched.
+- [ ] Verify the branch-head workflow and report exact results.
 
-## Phase 4 — quality and regression
+## Implementation record
 
-- [x] Run `npm run test:security` and `npm run build` (24/24 tests passed; Next.js production build passed in GitHub Actions).
-- [ ] Inspect relevant routes at 320, 360, 390, 430, 768 and 1024 CSS px.
-- [ ] Check no horizontal page overflow, clipped Russian text or hidden CTAs.
-- [ ] Check keyboard operation, visible focus, contrast and reduced-motion behavior.
-- [ ] Check loading, empty, error, locked and success states.
-- [ ] Check WebGL fallback and low-power behavior.
-- [ ] Test real iOS Safari and Android Chrome before claiming device QA complete.
-- [x] Review the changed-file scope for security, product scope, SEO, and pricing/claims; no application security or business logic files were changed.
+The old homepage used a light-dominant layout, a standalone liquid sphere and an automatically rotating product carousel. Those parts did not meet the owner's dark Apple-stage reference or the pasta-style continuous transformation idea.
 
-Exit criteria: all available automated checks pass; any unperformed manual/device checks are explicitly recorded as open.
+The new homepage replaces that composition with:
+- An obsidian opening stage with accessible DOM typography, a concise promise and clear actions.
+- A continuous R3F particle transformation: floating binary digits → assembled computer/monitor → digital coin/asset → connected ecosystem.
+- Russian-language story copy and progress synchronized with native scroll, with reverse motion when scrolling upward.
+- Four product examples, all eight areas of exploration, the human-feedback principle, six creation stages and three participation formats.
+- Mobile-specific composition, passive scroll tracking, demand rendering, low-power WebGL, capped DPR, offscreen unmounting and deterministic resource cleanup.
+- A CSS fallback and a reduced-motion state that presents all four stages as readable content.
 
-## Phase 5 — handoff and controlled Preview
+The older sphere and carousel source files remain unmounted rather than being deleted prematurely; their callers and regression tests can be removed after a separate dependency check.
 
-- [ ] Update Project Brain and roadmap status based on what was actually implemented.
-- [ ] Commit only to `craft/visual-excellence`.
-- [ ] Use Preview for review; do not merge to `main` or publish Production.
-- [ ] Report exact commits, changed files, tests and remaining limitations.
+The TikTok video itself is not available in this repository context, so this implementation follows the CRAFT narrative already supplied in the project documents and the accessible motion reference. It does not claim a shot-by-shot recreation of an unseen video.
 
-## Deferred unless explicitly requested
-
-- Social media and marketing channels.
-- Payments, subscriptions, checkout and commercial activation.
-- Paid services, APIs or usage-based infrastructure.
-- Legal commitments and publication of legal documents.
-- Production deployment, merging or release.
-
-
-## Current implementation note — 2026-11-19
-
-The first signature-hero implementation has been added on `craft/visual-excellence`:
-- `components/craft-hero-scene.tsx` contains a client-side React Three Fiber scene with a metallic central form, restrained lime orbit, lighting and pointer-responsive motion.
-- `components/craft-hero-scene-loader.tsx` lazy-loads the WebGL scene with SSR disabled and a static CSS fallback.
-- `app/page.tsx` mounts the scene inside the existing homepage hero while keeping all headline and CTA content in semantic DOM.
-- `app/globals.css` adds the visual composition and compact-screen treatment.
-- `package.json` declares the stable R3F 9 / Three.js dependency line and Three.js types.
-
-Validation status: source files were re-read from the target branch after writing. Automated tests, dependency installation, TypeScript, Next.js build, browser rendering, and viewport checks have **not yet been run** against this change. The repository currently has no recognized npm/yarn/pnpm lockfile at its root, so dependency resolution and reproducibility need attention before the implementation can be called validated. ShaderGradient and the original Liquid Logo technique remain unintegrated; this first pass uses native Three.js materials inside R3F rather than adding unverified dependencies.
-
-
-## Implementation update — 2026-11-19
-
-Implemented on `craft/visual-excellence`:
-- The homepage hero now lazy-loads an R3F 9 scene with a custom GLSL liquid-metal sphere, procedural surface displacement, restrained lime orbit geometry and a custom shader atmosphere.
-- The scene reacts subtly to pointer movement, respects reduced motion, caps device pixel ratio, uses a low-power WebGL preference and pauses its render loop when outside the viewport.
-- The existing homepage content and CTA remain semantic DOM; a CSS fallback remains available when WebGL cannot initialize.
-- Shared visual refinement has been added across public catalogues, formats, auth, dashboard, learning and admin: clearer focus states, restrained hover feedback, consistent surfaces, sticky translucent public navigation and improved section composition.
-- GitHub Actions now includes the visual-excellence branch in its build trigger, so the same security/audit/build workflow can validate this branch without deploying it to Production.
-
-Still open:
-- ShaderGradient package itself is not installed; the atmospheric shader is a custom GLSL implementation pending review against the reference library.
-- The typographic CRAFT wordmark now receives a restrained SVG liquid-metal displacement/sheen treatment; a separate image-mask reveal is unnecessary until a dedicated logo asset exists.
-- `npm install`, `npm audit --audit-level=high` (0 vulnerabilities), all 24 security/mobile tests, and `next build` passed in GitHub Actions for the code-complete commit `135dc421dc9746cc83e80932f5bb89866d6206aa` (run: https://github.com/v8nwyrwdjs-boop/craft-platform/actions/runs/44526135024). The latest branch-head Preview deployment for `7d1b73f58c5d4951d6c412c28fac967170640c38` is READY. Browser screenshot review, visual inspection behind Preview protection, and physical iOS/Android checks have not been performed.
-- The repository has no committed npm lockfile; CI currently uses `npm install`, so reproducible lockfile adoption remains a separate engineering decision.
-- This work is not a completed full redesign until CI passes and remaining routes have visual review.
+A passing CI build is necessary but not visual sign-off. Preview/browser rendering and actual iOS/Android checks remain explicitly open.
