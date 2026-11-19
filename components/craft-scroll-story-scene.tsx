@@ -136,8 +136,8 @@ function createLayout(): StageLayout[] {
 
   // 05 — three catalogue panels, each assembled from a border and structured content grid.
   for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-    const card = Math.floor(index / 213);
-    const local = index % 213;
+    const card = Math.min(2, Math.floor(index / 214));
+    const local = index - card * 214;
     const originX = (card - 1) * 1.18;
     let x = originX; let y = 0; let z = 0.02; let sx = 0.025; let sy = 0.025; let sz = 0.025;
     if (local < 84) {
@@ -175,6 +175,13 @@ function ComponentAssembly({ progressRef, invalidateRef }: SceneProps) {
     envMapIntensity: 1.25,
   }), []);
   const dummy = useMemo(() => new THREE.Object3D(), []);
+  const scratch = useMemo(() => ({
+    position: new THREE.Vector3(),
+    scale: new THREE.Vector3(),
+    rotation: new THREE.Euler(),
+    quaternion: new THREE.Quaternion(),
+    zeroScale: new THREE.Vector3(0, 0, 0),
+  }), []);
 
   useEffect(() => {
     invalidateRef.current = invalidate;
@@ -186,7 +193,7 @@ function ComponentAssembly({ progressRef, invalidateRef }: SceneProps) {
     };
   }, [geometry, material, invalidate, invalidateRef]);
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     const instance = mesh.current;
     const group = root.current;
     if (!instance || !group) return;
@@ -196,11 +203,7 @@ function ComponentAssembly({ progressRef, invalidateRef }: SceneProps) {
     const eased = THREE.MathUtils.smoothstep(segment, 0, 1);
     const from = layouts[stage];
     const to = layouts[Math.min(stage + 1, 4)];
-    const tempPosition = new THREE.Vector3();
-    const tempScale = new THREE.Vector3();
-    const tempRotation = new THREE.Euler();
-    const tempQuaternion = new THREE.Quaternion();
-    const zeroScale = new THREE.Vector3(0, 0, 0);
+    const { position: tempPosition, scale: tempScale, rotation: tempRotation, quaternion: tempQuaternion, zeroScale } = scratch;
 
     for (let index = 0; index < COMPONENT_COUNT; index += 1) {
       const offset = index * 3;
@@ -238,7 +241,6 @@ function ComponentAssembly({ progressRef, invalidateRef }: SceneProps) {
     group.rotation.y = THREE.MathUtils.lerp(-0.12, 0.16, composition);
     group.rotation.x = THREE.MathUtils.lerp(0.035, -0.045, composition);
     group.scale.setScalar(THREE.MathUtils.lerp(1, 0.9, Math.sin(composition * Math.PI)));
-    invalidate();
   });
 
   return (
