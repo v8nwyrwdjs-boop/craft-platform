@@ -84,3 +84,18 @@ test("application motion and touch behavior retain accessible fallbacks", () => 
   assert.match(theme, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.format-detail-card, \.direction-card, \.product-card \{[\s\S]*?transition: none !important/s);
   assert.match(theme, /@media \(hover: none\)[\s\S]*?\.student-project:hover[\s\S]*?transform: none/s);
 });
+
+
+test("detail catalogue pages label their primary navigation landmarks", () => {
+  const direction = readFileSync(new URL("../../app/directions/[slug]/page.tsx", import.meta.url), "utf8");
+  const product = readFileSync(new URL("../../app/products/[id]/page.tsx", import.meta.url), "utf8");
+  assert.match(direction, /<nav aria-label="Основная навигация">/);
+  assert.match(product, /<nav aria-label="Основная навигация">/);
+});
+
+test("learning and admin layouts preserve constrained content containers", () => {
+  const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
+  assert.match(theme, /\.module-lesson \{ grid-template-columns: minmax\(0,1fr\); \}/);
+  assert.match(theme, /\.admin-table-wrap \{ max-width: 100%; overscroll-behavior-x: contain; \}/);
+  assert.match(theme, /\.admin-review-answer \{ white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1\.75; \}/);
+});
