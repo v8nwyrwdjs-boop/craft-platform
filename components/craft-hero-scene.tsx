@@ -171,6 +171,15 @@ export function CraftHeroScene() {
 
   return (
     <div ref={container} className="craft-scene" aria-hidden="true">
+      <svg className="craft-liquid-defs" aria-hidden="true" focusable="false">
+        <filter id="craft-liquid-filter" x="-15%" y="-25%" width="130%" height="150%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="2" seed="8" result="liquidNoise">
+            <animate attributeName="baseFrequency" values="0.018 0.045;0.024 0.055;0.018 0.045" dur="10s" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="liquidNoise" scale="4" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
+      <span className="craft-liquid-wordmark">CRAFT</span>
       <Canvas
         frameloop={reducedMotion || !isVisible ? "demand" : "always"}
         dpr={[1, 1.25]}
