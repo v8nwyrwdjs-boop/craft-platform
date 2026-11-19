@@ -52,7 +52,6 @@ function createCoinBodyGeometry() {
   const positions = geometry.getAttribute("position");
   for (let index = 0; index < positions.count; index += 1) {
     const x = positions.getX(index);
-    const y = positions.getY(index);
     const z = positions.getZ(index);
     const radius = Math.hypot(x, z);
     if (radius < 1.1) continue;
