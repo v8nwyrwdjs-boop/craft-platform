@@ -76,3 +76,15 @@ Exit criteria: all available automated checks pass; any unperformed manual/devic
 - Paid services, APIs or usage-based infrastructure.
 - Legal commitments and publication of legal documents.
 - Production deployment, merging or release.
+
+
+## Current implementation note — 2026-11-19
+
+The first signature-hero implementation has been added on `craft/visual-excellence`:
+- `components/craft-hero-scene.tsx` contains a client-side React Three Fiber scene with a metallic central form, restrained lime orbit, lighting and pointer-responsive motion.
+- `components/craft-hero-scene-loader.tsx` lazy-loads the WebGL scene with SSR disabled and a static CSS fallback.
+- `app/page.tsx` mounts the scene inside the existing homepage hero while keeping all headline and CTA content in semantic DOM.
+- `app/globals.css` adds the visual composition and compact-screen treatment.
+- `package.json` declares the stable R3F 9 / Three.js dependency line and Three.js types.
+
+Validation status: source files were re-read from the target branch after writing. Automated tests, dependency installation, TypeScript, Next.js build, browser rendering, and viewport checks have **not yet been run** against this change. The repository currently has no recognized npm/yarn/pnpm lockfile at its root, so dependency resolution and reproducibility need attention before the implementation can be called validated. ShaderGradient and the original Liquid Logo technique remain unintegrated; this first pass uses native Three.js materials inside R3F rather than adding unverified dependencies.
