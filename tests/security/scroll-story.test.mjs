@@ -63,6 +63,15 @@ test("scroll stages include physical monitor, metallic asset, and spatial ecosys
 });
 
 test("physical 3D objects respect demand rendering outside active stages", () => {
-  assert.match(scene, /if \(transitioning \|\| coinTarget > 0\.02 \|\| ecosystemTarget > 0\.02\) invalidate\(\)/);
+  assert.match(scene, /if \(transitioning \|\| monitorRotating \|\| coinTarget > 0\.02 \|\| ecosystemTarget > 0\.02\) invalidate\(\)/);
+  assert.match(scene, /monitorRotating = Math\.abs\(monitor\.current\.rotation\.y - -0\.16\) > 0\.001/);
   assert.match(scene, /group\.visible = next > 0\.008/);
+});
+
+test("monitor housing uses a beveled enclosure and restrained interface details", () => {
+  assert.match(scene, /new THREE\.ExtrudeGeometry\(shape/);
+  assert.match(scene, /bevelEnabled: true/);
+  assert.match(scene, /monitorFrameGeometry/);
+  assert.match(scene, /bevelThickness: 0\.035/);
+  assert.match(scene, /position=\{\[-0\.78, 0\.66, 0\.112\]\}/);
 });
