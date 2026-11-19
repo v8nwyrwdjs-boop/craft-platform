@@ -968,3 +968,165 @@ button { font: inherit; }
   .catalog-page .header,
   .formats-page .header { background: rgba(8,9,11,.92) !important; }
 }
+
+
+/* Product-wide finish: consistent controls, readable states and mobile-safe layouts. */
+:root {
+  color-scheme: dark;
+  accent-color: var(--craft-lime);
+  --craft-content-width: 1320px;
+}
+html, body { min-width: 320px; }
+body { overflow-x: clip; }
+main { min-width: 0; }
+.auth-shell, .dashboard-shell, .admin-shell, .catalog-page, .formats-page {
+  isolation: isolate;
+}
+.auth-top .brand, .dashboard-header .brand, .admin-top .brand,
+.header .brand, .footer .brand { color: var(--craft-text); }
+.auth-top, .dashboard-header, .admin-top, .header, .footer {
+  padding-inline: 0;
+}
+.auth-form input, .auth-form select, .auth-form textarea,
+.assignment-form input, .assignment-form select, .assignment-form textarea,
+.staff-review-form input, .staff-review-form select, .staff-review-form textarea,
+.admin-panel input, .new-project-panel input {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  color-scheme: dark;
+  font-size: 16px;
+}
+.auth-form textarea, .assignment-form textarea,
+.staff-review-form textarea { min-height: 132px; resize: vertical; }
+.auth-form button, .assignment-form button, .lesson-status button,
+.staff-review-form button, .admin-panel button, .new-project-panel button {
+  min-width: 44px;
+  min-height: 48px;
+}
+.auth-form label, .assignment-form label,
+.staff-review-form label { display: grid; gap: 9px; }
+.auth-form input:disabled, .auth-form button:disabled,
+.assignment-form button:disabled, .staff-review-form button:disabled {
+  cursor: not-allowed;
+  opacity: .58;
+}
+.auth-message { padding: 14px 16px; line-height: 1.65; overflow-wrap: anywhere; }
+.auth-message a { color: var(--craft-lime); text-decoration: underline; text-underline-offset: 3px; }
+.dashboard-user > span, .admin-hero-aside strong,
+.admin-table td, .admin-review-answer { overflow-wrap: anywhere; }
+.dashboard-section-title { gap: 18px; }
+.student-project-grid, .admin-record-grid, .admin-review-list,
+.curriculum-list, .module-lesson-list { min-width: 0; }
+.student-project, .admin-record, .admin-review,
+.curriculum-card, .module-lesson { min-width: 0; }
+.module-lesson { grid-template-columns: minmax(0,1fr); }
+.module-lesson > div:first-child { min-width: 0; }
+.lesson-task p, .mentor-feedback p, .submission-preview p { overflow-wrap: anywhere; }
+.submission-preview { min-width: 0; }
+.submission-preview summary { cursor: pointer; text-underline-offset: 3px; }
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th, .admin-table td { vertical-align: top; }
+.admin-table td code { overflow-wrap: anywhere; }
+.admin-table-wrap { max-width: 100%; overscroll-behavior-x: contain; }
+.admin-review-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.admin-review-answer { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.75; }
+.admin-empty { padding: 24px; line-height: 1.7; }
+.catalog-page .header, .formats-page .header {
+  min-height: 76px;
+  height: auto;
+  padding-block: 8px;
+}
+.catalog-page .header nav, .formats-page .header nav {
+  min-width: 0;
+}
+.catalog-page .header nav a, .formats-page .header nav a,
+.header-account a, .dashboard-header > a:last-child,
+.auth-top > a:last-child, .admin-top-right > a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.catalog-page .header nav a, .formats-page .header nav a {
+  color: var(--craft-muted);
+}
+.catalog-page .header nav a:hover, .formats-page .header nav a:hover {
+  color: var(--craft-text);
+}
+.format-detail-card, .direction-card, .product-card, .entry-card,
+.admin-stat, .admin-record, .admin-review, .student-project {
+  box-shadow: none;
+}
+.format-detail-card:focus-within, .direction-card:focus-within,
+.product-card:focus-within, .entry-card:focus-within {
+  border-color: rgba(201,243,106,.42);
+}
+@media (max-width: 760px) {
+  .catalog-page .header, .formats-page .header {
+    display: flex;
+    min-height: 104px;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 0 14px;
+  }
+  .catalog-page .header nav, .formats-page .header nav {
+    order: 3;
+    display: flex;
+    flex: 0 0 100%;
+    width: 100%;
+    gap: 20px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 4px 0 0;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .catalog-page .header nav::-webkit-scrollbar,
+  .formats-page .header nav::-webkit-scrollbar { display: none; }
+  .catalog-page .header nav a, .formats-page .header nav a {
+    flex: 0 0 auto;
+    min-height: 44px;
+    font-size: 11px;
+  }
+  .catalog-page .header-account, .formats-page .header-account {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .catalog-page .header-account > a, .formats-page .header-account > a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .module-lesson { padding-block: 26px; }
+  .assignment-submit-area { min-width: 0; }
+  .assignment-form button, .lesson-status button { width: 100%; }
+  .admin-table-wrap { margin-inline: 0; }
+  .admin-review-meta { gap: 7px 10px; }
+  .admin-review-answer { font-size: 12px; }
+  .catalog-page .header, .formats-page .header { background: rgba(8,9,11,.94) !important; }
+}
+@media (max-width: 390px) {
+  .catalog-page .header, .formats-page .header { min-height: 100px; }
+  .catalog-page .header nav, .formats-page .header nav { gap: 15px; }
+  .catalog-page .header nav a, .formats-page .header nav a { font-size: 10px; }
+  .admin-stat strong { font-size: 26px; }
+  .admin-stat { min-width: 0; }
+  .auth-card { width: calc(100% - 32px); }
+}
+@media (hover: none) {
+  .student-project:hover, .admin-record:hover, .admin-stat:hover,
+  .format-detail-card:hover, .direction-card:hover, .product-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-form input, .auth-form select, .auth-form textarea,
+  .assignment-form textarea, .staff-review-form textarea,
+  .student-project, .admin-record, .admin-stat,
+  .format-detail-card, .direction-card, .product-card {
+    transition: none !important;
+  }
+}
