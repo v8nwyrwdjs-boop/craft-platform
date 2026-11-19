@@ -891,3 +891,56 @@ button { font: inherit; }
   .curriculum-card,
   .student-project { transition: none; }
 }
+
+
+/* Catalog and format pages: remove remaining light-surface remnants. */
+.catalog-page .header,
+.formats-page .header {
+  background: rgba(8,9,11,.82) !important;
+  border-bottom-color: rgba(255,255,255,.1) !important;
+  backdrop-filter: blur(22px) saturate(1.3);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+}
+.catalog-page .header-cta,
+.formats-page .header-cta { color: var(--craft-text); }
+.catalog-page .catalog-note p { color: var(--craft-muted); }
+.catalog-page .catalog-bridge .eyebrow { color: #aab69b; }
+.catalog-page .entry-card p { color: var(--craft-muted); }
+.catalog-page .direction-bottom a,
+.catalog-page .product-card-foot a { color: var(--craft-lime); }
+.catalog-page .direction-bottom a span,
+.catalog-page .product-card-foot a span { color: var(--craft-lime); }
+.catalog-page .product-card-foot { border-top-color: var(--craft-line); color: var(--craft-muted); }
+.catalog-page .product-fields span { color: #929b90; }
+.catalog-page .product-fields b { color: #d5dbd1; }
+.formats-page .format-detail-featured {
+  border-color: rgba(201,243,106,.34) !important;
+  background: linear-gradient(145deg, rgba(201,243,106,.075), #111517 54%) !important;
+}
+.formats-page .format-detail-main { border-bottom-color: var(--craft-line); }
+.formats-page .format-detail-featured .format-detail-main { border-bottom-color: #35412e; }
+.formats-page .format-detail-main > div:first-child > p { color: var(--craft-muted); }
+.formats-page .format-detail-price strong { color: var(--craft-text); }
+.formats-page .format-detail-price span { color: #929b90; }
+.formats-page .format-detail-bottom li {
+  border-top-color: var(--craft-line);
+  color: #c2c9bf;
+}
+.formats-page .format-detail-bottom li::before { color: var(--craft-lime); }
+.formats-page .format-detail-note {
+  background: #0d1112;
+  border: 1px solid var(--craft-line);
+  color: var(--craft-muted);
+}
+.formats-page .format-detail-featured .format-detail-note {
+  background: rgba(201,243,106,.07);
+  border-color: rgba(201,243,106,.18);
+  color: #c5d0bb;
+}
+.formats-page .formats-principle > div > p:last-child { color: var(--craft-muted); }
+.formats-page .formats-cta > div > p:last-child { color: var(--craft-muted); }
+.formats-page .formats-cta h2 em { color: #858d83; }
+@media (max-width: 760px) {
+  .catalog-page .header,
+  .formats-page .header { background: rgba(8,9,11,.92) !important; }
+}
