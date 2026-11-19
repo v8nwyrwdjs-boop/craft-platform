@@ -1,15 +1,26 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  return reduced;
+}
 
 function ObjectField() {
   const group = useRef<THREE.Group>(null);
   const core = useRef<THREE.Mesh>(null);
   const ring = useRef<THREE.Mesh>(null);
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
 
   useFrame((state, delta) => {
     if (!group.current || reducedMotion) return;
@@ -48,7 +59,7 @@ function ObjectField() {
 }
 
 export function CraftHeroScene() {
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
   return (
     <div className="craft-scene" aria-hidden="true">
       <Canvas
