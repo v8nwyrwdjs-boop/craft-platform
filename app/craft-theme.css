@@ -367,8 +367,32 @@ button { font: inherit; }
   .craft-header-inner,.craft-hero-grid,.craft-story-pin,.craft-section-inner,.craft-principle-grid,.craft-cta-panel,.craft-footer {
     width: calc(100% - 40px);
   }
-  .craft-header-inner { min-height: 68px; gap: 15px; }
-  .craft-nav { display: none; }
+  .craft-header-inner {
+    min-height: 104px;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 0 15px;
+    padding-block: 8px;
+  }
+  .craft-nav {
+    order: 3;
+    display: flex;
+    flex: 0 0 100%;
+    min-width: 0;
+    gap: 24px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .craft-nav::-webkit-scrollbar { display: none; }
+  .craft-nav a {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    min-height: 44px;
+    white-space: nowrap;
+    font-size: 11px;
+  }
   .craft-header-actions { gap: 12px; }
   .craft-header-actions > a:first-child { display: none; }
   .craft-button-small { min-height: 42px; padding-inline: 15px; }
@@ -381,7 +405,7 @@ button { font: inherit; }
   .craft-scroll-cue { left: 20px; bottom: 18px; font-size: 8px; }
   .craft-story { height: 330vh; }
   .craft-story-pin {
-    top: 68px; height: calc(100svh - 68px); min-height: 590px; padding: 26px 0 20px;
+    top: 104px; height: calc(100svh - 104px); min-height: 590px; padding: 26px 0 20px;
     grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(230px,.9fr) minmax(250px,1.1fr);
     gap: 16px; align-content: stretch;
   }
