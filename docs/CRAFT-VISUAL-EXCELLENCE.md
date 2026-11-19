@@ -95,3 +95,23 @@ The visual references supplied for CRAFT are intended as implementation directio
 - Do not merge to production or publish Production without explicit approval.
 - Do not add paid services or incur costs without approval.
 - Payments, legal pages, support operations, real program content, and production verification remain separate launch requirements.
+
+
+## Ten-stage platform unification pass
+
+This pass extends the dark-first CRAFT language beyond the homepage while preserving server actions, authentication, Supabase queries, enrollment rules, progress tracking, and staff permissions.
+
+1. **Route and component audit** — reviewed public catalogues, detail routes, auth, dashboard, curriculum, lesson submission, and admin surfaces.
+2. **Shared visual foundations** — aligned application controls, page surfaces, typography behavior, borders, and focus treatment to the existing CRAFT tokens.
+3. **Mobile navigation** — kept homepage navigation visible with horizontal scrolling and corrected the sticky scroll-story offset; applied the same reachable pattern to catalog and format headers.
+4. **Authentication forms** — standardized full-width, 16px mobile-safe fields, readable status messages, and consistent action sizing.
+5. **Student workspace** — constrained project cards, empty states, and project creation controls to prevent narrow-screen overflow.
+6. **Learning catalogue** — retained readable curriculum rows and progress presentation across mobile breakpoints.
+7. **Lesson workspace** — made lesson content, assignment submission, feedback, and status actions adapt to a single-column mobile flow.
+8. **Team workspace** — contained admin tables, allowed long learner responses and identifiers to wrap, and preserved horizontal table scrolling.
+9. **Interaction accessibility** — retained visible keyboard focus, reduced-motion behavior, and hover-independent touch behavior.
+10. **Regression guardrails** — added source-level tests for navigation, forms, table containment, motion preferences, and semantic navigation landmarks.
+
+### Verification boundary
+
+The code and source-level regression assertions above are committed to the working branch. They are not a substitute for executing the full test suite, a production build, browser screenshots, authenticated end-to-end journeys, or real iOS Safari / Android Chrome checks. Do not mark the visual redesign as release-ready until those checks have been run against the latest Preview. No production deployment is authorized by this pass.
