@@ -90,4 +90,4 @@ Before accepting:
 
 The first production-minded visual implementation uses React Three Fiber v9 and custom GLSL shaders on the CRAFT hero. The custom shader provides the moving atmospheric gradient and liquid-metal surface treatment without adding ShaderGradient as an unverified dependency under Next.js 16. This is a deliberate compatibility-first substitute, not a claim that the ShaderGradient package has been integrated.
 
-The liquid-metal treatment is currently applied to the abstract hero object, not yet to the actual CRAFT logo asset. A logo reveal remains open until the correct brand asset and mask are confirmed in the repository.
+The liquid-metal treatment is applied to the hero object through a custom GLSL material and to the CRAFT wordmark through a restrained SVG turbulence/displacement filter. The current repository has no separate logo image asset, so the existing typographic CRAFT wordmark is used to preserve the brand lettering.
