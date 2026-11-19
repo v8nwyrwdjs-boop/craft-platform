@@ -48,3 +48,14 @@ test("the signature hero scene keeps WebGL bounded and motion-aware", async () =
   assert.match(scene, /craft-liquid-wordmark/);
 
 });
+
+
+test("CRAFT homepage keeps its primary navigation reachable on mobile", async () => {
+  const theme = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
+  const mobileHeader = theme.match(/@media \(max-width: 760px\) \{([\s\S]*?)\n\}/)?.[1] ?? "";
+  assert.match(mobileHeader, /\.craft-nav\s*\{[^}]*display:\s*flex/s);
+  assert.match(mobileHeader, /\.craft-nav\s*\{[^}]*overflow-x:\s*auto/s);
+  assert.match(mobileHeader, /\.craft-nav a\s*\{[^}]*min-height:\s*44px/s);
+  assert.match(mobileHeader, /\.craft-header-inner\s*\{[^}]*min-height:\s*104px/s);
+  assert.match(mobileHeader, /\.craft-story-pin\s*\{[^}]*top:\s*104px/s);
+});
