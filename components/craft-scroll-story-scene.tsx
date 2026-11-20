@@ -1,317 +1,286 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import {
+  ARC_STEPS,
+  ARC_WIDTH,
+  CAMERA_FOV,
+  FAMILIES,
+  buildStoryLayout,
+  sampleCamera,
+  sampleStory,
+} from "../lib/craft-story-layout";
+import type { CameraPose, Family, Quality } from "../lib/craft-story-layout";
 
 type SceneProps = {
   progressRef: MutableRefObject<number>;
   invalidateRef: MutableRefObject<(() => void) | null>;
+  reducedMotion?: boolean;
 };
 
-const COMPONENT_COUNT = 640;
-const BINARY_GLYPHS = [
-  ["01110","10001","10001","10001","10001","10001","01110"],
-  ["00100","01100","00100","00100","00100","00100","01110"],
-] as const;
-
-type StageLayout = {
-  positions: Float32Array;
-  rotations: Float32Array;
-  scales: Float32Array;
-};
-
-function createLayout(): StageLayout[] {
-  const layouts = Array.from({ length: 5 }, () => ({
-    positions: new Float32Array(COMPONENT_COUNT * 3),
-    rotations: new Float32Array(COMPONENT_COUNT * 3),
-    scales: new Float32Array(COMPONENT_COUNT * 3),
-  }));
-
-  const write = (stage: number, index: number, x: number, y: number, z: number, sx: number, sy: number, sz: number, rx = 0, ry = 0, rz = 0) => {
-    const item = layouts[stage];
-    const offset = index * 3;
-    item.positions.set([x, y, z], offset);
-    item.scales.set([sx, sy, sz], offset);
-    item.rotations.set([rx, ry, rz], offset);
-  };
-
-  // 01 — readable binary typography: eight 0/1 glyphs built from 520 machined bar components, plus a 120-part baseline rail.
-  const binaryPixels: { glyph: number; row: number; column: number }[] = [];
-  for (let glyph = 0; glyph < 8; glyph += 1) {
-    for (let row = 0; row < 7; row += 1) {
-      for (let column = 0; column < 5; column += 1) {
-        if (BINARY_GLYPHS[glyph % 2][row][column] === "1") binaryPixels.push({ glyph, row, column });
-      }
-    }
-  }
-  for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-    if (index < binaryPixels.length * 5) {
-      const pixel = binaryPixels[Math.floor(index / 5)];
-      const subPart = index % 5;
-      const x = (pixel.glyph - 3.5) * 0.68 + (pixel.column - 2) * 0.105 + (subPart - 2) * 0.0145;
-      const y = (3 - pixel.row) * 0.105;
-      write(0, index, x, y, 0.015, 0.011, 0.078, 0.026);
-    } else {
-      const rail = index - binaryPixels.length * 5;
-      const glyph = rail % 8;
-      const row = Math.floor(rail / 8);
-      write(0, index, (glyph - 3.5) * 0.68, -0.49 - row * 0.014, -0.005, 0.22, 0.006, 0.012);
-    }
-  }
-
-  // 02 — monitor: continuous bezel, pixel-like screen tiles, stand and base.
-  for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-    let x = 0; let y = 0; let z = 0.03; let sx = 0.035; let sy = 0.035; let sz = 0.035;
-    if (index < 180) {
-      const edge = index % 4;
-      const t = Math.floor(index / 4) / 44.75;
-      if (edge < 2) { x = (t - 0.5) * 3.45; y = edge === 0 ? -1.03 : 1.03; sx = 0.034; sy = 0.055; }
-      else { x = edge === 2 ? -1.72 : 1.72; y = (t - 0.5) * 2.06; sx = 0.055; sy = 0.034; }
-      z = 0.12;
-    } else if (index < 570) {
-      const tile = index - 180;
-      const column = tile % 30;
-      const row = Math.floor(tile / 30);
-      x = (column - 14.5) * 0.102;
-      y = 0.82 - row * 0.102;
-      z = 0.17 + ((row + column) % 5) * 0.003;
-      sx = 0.043; sy = 0.043; sz = 0.018;
-    } else if (index < 610) {
-      const part = index - 570;
-      x = (part % 4 - 1.5) * 0.075;
-      y = -1.28 - Math.floor(part / 4) * 0.032;
-      z = 0.02; sx = 0.032; sy = 0.025; sz = 0.035;
-    } else {
-      const part = index - 610;
-      x = (part - 14.5) * 0.075;
-      y = -1.58; z = 0.02; sx = 0.034; sy = 0.055; sz = 0.11;
-    }
-    write(1, index, x, y, z, sx, sy, sz);
-  }
-
-  // 03 — coin: 384 milled edge segments plus concentric face engraving.
-  for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-    let x = 0; let y = 0; let z = 0.12; let sx = 0.022; let sy = 0.035; let sz = 0.025; let rz = 0;
-    if (index < 384) {
-      const angle = (index / 384) * Math.PI * 2;
-      x = Math.cos(angle) * 1.12; y = Math.sin(angle) * 1.12; z = 0;
-      sx = 0.018; sy = 0.026; sz = 0.105; rz = angle;
-    } else {
-      const detail = index - 384;
-      const ring = Math.floor(detail / 64);
-      const segment = detail % 64;
-      const angle = (segment / 64) * Math.PI * 2 + ring * 0.045;
-      const radius = 0.28 + ring * 0.105;
-      x = Math.cos(angle) * radius; y = Math.sin(angle) * radius;
-      z = 0.135 + (ring % 2) * 0.012;
-      sx = 0.018; sy = 0.055 + (segment % 8 === 0 ? 0.025 : 0); sz = 0.018;
-      rz = angle;
-    }
-    write(2, index, x, y, z, sx, sy, sz, 0, 0, rz);
-  }
-
-  // 04 — ecosystem: authored hub clusters and components along deliberate links.
-  const nodes: [number, number, number][] = [
-    [0, 0.92, 0], [0.88, 0.46, 0.12], [0.92, -0.48, 0.08], [0, -0.92, 0],
-    [-0.9, -0.45, -0.08], [-0.92, 0.48, -0.1], [0.05, 0.02, 0.78], [-0.05, -0.02, -0.78],
-  ];
-  const links = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[2,6],[4,7],[5,7],[6,7]];
-  for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-    if (index < 176) {
-      const nodeIndex = index % nodes.length;
-      const node = nodes[nodeIndex];
-      const local = Math.floor(index / nodes.length);
-      const angle = (local / 22) * Math.PI * 2;
-      const radius = 0.075 + (local % 3) * 0.018;
-      write(3, index, node[0] + Math.cos(angle) * radius, node[1] + Math.sin(angle) * radius, node[2] + Math.sin(angle * 2) * radius, 0.025, 0.025, 0.025, angle * 0.2, angle * 0.25, angle);
-    } else {
-      const linkIndex = (index - 176) % links.length;
-      const step = Math.floor((index - 176) / links.length);
-      const [from, to] = links[linkIndex];
-      const a = nodes[from]; const b = nodes[to];
-      const t = step / 43;
-      const x = THREE.MathUtils.lerp(a[0], b[0], t);
-      const y = THREE.MathUtils.lerp(a[1], b[1], t);
-      const z = THREE.MathUtils.lerp(a[2], b[2], t);
-      const dx = b[0] - a[0]; const dy = b[1] - a[1];
-      write(3, index, x, y, z, 0.018, Math.max(0.012, Math.hypot(dx, dy) / 46), 0.018, 0, 0, -Math.atan2(dx, dy));
-    }
-  }
-
-  // 05 — three catalogue panels, each assembled from a border and structured content grid.
-  for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-    const card = Math.min(2, Math.floor(index / 214));
-    const local = index - card * 214;
-    const originX = (card - 1) * 1.18;
-    let x = originX; let y = 0; let z = 0.02; let sx = 0.025; let sy = 0.025; let sz = 0.025;
-    if (local < 84) {
-      const edge = local % 4;
-      const t = Math.floor(local / 4) / 20.75;
-      if (edge < 2) { x += (t - 0.5) * 0.94; y = edge === 0 ? -0.7 : 0.7; sx = 0.022; sy = 0.035; }
-      else { x += edge === 2 ? -0.47 : 0.47; y = (t - 0.5) * 1.4; sx = 0.035; sy = 0.022; }
-    } else {
-      const tile = local - 84;
-      const column = tile % 11;
-      const row = Math.floor(tile / 11);
-      x += (column - 5) * 0.075;
-      y = 0.43 - row * 0.078;
-      sx = 0.026; sy = 0.026; sz = 0.016;
-    }
-    write(4, index, x, y, z, sx, sy, sz);
-  }
-
-  return layouts;
+/** Rendering policy: one scene, a handful of instanced component families, demand rendering. */
+function detectQuality(): Quality {
+  if (typeof window === "undefined") return "low";
+  const nav = navigator as Navigator & { deviceMemory?: number };
+  const coarse = window.matchMedia("(pointer: coarse)").matches;
+  const compact = window.innerWidth < 760;
+  const lowMemory = (nav.deviceMemory ?? 8) <= 4;
+  const fewCores = (nav.hardwareConcurrency ?? 8) <= 4;
+  return coarse || compact || lowMemory || fewCores ? "low" : "high";
 }
 
-function ComponentAssembly({ progressRef, invalidateRef }: SceneProps) {
-  const mesh = useRef<THREE.InstancedMesh>(null);
-  const root = useRef<THREE.Group>(null);
+/* ---------------------------------------------------------------- geometry */
+
+function createArcGeometry(quality: Quality) {
+  // One piece of a thin ring (radius 1, width ARC_WIDTH) spanning 360° / ARC_STEPS and 1 deep.
+  // The piece origin sits at its own centroid (the ring centre is at local x = -1), so an instance's
+  // position is a point ON the ring and its rotation about Z is the ring angle.
+  const half = (Math.PI / ARC_STEPS) * 1.05;
+  const inner = 1 - ARC_WIDTH / 2;
+  const outer = 1 + ARC_WIDTH / 2;
+  const shape = new THREE.Shape();
+  shape.absarc(0, 0, outer, -half, half, false);
+  shape.absarc(0, 0, inner, half, -half, true);
+  shape.closePath();
+  const geometry = new THREE.ExtrudeGeometry(shape, { depth: 1, bevelEnabled: false, curveSegments: quality === "high" ? 6 : 4 });
+  geometry.translate(-1, 0, -0.5);
+  return geometry;
+}
+
+function createGeometries(quality: Quality): Record<Family, THREE.BufferGeometry> {
+  const hi = quality === "high";
+  return {
+    slab: new THREE.BoxGeometry(1, 1, 1),
+    bar: new RoundedBoxGeometry(1, 1, 1, hi ? 2 : 1, 0.14),
+    arc: createArcGeometry(quality),
+    cyl: new THREE.CylinderGeometry(0.5, 0.5, 1, hi ? 32 : 20, 1),
+    orb: new THREE.IcosahedronGeometry(0.5, hi ? 3 : 2),
+    pix: new THREE.BoxGeometry(1, 1, 1),
+  };
+}
+
+function createMaterials(): Record<Family, THREE.Material> {
+  const metal = (metalness: number, roughness: number) =>
+    new THREE.MeshStandardMaterial({ color: "#ffffff", metalness, roughness, envMapIntensity: 1.3 });
+  return {
+    slab: metal(0.6, 0.25),
+    bar: metal(1, 0.3),
+    arc: metal(1, 0.26),
+    cyl: metal(1, 0.24),
+    orb: metal(0.55, 0.2),
+    // lit components: unlit, true colour, never tone-mapped down
+    pix: new THREE.MeshBasicMaterial({ color: "#ffffff", toneMapped: false }),
+  };
+}
+
+/* ------------------------------------------------------------- environment */
+
+/** A dark photo studio: softboxes, strip lights and a lime bounce, baked once into a PMREM cube. */
+function createStudioTexture(renderer: THREE.WebGLRenderer) {
+  const studio = new THREE.Scene();
+  const disposables: { dispose: () => void }[] = [];
+  const panel = (w: number, h: number, position: [number, number, number], color: string, intensity: number) => {
+    const geometry = new THREE.PlaneGeometry(w, h);
+    const material = new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(intensity), side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...position);
+    mesh.lookAt(0, 0, 0);
+    studio.add(mesh);
+    disposables.push(geometry, material);
+  };
+  const room = new THREE.Mesh(new THREE.BoxGeometry(30, 30, 30), new THREE.MeshBasicMaterial({ color: "#0e1013", side: THREE.BackSide }));
+  studio.add(room);
+  disposables.push(room.geometry, room.material as THREE.Material);
+  panel(9, 5, [-2, 9, 5], "#ffffff", 6); // key softbox, top front
+  panel(16, 9, [0, 1, 11], "#f2f5f7", 0.5); // broad front fill: flat faces read as polished metal
+  panel(3, 12, [7, 3, 8], "#ffffff", 7); // hard strip: gradient sweep across tilted faces
+  panel(2.4, 12, [-10, 1, 2], "#e8f0ff", 5); // left strip
+  panel(2, 10, [10, 2, -4], "#ffffff", 6); // right rim strip
+  panel(7, 1.6, [0, -3, 9], "#c9f36a", 0.7); // lime floor bounce, front low
+  panel(14, 8, [0, -9, 2], "#cfd6dc", 0.9); // soft floor card
+  panel(10, 2, [0, 2, -11], "#9fb3c8", 2.2); // back kicker
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const target = pmrem.fromScene(studio, 0.02);
+  pmrem.dispose();
+  disposables.forEach((item) => item.dispose());
+  return target;
+}
+
+function StudioEnvironment({ materials }: { materials: Record<Family, THREE.Material> }) {
+  const gl = useThree((state) => state.gl);
   const invalidate = useThree((state) => state.invalidate);
-  const layouts = useMemo(() => createLayout(), []);
-  const geometry = useMemo(() => {
-    const shape = new THREE.BoxGeometry(1, 1, 1);
-    return shape;
-  }, []);
-  const material = useMemo(() => new THREE.MeshStandardMaterial({
-    color: "#c8cdd0",
-    metalness: 0.92,
-    roughness: 0.26,
-    envMapIntensity: 1.25,
-  }), []);
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-  const scratch = useMemo(() => ({
-    position: new THREE.Vector3(),
-    scale: new THREE.Vector3(),
-    rotation: new THREE.Euler(),
-    quaternion: new THREE.Quaternion(),
-    zeroScale: new THREE.Vector3(0, 0, 0),
-  }), []);
+  useEffect(() => {
+    const target = createStudioTexture(gl);
+    FAMILIES.forEach((family) => {
+      const material = materials[family] as THREE.MeshStandardMaterial;
+      if ("envMap" in material && family !== "pix") {
+        material.envMap = target.texture;
+        material.needsUpdate = true;
+      }
+    });
+    invalidate();
+    return () => {
+      FAMILIES.forEach((family) => {
+        const material = materials[family] as THREE.MeshStandardMaterial;
+        if ("envMap" in material && family !== "pix") material.envMap = null;
+      });
+      target.dispose();
+    };
+  }, [gl, invalidate, materials]);
+  return null;
+}
+
+/* ---------------------------------------------------------------- assembly */
+
+type Pointer = { x: number; y: number; tx: number; ty: number };
+
+function Assembly({ progressRef, invalidateRef, quality, reducedMotion }: SceneProps & { quality: Quality }) {
+  const invalidate = useThree((state) => state.invalidate);
+  const gl = useThree((state) => state.gl);
+  const layout = useMemo(() => buildStoryLayout(quality), [quality]);
+  const geometries = useMemo(() => createGeometries(quality), [quality]);
+  const materials = useMemo(() => createMaterials(), []);
+  const meshes = useRef<Partial<Record<Family, THREE.InstancedMesh>>>({});
+  const buffers = useRef<{ matrices: Record<Family, Float32Array>; colors: Record<Family, Float32Array> } | null>(null);
+  const light = useRef<THREE.PointLight>(null);
+  const pointer = useRef<Pointer>({ x: 0, y: 0, tx: 0, ty: 0 });
+  const last = useRef({ progress: -1, px: 99, py: 99 });
+  const pose = useMemo<CameraPose>(() => ({ position: [0, 0, 7], target: [0, 0, 0] }), []);
+
+  useLayoutEffect(() => {
+    const matrices = {} as Record<Family, Float32Array>;
+    const colors = {} as Record<Family, Float32Array>;
+    FAMILIES.forEach((family) => {
+      const mesh = meshes.current[family];
+      if (!mesh) return;
+      mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      mesh.setColorAt(0, new THREE.Color(1, 1, 1));
+      mesh.instanceColor?.setUsage(THREE.DynamicDrawUsage);
+      matrices[family] = mesh.instanceMatrix.array as Float32Array;
+      colors[family] = mesh.instanceColor?.array as Float32Array;
+    });
+    buffers.current = { matrices, colors };
+    last.current.progress = -1;
+    invalidate();
+  }, [invalidate, layout]);
 
   useEffect(() => {
     invalidateRef.current = invalidate;
     invalidate();
     return () => {
       if (invalidateRef.current === invalidate) invalidateRef.current = null;
-      geometry.dispose();
-      material.dispose();
+      FAMILIES.forEach((family) => {
+        geometries[family].dispose();
+        materials[family].dispose();
+      });
     };
-  }, [geometry, material, invalidate, invalidateRef]);
+  }, [geometries, invalidate, invalidateRef, materials]);
 
-  useFrame(() => {
-    const instance = mesh.current;
-    const group = root.current;
-    if (!instance || !group) return;
-    const target = THREE.MathUtils.clamp(progressRef.current, 0, 1) * 4;
-    const stage = Math.min(3, Math.floor(target));
-    const segment = target >= 4 ? 1 : target - stage;
-    const eased = THREE.MathUtils.smoothstep(segment, 0, 1);
-    const from = layouts[stage];
-    const to = layouts[Math.min(stage + 1, 4)];
-    const { position: tempPosition, scale: tempScale, rotation: tempRotation, quaternion: tempQuaternion, zeroScale } = scratch;
+  // Pointer parallax: mouse/pen only, never touch, never while reduced motion is requested.
+  useEffect(() => {
+    if (reducedMotion) return;
+    const element = gl.domElement;
+    const state = pointer.current;
+    const onMove = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const rect = element.getBoundingClientRect();
+      state.tx = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      state.ty = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+      invalidate();
+    };
+    const onLeave = () => {
+      state.tx = 0;
+      state.ty = 0;
+      invalidate();
+    };
+    element.addEventListener("pointermove", onMove, { passive: true });
+    element.addEventListener("pointerleave", onLeave, { passive: true });
+    return () => {
+      element.removeEventListener("pointermove", onMove);
+      element.removeEventListener("pointerleave", onLeave);
+      state.tx = 0;
+      state.ty = 0;
+    };
+  }, [gl, invalidate, reducedMotion]);
 
-    for (let index = 0; index < COMPONENT_COUNT; index += 1) {
-      const offset = index * 3;
-      tempPosition.set(
-        THREE.MathUtils.lerp(from.positions[offset], to.positions[offset], eased),
-        THREE.MathUtils.lerp(from.positions[offset + 1], to.positions[offset + 1], eased),
-        THREE.MathUtils.lerp(from.positions[offset + 2], to.positions[offset + 2], eased),
-      );
-      // Components travel on deterministic shallow arcs, never as detached ambient particles.
-      const arc = Math.sin(eased * Math.PI) * Math.sin(index * 0.37) * 0.055;
-      tempPosition.z += arc;
-      tempScale.set(
-        THREE.MathUtils.lerp(from.scales[offset], to.scales[offset], eased),
-        THREE.MathUtils.lerp(from.scales[offset + 1], to.scales[offset + 1], eased),
-        THREE.MathUtils.lerp(from.scales[offset + 2], to.scales[offset + 2], eased),
-      );
-      if (tempScale.lengthSq() < 0.000001) tempScale.copy(zeroScale);
-      tempRotation.set(
-        THREE.MathUtils.lerp(from.rotations[offset], to.rotations[offset], eased),
-        THREE.MathUtils.lerp(from.rotations[offset + 1], to.rotations[offset + 1], eased),
-        THREE.MathUtils.lerp(from.rotations[offset + 2], to.rotations[offset + 2], eased),
-      );
-      tempQuaternion.setFromEuler(tempRotation);
-      dummy.position.copy(tempPosition);
-      dummy.quaternion.copy(tempQuaternion);
-      dummy.scale.copy(tempScale);
-      dummy.updateMatrix();
-      instance.setMatrixAt(index, dummy.matrix);
+  useFrame((state) => {
+    const store = buffers.current;
+    if (!store) return;
+    const p = pointer.current;
+    p.x += (p.tx - p.x) * 0.1;
+    p.y += (p.ty - p.y) * 0.1;
+    const settling = Math.abs(p.tx - p.x) > 0.002 || Math.abs(p.ty - p.y) > 0.002;
+    const progress = THREE.MathUtils.clamp(progressRef.current, 0, 1);
+
+    if (progress !== last.current.progress) {
+      sampleStory(layout, progress, store.matrices, store.colors);
+      FAMILIES.forEach((family) => {
+        const mesh = meshes.current[family];
+        if (!mesh) return;
+        mesh.instanceMatrix.needsUpdate = true;
+        if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+      });
+      last.current.progress = progress;
     }
-    instance.instanceMatrix.needsUpdate = true;
 
-    const composition = THREE.MathUtils.clamp(progressRef.current, 0, 1);
-    group.position.x = Math.sin(composition * Math.PI * 2) * 0.24;
-    group.position.y = Math.sin(composition * Math.PI) * 0.12;
-    group.rotation.y = THREE.MathUtils.lerp(-0.12, 0.16, composition);
-    group.rotation.x = THREE.MathUtils.lerp(0.035, -0.045, composition);
-    group.scale.setScalar(THREE.MathUtils.lerp(1, 0.9, Math.sin(composition * Math.PI)));
+    const aspect = state.size.width / Math.max(state.size.height, 1);
+    sampleCamera(progress, aspect, p.x, p.y, pose);
+    state.camera.position.set(pose.position[0], pose.position[1], pose.position[2]);
+    state.camera.lookAt(pose.target[0], pose.target[1], pose.target[2]);
+    // accent light rests low-left and follows the pointer across the object
+    if (light.current) light.current.position.set(-2.4 + p.x * 3.4, -1.6 - p.y * 2.2, 2.6);
+    if (settling) state.invalidate();
   });
 
   return (
-    <group ref={root}>
-      <instancedMesh ref={mesh} args={[geometry, material, COMPONENT_COUNT]} frustumCulled={false} />
-    </group>
+    <>
+      <pointLight ref={light} intensity={3} distance={8} decay={2} color="#d6f58f" position={[-2.4, -1.6, 2.6]} />
+      {FAMILIES.map((family) =>
+        layout.counts[family] > 0 ? (
+          <instancedMesh
+            key={family + quality}
+            ref={(mesh: THREE.InstancedMesh | null) => {
+              if (mesh) meshes.current[family] = mesh;
+              else delete meshes.current[family];
+            }}
+            args={[geometries[family], materials[family], layout.counts[family]]}
+            frustumCulled={false}
+          />
+        ) : null,
+      )}
+      <StudioEnvironment materials={materials} />
+    </>
   );
 }
 
-function StudioEnvironment() {
-  const scene = useThree((state) => state.scene);
-  const environment = useMemo(() => {
-    const width = 256;
-    const height = 128;
-    const data = new Uint8Array(width * height * 4);
-    for (let y = 0; y < height; y += 1) {
-      for (let x = 0; x < width; x += 1) {
-        const u = x / width; const v = y / height;
-        const softbox = (u > 0.16 && u < 0.24 && v > 0.2 && v < 0.8) || (u > 0.48 && u < 0.78 && v > 0.12 && v < 0.21);
-        const limeBounce = u > 0.34 && u < 0.37 && v > 0.48 && v < 0.72;
-        const base = 7 + Math.round((1 - v) * 8);
-        const light = softbox ? 235 : base;
-        const index = (y * width + x) * 4;
-        data[index] = light;
-        data[index + 1] = limeBounce ? 205 : light;
-        data[index + 2] = limeBounce ? 125 : light;
-        data[index + 3] = 255;
-      }
-    }
-    const texture = new THREE.DataTexture(data, width, height, THREE.RGBAFormat);
-    texture.mapping = THREE.EquirectangularReflectionMapping;
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.magFilter = THREE.LinearFilter;
-    texture.minFilter = THREE.LinearFilter;
-    texture.needsUpdate = true;
-    return texture;
-  }, []);
+export function CraftScrollStoryScene({ progressRef, invalidateRef, reducedMotion = false }: SceneProps) {
+  const [quality] = useState<Quality>(() => detectQuality());
+  const [lost, setLost] = useState(false);
 
-  useEffect(() => {
-    const previous = scene.environment;
-    scene.environment = environment;
-    return () => {
-      if (scene.environment === environment) scene.environment = previous;
-      environment.dispose();
-    };
-  }, [environment, scene]);
-  return null;
-}
+  if (lost) return <div className="craft-story-fallback" />;
 
-export function CraftScrollStoryScene({ progressRef, invalidateRef }: SceneProps) {
   return (
     <Canvas
       frameloop="demand"
-      dpr={[1, 1.15]}
-      camera={{ position: [0, 0, 6.5], fov: 36 }}
-      gl={{ alpha: true, antialias: false, powerPreference: "low-power", stencil: false }}
+      dpr={[1, quality === "high" ? 1.5 : 1.15]}
+      camera={{ position: [0, 0, 7], fov: CAMERA_FOV, near: 0.1, far: 40 }}
+      gl={{ alpha: true, antialias: true, powerPreference: "low-power", stencil: false }}
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener("webglcontextlost", (event) => {
+          event.preventDefault();
+          setLost(true);
+        });
+      }}
       fallback={<div className="craft-story-fallback" />}
     >
-      <color attach="background" args={["#08090b"]} />
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[3, 4, 5]} intensity={2.2} color="#ffffff" />
-      <directionalLight position={[-4, 1, -3]} intensity={1.2} color="#aab5c0" />
-      <pointLight position={[-3, -2, 2]} intensity={7} distance={8} color="#c8f169" />
-      <StudioEnvironment />
-      <ComponentAssembly progressRef={progressRef} invalidateRef={invalidateRef} />
+      <ambientLight intensity={0.25} />
+      <directionalLight position={[3, 4, 5]} intensity={1.5} color="#ffffff" />
+      <directionalLight position={[-4, 1, -3]} intensity={0.9} color="#aab5c0" />
+      <Assembly progressRef={progressRef} invalidateRef={invalidateRef} quality={quality} reducedMotion={reducedMotion} />
     </Canvas>
   );
 }

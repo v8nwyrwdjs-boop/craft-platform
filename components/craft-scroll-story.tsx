@@ -160,13 +160,13 @@ export function CraftScrollStory() {
         </div>
 
         <div className="craft-story-visual" aria-hidden="true">
-          <div className="craft-story-visual-top"><span>CRAFT / PROCESS STUDY</span><span>FIG. 001—005</span></div>
+          <div className="craft-story-visual-top"><span>CRAFT / PROCESS STUDY</span><span>FIG. 00{activeChapter + 1} — 005</span></div>
           {isVisible ? (
-            <ScrollScene progressRef={progressRef} invalidateRef={invalidateRef} />
+            <ScrollScene progressRef={progressRef} invalidateRef={invalidateRef} reducedMotion={reducedMotion} />
           ) : (
             <div className="craft-story-fallback" />
           )}
-          <div className="craft-story-visual-bottom"><span>IDEA → PRODUCT</span><span>SCROLL / 360°</span></div>
+          <div className="craft-story-visual-bottom"><span>{chapter.label}</span><span>SCROLL ↕ / POINTER ◎</span></div>
         </div>
       </div>
 

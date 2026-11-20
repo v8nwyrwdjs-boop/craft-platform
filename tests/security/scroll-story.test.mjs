@@ -35,47 +35,62 @@ test("scroll progress uses passive native scrolling and cleans up listeners", ()
   assert.doesNotMatch(story, /wheel|touchmove/);
 });
 
-test("3D story uses a bounded mobile GPU budget and demand rendering", () => {
+const layoutSource = readFileSync(new URL("../../lib/craft-story-layout.ts", import.meta.url), "utf8");
+
+test("3D story uses a bounded GPU budget, demand rendering and a handful of instanced families", () => {
   assert.match(scene, /frameloop="demand"/);
-  assert.match(scene, /dpr=\{\[1, 1\.15\]\}/);
+  assert.match(scene, /dpr=\{\[1, quality === "high" \? 1\.5 : 1\.15\]\}/);
   assert.match(scene, /powerPreference: "low-power"/);
   assert.match(scene, /<instancedMesh/);
-  assert.match(scene, /COMPONENT_COUNT = 640/);
-  assert.match(scene, /instance\.instanceMatrix\.needsUpdate = true/);
-  assert.match(scene, /dispose\(\)/);
+  assert.match(scene, /DynamicDrawUsage/);
+  assert.match(scene, /instanceMatrix\.needsUpdate = true/);
+  assert.match(scene, /instanceColor\.needsUpdate = true/);
+  assert.match(scene, /function detectQuality/);
+  assert.match(scene, /frustumCulled=\{false\}/);
+  assert.match(scene, /webglcontextlost/);
 });
 
-test("legacy point-cloud morph is removed from the active scene", () => {
+test("scene releases GPU resources and honours reduced motion for pointer interaction", () => {
+  assert.match(scene, /geometries\[family\]\.dispose\(\)/);
+  assert.match(scene, /materials\[family\]\.dispose\(\)/);
+  assert.match(scene, /target\.dispose\(\)/);
+  assert.match(scene, /if \(reducedMotion\) return;/);
+  assert.match(scene, /event\.pointerType === "touch"/);
+  assert.match(scene, /passive: true/);
+  assert.match(scene, /removeEventListener\("pointermove"/);
+});
+
+test("legacy point-cloud morph and generic cube instances are gone from the active scene", () => {
   assert.doesNotMatch(scene, /MorphingParticles/);
   assert.doesNotMatch(scene, /<points\b/);
   assert.doesNotMatch(scene, /gl_PointSize/);
-  assert.doesNotMatch(scene, /particleVertexShader|particleFragmentShader/);
-  assert.match(scene, /function ComponentAssembly/);
+  assert.doesNotMatch(scene, /COMPONENT_COUNT/);
+  assert.match(scene, /function Assembly/);
 });
 
-test("five authored component layouts provide deterministic reversible morph targets", () => {
-  assert.match(scene, /function createLayout/);
-  assert.match(scene, /Array\.from\(\{ length: 5 \}/);
-  assert.match(scene, /const from = layouts\[stage\]/);
-  assert.match(scene, /const to = layouts\[Math\.min\(stage \+ 1, 4\)\]/);
-  assert.match(scene, /THREE\.MathUtils\.lerp/);
+test("scene consumes the pure authored layout module instead of embedding layout maths", () => {
+  assert.match(scene, /from "\.\.\/lib\/craft-story-layout"/);
+  assert.match(scene, /sampleStory\(layout, progress/);
+  assert.match(scene, /sampleCamera\(progress, aspect/);
   assert.match(scene, /progressRef\.current/);
-  assert.match(scene, /Components travel on deterministic shallow arcs/);
+  assert.match(layoutSource, /There is no randomness|no randomness/);
+  assert.doesNotMatch(layoutSource, /Math\.random\(/);
+  assert.doesNotMatch(layoutSource, /from "three"/);
 });
 
-test("binary typography is structured and catalogue resolves into three authored panels", () => {
-  assert.match(scene, /BINARY_GLYPHS/);
-  assert.match(scene, /readable binary typography/i);
-  assert.match(scene, /three catalogue panels/i);
-  assert.match(scene, /Math\.min\(2, Math\.floor\(index \/ 214\)\)/);
+test("binary typography is real ASCII for CRAFT and the catalogue resolves into three authored panels", () => {
+  assert.match(layoutSource, /"CRAFT" in 8-bit ASCII/);
+  assert.match(layoutSource, /0x43, 0x52, 0x41, 0x46, 0x54/);
+  assert.match(layoutSource, /function buildCatalogue/);
+  assert.match(layoutSource, /const cards = \[/);
 });
 
-test("studio environment and material response remain part of the scene", () => {
+test("studio environment, per-family material response and instanced colour remain part of the scene", () => {
   assert.match(scene, /MeshStandardMaterial/);
-  assert.match(scene, /metalness: 0\.92/);
-  assert.match(scene, /EquirectangularReflectionMapping/);
-  assert.match(scene, /scene\.environment = environment/);
-  assert.match(scene, /environment\.dispose\(\)/);
+  assert.match(scene, /PMREMGenerator/);
+  assert.match(scene, /material\.envMap = target\.texture/);
+  assert.match(scene, /toneMapped: false/);
+  assert.match(scene, /setColorAt/);
 });
 
 test("dark visual system covers mobile and reduced-motion layouts", () => {
