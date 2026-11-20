@@ -55,7 +55,7 @@ A first mobile CSS refinement has been added for homepage, formats, authenticati
 - [x] Allow horizontal navigation scrolling without hiding links or requiring hover.
 - [x] Preserve 44px minimum navigation link height for touch interaction.
 - [x] Offset the sticky scroll-story panel by the expanded mobile header height.
-- [ ] Verify the expanded header and sticky story together in browser screenshots at 320, 360, 390 and 430 CSS px.
+- [x] Verify the expanded header and sticky story together in browser screenshots at 320, 360, 390 and 430 CSS px (headless Chrome mobile emulation, 2026-11-21; not a physical device).
 
 ## Regression found and fixed from an iPhone screenshot
 
@@ -87,3 +87,14 @@ The deployed CSS asset was fetched and confirmed to contain the mobile single-co
 - [ ] Verify on physical iOS Safari and Android Chrome.
 
 The CSS and test assertions are source-level changes only. The final three items remain release blockers until execution evidence is recorded.
+
+## Homepage story — headless browser pass (2026-11-21)
+
+Production build served locally and driven by headless Chrome with software WebGL (SwiftShader); mobile emulation uses DPR 2, touch and an iOS user agent. Viewport screenshots were taken at several scroll positions per width.
+
+- [x] 320×640, 360×740, 375×667, 390×844, 430×932, 768×1024 and 1024×768: no horizontal page overflow (scrollWidth equals clientWidth), no clipped Russian copy, all five stages visible and legible.
+- [x] Short phones: below 720 CSS px of viewport height the story copy compacts and the stage fits completely (verified at 320×640 and 375×667). Before the fix the pinned story was 610px tall, so at 320×640 its bottom edge sat at 714px, below the fold.
+- [x] 320px header: all four section links fit without being cut mid-word.
+- [x] Reduced motion (320×640 and 390×844): the story is a static, non-pinned section showing a monitor composition, with no horizontal overflow.
+- [x] Touch drags that start on the 3D stage scroll the page natively.
+- [ ] Not covered: physical iOS Safari and Android Chrome, real-GPU performance, landscape phones (header plus pinned story leave very little height), browser zoom, safe-area insets and the other routes.
