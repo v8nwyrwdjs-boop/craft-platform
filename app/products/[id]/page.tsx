@@ -32,7 +32,7 @@ export default async function ConceptDetailPage({ params }: { params: Promise<{ 
       <header className="header wrap"><Link className="brand" href="/">CRAFT<span>®</span></Link><nav aria-label="Основная навигация"><Link href="/directions">Направления</Link><Link href="/products">Все концепции</Link><Link href="/formats">Форматы</Link></nav><Link className="header-cta" href="/dashboard">Личный кабинет ↗</Link></header>
       <section className="catalog-hero wrap">
         <p className="eyebrow"><i /> CRAFT / {item.id}</p><p className="catalog-kicker">{item.type}</p>
-        <h1>{item.title}</h1><p className="catalog-lead">{item.problem}</p>
+        <h1 data-long-word={item.title.split(/\s+/).some((word) => word.length > 13) || undefined}>{item.title}</h1><p className="catalog-lead">{item.problem}</p>
         <div className="catalog-meta"><span>Демонстрационная бизнес-гипотеза</span><span>Сложность: {item.difficulty}</span></div>
       </section>
       <section className="catalog-list wrap">

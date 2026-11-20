@@ -481,9 +481,26 @@ button { font: inherit; }
   .craft-story-progress { margin-top: 12px; }
   .craft-story-hint { display: none; }
 }
-/* 320px phones: the five header links need ~310px at the default gap and the last one was cut mid-word. */
+/* 320px phones: the four header links need ~310px at the default gap and the last one was cut mid-word. */
 @media (max-width: 340px) {
   .craft-nav { gap: 14px; }
+}
+/* Secondary routes at phone widths. Long Russian words in the catalogue heroes ("направление", "специалистов")
+   overflowed the page at the fixed 55px size on 320-360px screens, so the size now follows the viewport
+   (unchanged from 417px up). */
+@media (max-width: 760px) {
+  .catalog-page .catalog-hero h1 { font-size: clamp(34px,13.2vw,55px); }
+  /* Detail titles with a word of 14+ letters ("профессиональной") get a smaller size and may break inside a word
+     only as a last resort, instead of widening the page. */
+  .catalog-page .catalog-hero h1[data-long-word] { font-size: clamp(26px,9.6vw,50px); overflow-wrap: break-word; }
+}
+/* Touch targets: the "Подробнее" card links and the account links were only 12-15px tall. Extend the hit area,
+   not the layout, to at least 44px. */
+@media (pointer: coarse) {
+  .direction-bottom a,.product-card-foot a,.auth-switch a { position: relative; }
+  .direction-bottom a::after,.product-card-foot a::after,.auth-switch a::after {
+    content: ""; position: absolute; inset: -16px -6px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

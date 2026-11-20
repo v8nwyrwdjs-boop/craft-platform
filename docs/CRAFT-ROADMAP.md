@@ -49,9 +49,12 @@ Build a coherent, recognizably CRAFT experience, not a collection of disconnecte
 ## Phase 4 — quality gate
 
 - [x] Add source-level regression tests for native scroll, accessibility, reduced motion, resource cleanup, five component layouts and removal of the legacy point-cloud renderer.
-- [x] Run the complete security suite and Next.js production build locally (52/52 security tests, `tsc --noEmit` clean, `npm run build` succeeded) on the tree that became commit 19440c2. The GitHub/Vercel run for that commit still has to be read.
+- [x] Run the complete security suite and Next.js production build locally (52/52 security tests, `tsc --noEmit` clean, `npm run build` succeeded) on the tree that became commit 19440c2. GitHub's `build` check and the Vercel Preview deployment for 19440c2 both reported success (read through the GitHub API on 2026-11-21).
 - [x] Homepage story inspected at 320, 360, 390, 430, 768 and 1024 CSS px (plus 375×667 and reduced motion) in headless Chrome: no horizontal overflow and no clipped Russian text after the short-viewport and 320px header fixes.
-- [ ] Inspect the other routes at the same widths with rendered screenshots.
+- [x] All 19 public pages (including every direction and concept detail page) were scanned at 320, 360, 390, 430, 768 and 1024 CSS px in headless Chrome: 114 checks, no horizontal overflow after the fixes below. Visual review was limited to the top of `/directions`, `/login` and `/products/C-06`.
+- [x] Fixed: catalogue hero headings used a fixed 55px size, so long Russian words ("направление", "специалистов") overflowed the page at 320-360px, and `/products/C-06` ("профессиональной") overflowed at every phone width. The size now follows the viewport, and detail titles with a word of 14+ letters get a smaller size through `data-long-word`.
+- [x] Fixed: the "Подробнее" card links and the account links were only 12-15px tall; on coarse pointers their hit area is now at least 44px (checked with `elementFromPoint` at ±20px).
+- [ ] Authenticated routes (`/dashboard`, `/learn`, `/admin`) and the lower sections of each public route still need rendered-screenshot review.
 - [x] Touch drags that start on the 3D canvas scroll the page natively (checked with dispatched touch events in headless Chrome).
 - [ ] Open finding: `app/globals.css` line 1 `@import`s Google Fonts, which the production CSP (`style-src 'self'`) blocks, so DM Sans and Manrope never load and the console reports a CSP error. Needs an owner decision (self-host through `next/font`, or keep the fallbacks); the CSP was not changed.
 - [ ] Open finding: `/favicon.ico` returns 404.
@@ -63,7 +66,7 @@ Build a coherent, recognizably CRAFT experience, not a collection of disconnecte
 - [x] Keep the implementation on craft/visual-excellence.
 - [x] Keep main unchanged and do not merge a pull request.
 - [x] Keep Production untouched.
-- [ ] Verify the branch-head workflow and report exact results.
+- [ ] Verify the branch-head workflow and report exact results. (19440c2: `build` check and Vercel Preview succeeded; re-read the status of the final head.)
 
 ## Implementation record
 
@@ -97,6 +100,7 @@ Verification log, 2026-11-21 (branch head 19440c2, local):
 - `npm run test:security`: 52 tests, 52 pass, 0 fail (10 are the new layout tests). `npx tsc --noEmit`: no errors. `npm run build`: compiled and generated all 16 pages.
 - Rendering: the production build served with `next start` and driven by headless Google Chrome (puppeteer-core) using SwiftShader software WebGL, at 1280×800, 1024×768, 768×1024 and mobile emulation (DPR 2, touch, iOS user agent) at 320×640, 360×740, 375×667, 390×844 and 430×932, plus a reduced-motion pass. All five stages and the transitions were inspected as screenshots; scrollWidth equals clientWidth at every width.
 - Touch: drags dispatched through the DevTools protocol scroll the page identically on the copy and on the 3D canvas (`touch-action` stays `auto`, listeners are passive, touch pointers are ignored by the parallax code).
+- Public-route sweep after the catalogue fixes: 19 public pages × 6 widths = 114 checks, no horizontal overflow; hit areas of the card and account links verified with `elementFromPoint`.
 - Not tested: physical iOS/Android devices, real-GPU frame times and thermal behaviour, landscape phones, the WebGL-unavailable and context-loss paths in a browser (source tests only), rendered screenshots of the other routes, a keyboard-only pass, and the GitHub/Vercel result for this commit.
 
 Do not mark this phase visually complete until the actual Preview has been inspected at desktop and mobile sizes, including the five transitions, upward reversal, reduced-motion fallback and low-end mobile behavior.

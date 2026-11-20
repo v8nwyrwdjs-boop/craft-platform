@@ -97,4 +97,5 @@ Production build served locally and driven by headless Chrome with software WebG
 - [x] 320px header: all four section links fit without being cut mid-word.
 - [x] Reduced motion (320×640 and 390×844): the story is a static, non-pinned section showing a monitor composition, with no horizontal overflow.
 - [x] Touch drags that start on the 3D stage scroll the page natively.
-- [ ] Not covered: physical iOS Safari and Android Chrome, real-GPU performance, landscape phones (header plus pinned story leave very little height), browser zoom, safe-area insets and the other routes.
+- [x] All 19 public routes (every direction and concept detail page) at 320, 360, 390, 430, 768 and 1024: scrollWidth equals clientWidth (114 checks). Two defects were found and fixed: catalogue hero headings overflowed at 320-360px (fixed 55px size against long Russian words; `/products/C-06` overflowed at every phone width because of a 16-letter word), and the "Подробнее" card links and account links were 12-15px tall (hit area is now at least 44px on coarse pointers).
+- [ ] Not covered: authenticated routes, physical iOS Safari and Android Chrome, real-GPU performance, landscape phones (header plus pinned story leave very little height), browser zoom, safe-area insets.
