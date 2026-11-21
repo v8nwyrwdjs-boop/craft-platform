@@ -3,7 +3,7 @@
 Before making changes, read:
 1. `docs/CRAFT-MASTER-SPEC.md` — canonical product, design, 3D-storytelling and engineering requirements.
 2. `docs/CRAFT-PROJECT-BRAIN.md`
-3. The linked product, design, visual-reference, architecture and roadmap documents, including `docs/CRAFT-APPLE-REFERENCE.md` for the dark Apple product-stage reference and implementation measurements.
+3. `docs/CRAFT-V2-DESIGN-RULES.md` (owner decision of 2026-11-21: the v2 world, tokens, anti-slop rules, copy rules, security checklist) and the linked product, architecture and roadmap documents. `docs/CRAFT-APPLE-REFERENCE.md` is historical for visual identity; its measurements remain useful for performance and layout.
 4. Existing `README.md`, `docs/roadmap.md`, `docs/launch-readiness.md`, and `docs/CRAFT-MOBILE-QUALITY-GATE.md` when relevant.
 
 ## Non-negotiable repository and release rules
@@ -39,7 +39,7 @@ Core themes include SaaS and digital products, AI, AI-assisted development, auto
 ## Design and experience priorities
 
 - Mobile usability is a first-class requirement and outranks decorative effects.
-- Visual direction: lead with deep black/obsidian and graphite product stages, precise porcelain typography, restrained lime/green brand accents and silver/metallic 3D highlights. Use warm-white/pale surfaces selectively as deliberate contrast chapters, not as the default overall direction.
+- Visual direction (owner decision, 2026-11-21, supersedes the earlier obsidian/lime brief): the owner handed the redesign to the agent and fixed only the name CRAFT. The identity is the foundry world defined in `docs/CRAFT-V2-DESIGN-RULES.md`: per-chapter ground colours (void, steel, ember, one chalk contrast chapter), a single heat accent, liquid-metal shading (WebGL, not CSS gradients), and one persistent scroll-following 3D object made of thousands of instanced bricks. Do not drift back to the old palette, and do not add template tells (eyebrows, numbered sections, gradient text, icon-tile cards).
 - Strong editorial typography, clear hierarchy, rounded but purposeful shapes, confident spacing, visual depth, and polished transitions.
 - Build a coherent system across public pages, catalogues, auth, dashboard, learning and admin.
 - 3D, shaders and motion should make CRAFT memorable without obscuring content, navigation or calls to action.
@@ -101,7 +101,7 @@ Reference: `nextlevelbuilder/ui-ux-pro-max-skill`.
 - Use mobile-first layouts, semantic color roles, legible body text, visible keyboard focus, touch-friendly controls and no page-level horizontal overflow.
 - Motion must communicate state, causality or spatial continuity; avoid animating width/height when transforms or opacity can do the job.
 - Use stack-specific guidance only after verifying the actual framework and dependency versions in this repository.
-- Use this skill as a searchable UX/pattern reference, not as a generator of arbitrary presets. CRAFT's obsidian / graphite / porcelain / restrained-lime brand tokens remain the source of truth.
+- Use this skill as a searchable UX/pattern reference, not as a generator of arbitrary presets. CRAFT's v2 tokens in `docs/CRAFT-V2-DESIGN-RULES.md` (ground colours, heat accent, Geologica/Onest) are the source of truth.
 
 ### 3. Motion design: restraint, polish and experimentation
 Reference: `kylezantos/design-motion-principles`, synthesizing three lenses:
@@ -140,7 +140,7 @@ The following references are part of the CRAFT engineering playbook. Apply them 
 
 ### Required UI review sequence
 1. Inspect the relevant route, components, tokens, package versions and current behavior.
-2. Make the smallest coherent implementation; keep CRAFT's dark-first Apple-stage direction and CRAFT-specific lime identity.
+2. Make the smallest coherent implementation; keep CRAFT's v2 foundry direction (`docs/CRAFT-V2-DESIGN-RULES.md`) and its heat-accent identity.
 3. Run the Vercel guideline audit mentally/source-wise against touched files and record exact file/line issues; never claim this audit was run by a separate executable unless it was.
 4. Review animation decisions using Emil's gates: frequency → purpose → cheapest tool → properties → easing/duration → interruption/exit → accessibility/performance.
 5. Exercise edge cases using long text, empty states, loading/error states, narrow screens, touch, keyboard and reduced-motion.

@@ -4,7 +4,7 @@
 
 The root AGENTS.md is the single source of truth for product intent, branch safety, security, cost boundaries, accessibility, design direction, implementation quality and validation.
 
-Before editing, read the project documents linked from AGENTS.md and inspect the actual branch state. Keep CRAFT's dark-first product-story direction and native-scroll narrative. Do not replace product truth with generic landing-page copy.
+Before editing, read the project documents linked from AGENTS.md and inspect the actual branch state. Follow `docs/CRAFT-V2-DESIGN-RULES.md` (owner decision of 2026-11-21: foundry world, liquid-metal shading, one persistent scroll-following 3D object) and keep the native-scroll narrative. Do not replace product truth with generic landing-page copy.
 
 For significant UI work, use the same closed loop:
 1. Inspect source and current behavior.
