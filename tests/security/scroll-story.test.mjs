@@ -5,7 +5,7 @@ import { readFileSync } from "node:fs";
 const story = readFileSync(new URL("../../components/craft-scroll-story.tsx", import.meta.url), "utf8");
 const scene = readFileSync(new URL("../../components/craft-scroll-story-scene.tsx", import.meta.url), "utf8");
 const css = readFileSync(new URL("../../app/craft-theme.css", import.meta.url), "utf8");
-const home = readFileSync(new URL("../../app/page.tsx", import.meta.url), "utf8");
+const home = readFileSync(new URL("../../app/(legacy)/page.tsx", import.meta.url), "utf8");
 const masterSpec = readFileSync(new URL("../../docs/CRAFT-MASTER-SPEC.md", import.meta.url), "utf8");
 
 test("homepage replaces the disconnected sphere and carousel with one scroll story", () => {

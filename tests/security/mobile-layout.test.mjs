@@ -86,11 +86,19 @@ test("application motion and touch behavior retain accessible fallbacks", () => 
 });
 
 
-test("detail catalogue pages label their primary navigation landmarks", () => {
-  const direction = readFileSync(new URL("../../app/directions/[slug]/page.tsx", import.meta.url), "utf8");
-  const product = readFileSync(new URL("../../app/products/[id]/page.tsx", import.meta.url), "utf8");
-  assert.match(direction, /<nav aria-label="Основная навигация">/);
-  assert.match(product, /<nav aria-label="Основная навигация">/);
+test("site shell provides labelled navigation, a skip link and one main landmark; pages do not repeat them", () => {
+  const layout = readFileSync(new URL("../../app/(site)/layout.tsx", import.meta.url), "utf8");
+  const header = readFileSync(new URL("../../components/site-header.tsx", import.meta.url), "utf8");
+  assert.match(layout, /<a className="f-skip" href="#main">/);
+  assert.match(layout, /<main id="main"[^>]*>/);
+  assert.match(layout, /<SiteHeader \/>/);
+  assert.match(header, /aria-label="Основная навигация"/);
+  assert.match(header, /aria-label="Мобильная навигация"/);
+  assert.match(header, /aria-expanded=\{open\}/);
+  for (const path of ["../../app/(site)/directions/[slug]/page.tsx", "../../app/(site)/products/[id]/page.tsx"]) {
+    const page = readFileSync(new URL(path, import.meta.url), "utf8");
+    assert.doesNotMatch(page, /<main|<header|<footer/, `${path} repeats shell landmarks`);
+  }
 });
 
 test("learning and admin layouts preserve constrained content containers", () => {

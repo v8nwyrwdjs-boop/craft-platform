@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CraftScrollStory } from "../components/craft-scroll-story";
+import { CraftScrollStory } from "@/components/craft-scroll-story";
 
 const products = [
   {

@@ -88,6 +88,17 @@ create policy "Users can read their own enrollments" on public.enrollments for s
 drop policy if exists "Staff can read all enrollments" on public.enrollments;
 create policy "Staff can read all enrollments" on public.enrollments for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') in ('admin', 'mentor'));
 
+-- Список ожидания: ученик создаёт только заявку со статусом pending; доступ (active) выдаёт администратор.
+drop policy if exists "Users can join the waitlist" on public.enrollments;
+create policy "Users can join the waitlist" on public.enrollments
+  for insert to authenticated
+  with check (
+    auth.uid() = student_id
+    and status = 'pending'
+    and program_slug ~ '^[a-z0-9-]{2,40}$'
+    and (select count(*) from public.enrollments e where e.student_id = auth.uid()) < 40
+  );
+
 drop policy if exists "Users can read their own lesson progress" on public.lesson_progress;
 create policy "Users can read their own lesson progress" on public.lesson_progress for select to authenticated using (auth.uid() = student_id);
 

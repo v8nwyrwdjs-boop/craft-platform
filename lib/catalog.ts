@@ -821,6 +821,14 @@ export const workshopOfProduct = (product: Product) => workshopBySlug(directionB
 // На витрине показываются продукты, в которые можно войти или записаться (правило раздела 5).
 export const visibleProducts = products.filter((item) => item.status !== "idea");
 
+/** Directions that have at least one product people can see. Empty directions stay out of the storefront. */
+export const visibleDirections = directions.filter((direction) => productsOfDirection(direction.slug).some((item) => item.status !== "idea"));
+
+/** Workshops that have at least one visible direction. */
+export const visibleWorkshops = workshops.filter((workshop) => visibleDirections.some((direction) => direction.workshop === workshop.slug));
+
+export const visibleProductsOfDirection = (direction: string) => visibleProducts.filter((item) => item.direction === direction);
+
 // Шесть существующих типов продуктов со страницы направлений -> ближайшие направления (раздел 5).
 export const legacyTypeNearest: Record<string, string[]> = {
   "direction-01": ["saas", "web-apps", "backend"],

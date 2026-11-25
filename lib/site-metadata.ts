@@ -1,6 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
-import "./craft-theme.css";
 
 const title = "CRAFT — школа создания цифровых продуктов";
 const description =
@@ -20,11 +18,13 @@ const metadataBase = (() => {
   }
 })();
 
-export const metadata: Metadata = {
+/** Shared by every root layout, so the two "worlds" (site and legacy) describe CRAFT the same way. */
+export const siteMetadata: Metadata = {
   metadataBase,
   title: { default: title, template: "%s | CRAFT" },
   description,
   applicationName: "CRAFT",
+  icons: { icon: [{ url: "/icon.svg", type: "image/svg+xml" }] },
   category: "education",
   robots:
     process.env.VERCEL_ENV === "production"
@@ -34,17 +34,10 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description },
 };
 
-export const viewport: Viewport = {
-  themeColor: "#08090b",
+/** sRGB of --ground-void oklch(0.145 0.014 268), the colour of the browser chrome. */
+export const siteViewport: Viewport = {
+  themeColor: "#080a10",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
-
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="ru">
-      <body>{children}</body>
-    </html>
-  );
-}
