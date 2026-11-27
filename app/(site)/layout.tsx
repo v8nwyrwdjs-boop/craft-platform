@@ -1,3 +1,4 @@
+import { SiteBackdrop } from "@/components/site-backdrop";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { siteMetadata, siteViewport } from "@/lib/site-metadata";
@@ -15,6 +16,7 @@ export default function SiteRootLayout({ children }: Readonly<{ children: React.
         <link rel="preload" href="/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body>
+        <SiteBackdrop />
         <a className="f-skip" href="#main">
           К содержимому
         </a>

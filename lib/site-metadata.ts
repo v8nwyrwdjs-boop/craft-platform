@@ -34,8 +34,16 @@ export const siteMetadata: Metadata = {
   twitter: { card: "summary_large_image", title, description },
 };
 
-/** sRGB of --ground-void oklch(0.145 0.014 268), the colour of the browser chrome. */
+/** sRGB of --ground-paper oklch(0.995 0.002 250): the colour of the browser chrome on the white site. */
 export const siteViewport: Viewport = {
+  themeColor: "#fcfdff",
+  colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
+};
+
+/** The first design (auth, dashboard, learning) is still dark until it is ported. */
+export const legacyViewport: Viewport = {
   themeColor: "#080a10",
   colorScheme: "dark",
   width: "device-width",

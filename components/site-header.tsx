@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { BrandMark } from "./brand-mark";
+import { LiquidLogo } from "./liquid-logo";
 
 const links = [
   { href: "/products", label: "Каталог" },
@@ -37,7 +37,7 @@ export function SiteHeader() {
     <header className="f-header">
       <div className="f-wrap f-header__bar">
         <Link href="/" className="f-brand" aria-label="CRAFT, на главную">
-          <BrandMark />
+          <LiquidLogo size={32} label="" fps={24} />
           <span>CRAFT</span>
         </Link>
 

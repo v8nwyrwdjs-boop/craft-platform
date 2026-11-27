@@ -39,7 +39,7 @@ function DirectionView({ direction }: { direction: Direction }) {
   const siblings = visibleDirections.filter((item) => item.workshop === direction.workshop && item.slug !== direction.slug).slice(0, 3);
   return (
     <article>
-      <section className="f-hero f-ground-void">
+      <section className="f-hero f-ground-paper">
         <div className="f-wrap">
           <Link className="f-back" href="/directions">
             Все направления
@@ -65,7 +65,7 @@ function DirectionView({ direction }: { direction: Direction }) {
         </div>
       </section>
 
-      <section className="f-section f-ground-steel" aria-labelledby="products-title">
+      <section className="f-section f-ground-chalk" aria-labelledby="products-title">
         <div className="f-wrap f-split">
           <h2 id="products-title" className="f-display f-h2">
             Продукты направления
@@ -75,7 +75,7 @@ function DirectionView({ direction }: { direction: Direction }) {
       </section>
 
       {siblings.length > 0 && (
-        <section className="f-section f-ground-void" aria-labelledby="siblings-title">
+        <section className="f-section f-ground-paper" aria-labelledby="siblings-title">
           <div className="f-wrap f-split">
             <h2 id="siblings-title" className="f-display f-h2">
               В этой мастерской
@@ -92,7 +92,7 @@ function TypeView({ type }: { type: LegacyType }) {
   const nearest = (legacyTypeNearest[type.slug] ?? []).map((slug) => directionBySlug(slug)).filter((item): item is Direction => Boolean(item) && visibleDirections.includes(item!));
   return (
     <article>
-      <section className="f-hero f-ground-void">
+      <section className="f-hero f-ground-paper">
         <div className="f-wrap">
           <Link className="f-back" href="/directions">
             Все направления
@@ -106,7 +106,7 @@ function TypeView({ type }: { type: LegacyType }) {
         </div>
       </section>
 
-      <section className="f-section f-ground-steel">
+      <section className="f-section f-ground-chalk">
         <div className="f-wrap f-stack">
           <div className="f-split">
             <h2 className="f-display f-h2">Примеры продуктов</h2>
@@ -124,7 +124,7 @@ function TypeView({ type }: { type: LegacyType }) {
       </section>
 
       {nearest.length > 0 && (
-        <section className="f-section f-ground-void" aria-labelledby="near-title">
+        <section className="f-section f-ground-paper" aria-labelledby="near-title">
           <div className="f-wrap f-split">
             <h2 id="near-title" className="f-display f-h2">
               Ближайшие направления каталога

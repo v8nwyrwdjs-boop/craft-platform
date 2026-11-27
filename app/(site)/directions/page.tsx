@@ -15,7 +15,7 @@ export default function DirectionsPage() {
   const workshopCount = visibleWorkshops.length;
   return (
     <>
-      <section className="f-hero f-ground-void">
+      <section className="f-hero f-ground-paper">
         <div className="f-wrap">
           <h1 className="f-display f-h1">Найдите своё направление</h1>
           <p className="f-lead">
@@ -29,7 +29,7 @@ export default function DirectionsPage() {
         </div>
       </section>
 
-      <section className="f-section f-ground-void" aria-label="Мастерские">
+      <section className="f-section f-ground-paper" aria-label="Мастерские">
         <div className="f-wrap f-stack">
           {visibleWorkshops.map((workshop) => (
             <div key={workshop.slug} className="f-split">
@@ -45,7 +45,7 @@ export default function DirectionsPage() {
         </div>
       </section>
 
-      <section className="f-section f-ground-chalk" aria-labelledby="types-title">
+      <section className="f-section f-ground-steel" aria-labelledby="types-title">
         <div className="f-wrap f-split">
           <div className="f-split__label">
             <h2 id="types-title" className="f-display f-h2">

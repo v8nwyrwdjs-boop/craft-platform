@@ -19,7 +19,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <section className="f-hero f-ground-void">
+      <section className="f-hero f-ground-paper">
         <div className="f-wrap">
           <h1 className="f-display f-h1">Выберите, что соберёте</h1>
           <p className="f-lead">У каждого продукта есть результат, срок и входной уровень.</p>
@@ -45,7 +45,7 @@ export default function ProductsPage() {
         </section>
       )}
 
-      <section className="f-section f-ground-void" aria-labelledby="preparing-title">
+      <section className="f-section f-ground-paper" aria-labelledby="preparing-title">
         <div className="f-wrap f-stack">
           <div className="f-split">
             <h2 id="preparing-title" className="f-display f-h2">

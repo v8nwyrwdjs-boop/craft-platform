@@ -21,13 +21,20 @@ function files(dir, extensions) {
 
 const siteSources = [
   ...files(join(root, "app/(site)"), [".tsx", ".ts"]),
-  ...["site-header.tsx", "site-footer.tsx", "catalog-rows.tsx", "waitlist-form.tsx", "brand-mark.tsx"].map((name) => join(root, "components", name)),
+  ...["site-header.tsx", "site-footer.tsx", "catalog-rows.tsx", "waitlist-form.tsx", "brand-mark.tsx", "liquid-logo.tsx", "site-backdrop.tsx", "site-backdrop-canvas.tsx", "motion-toggle.tsx"].map((name) => join(root, "components", name)),
 ];
 
-test("tokens: four grounds and one heat accent are defined in OKLCH", () => {
-  for (const token of ["--ground-void", "--ground-steel", "--ground-ember", "--ground-chalk", "--heat"]) {
+test("tokens: white paper base, one light alternate, three dark contrast grounds and one heat accent, all OKLCH", () => {
+  for (const token of ["--ground-paper", "--ground-chalk", "--ground-void", "--ground-steel", "--ground-ember", "--heat", "--heat-ink"]) {
     assert.match(css, new RegExp(`${token}:\\s*oklch\\(`), token);
   }
+});
+
+test("the base ground is white paper, dark grounds are chapters", () => {
+  assert.match(css, /html\s*\{[^}]*background:\s*var\(--ground-paper\)/);
+  assert.match(css, /body\s*\{[^}]*background:\s*var\(--ground-paper\)/);
+  assert.match(css, /--bg:\s*var\(--ground-paper\)/);
+  assert.match(css, /--ground-paper:\s*oklch\(0\.99/);
 });
 
 test("css floor: no gradient text, no tracked uppercase labels, no transition: all, no plain vh", () => {
@@ -56,7 +63,7 @@ test("css floor: no text below 12px and no horizontal page scroll", () => {
 });
 
 test("accessibility: visible focus ring, reduced-motion path, touch targets, fonts with swap", () => {
-  assert.match(css, /:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--heat\)/);
+  assert.match(css, /:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--focus\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /\.f-btn\s*\{[^}]*min-height:\s*48px/);
   assert.match(css, /\.f-menu-btn\s*\{[^}]*min-height:\s*44px/);

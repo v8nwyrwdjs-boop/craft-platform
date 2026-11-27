@@ -51,7 +51,7 @@ function ProductView({ product }: { product: Product }) {
 
   return (
     <article>
-      <section className="f-hero f-ground-void">
+      <section className="f-hero f-ground-paper">
         <div className="f-wrap">
           <Link className="f-back" href="/products">
             К каталогу
@@ -103,7 +103,7 @@ function ProductView({ product }: { product: Product }) {
 
       {page ? (
         <>
-          <section className="f-section f-ground-steel" aria-label="Для кого">
+          <section className="f-section f-ground-chalk" aria-label="Для кого">
             <div className="f-wrap f-stack">
               <div className="f-split">
                 <h2 className="f-display f-h2">Кому подходит</h2>
@@ -125,7 +125,7 @@ function ProductView({ product }: { product: Product }) {
             </div>
           </section>
 
-          <section className="f-section f-ground-void" aria-labelledby="hands-title">
+          <section className="f-section f-ground-paper" aria-labelledby="hands-title">
             <div className="f-wrap f-split">
               <h2 id="hands-title" className="f-display f-h2">
                 Что будет в руках
@@ -139,7 +139,7 @@ function ProductView({ product }: { product: Product }) {
           </section>
 
           {page.route && (
-            <section className="f-section f-ground-steel" aria-labelledby="route-title">
+            <section className="f-section f-ground-chalk" aria-labelledby="route-title">
               <div className="f-wrap f-split">
                 <h2 id="route-title" className="f-display f-h2">
                   Маршрут
@@ -156,7 +156,7 @@ function ProductView({ product }: { product: Product }) {
             </section>
           )}
 
-          <section className="f-section f-ground-void" aria-labelledby="time-title">
+          <section className="f-section f-ground-paper" aria-labelledby="time-title">
             <div className="f-wrap f-split">
               <h2 id="time-title" className="f-display f-h2">
                 Время и что понадобится
@@ -174,7 +174,7 @@ function ProductView({ product }: { product: Product }) {
             </div>
           </section>
 
-          <section className="f-section f-ground-chalk" aria-labelledby="bounds-title">
+          <section className="f-section f-ground-steel" aria-labelledby="bounds-title">
             <div className="f-wrap f-split">
               <h2 id="bounds-title" className="f-display f-h2">
                 Границы
@@ -186,7 +186,7 @@ function ProductView({ product }: { product: Product }) {
           </section>
 
           {(page.done || page.missing) && (
-            <section className="f-section f-ground-void" aria-labelledby="ready-title">
+            <section className="f-section f-ground-paper" aria-labelledby="ready-title">
               <div className="f-wrap f-split">
                 <h2 id="ready-title" className="f-display f-h2">
                   Что готово и чего ещё нет
@@ -221,7 +221,7 @@ function ProductView({ product }: { product: Product }) {
             </section>
           )}
 
-          <section className="f-section f-ground-steel" aria-labelledby="help-title">
+          <section className="f-section f-ground-chalk" aria-labelledby="help-title">
             <div className="f-wrap f-split">
               <h2 id="help-title" className="f-display f-h2">
                 Кто помогает
@@ -238,7 +238,7 @@ function ProductView({ product }: { product: Product }) {
             </div>
           </section>
 
-          <section className="f-section f-ground-void" aria-labelledby="faq-title">
+          <section className="f-section f-ground-paper" aria-labelledby="faq-title">
             <div className="f-wrap f-split">
               <h2 id="faq-title" className="f-display f-h2">
                 Вопросы
@@ -255,7 +255,7 @@ function ProductView({ product }: { product: Product }) {
           </section>
         </>
       ) : (
-        <section className="f-section f-ground-steel" aria-labelledby="now-title">
+        <section className="f-section f-ground-chalk" aria-labelledby="now-title">
           <div className="f-wrap f-split">
             <h2 id="now-title" className="f-display f-h2">
               Что известно сейчас
@@ -269,7 +269,7 @@ function ProductView({ product }: { product: Product }) {
       )}
 
       {next.length > 0 && (
-        <section className="f-section f-ground-void" aria-labelledby="next-title">
+        <section className="f-section f-ground-paper" aria-labelledby="next-title">
           <div className="f-wrap f-split">
             <h2 id="next-title" className="f-display f-h2">
               Что дальше
@@ -280,7 +280,7 @@ function ProductView({ product }: { product: Product }) {
       )}
 
       {nearby.length > 0 && (
-        <section className="f-section f-ground-void" aria-labelledby="nearby-title">
+        <section className="f-section f-ground-paper" aria-labelledby="nearby-title">
           <div className="f-wrap f-split">
             <h2 id="nearby-title" className="f-display f-h2">
               Рядом
@@ -318,7 +318,7 @@ function ConceptView({ concept }: { concept: LegacyConcept }) {
   ];
   return (
     <article>
-      <section className="f-hero f-ground-void">
+      <section className="f-hero f-ground-paper">
         <div className="f-wrap">
           <Link className="f-back" href="/products">
             К каталогу
@@ -332,7 +332,7 @@ function ConceptView({ concept }: { concept: LegacyConcept }) {
         </div>
       </section>
 
-      <section className="f-section f-ground-steel">
+      <section className="f-section f-ground-chalk">
         <div className="f-wrap f-stack">
           {blocks.map((block) => (
             <div key={block.title} className="f-split">

@@ -78,7 +78,7 @@ const formats: Format[] = [
 export default function FormatsPage() {
   return (
     <>
-      <section className="f-hero f-ground-void">
+      <section className="f-hero f-ground-paper">
         <div className="f-wrap">
           <h1 className="f-display f-h1">Форматы работы</h1>
           <p className="f-lead">Проект проходит одни и те же этапы. Форматы различаются глубиной поддержки.</p>
@@ -88,7 +88,7 @@ export default function FormatsPage() {
         </div>
       </section>
 
-      <section className="f-section f-ground-steel" aria-label="Форматы">
+      <section className="f-section f-ground-chalk" aria-label="Форматы">
         <div className="f-wrap f-stack">
           {formats.map((format) => (
             <div key={format.slug} className="f-split">
@@ -139,7 +139,7 @@ export default function FormatsPage() {
         </div>
       </section>
 
-      <section className="f-section f-ground-chalk" aria-labelledby="club-title">
+      <section className="f-section f-ground-steel" aria-labelledby="club-title">
         <div className="f-wrap f-split">
           <div className="f-split__label">
             <h2 id="club-title" className="f-display f-h2">
@@ -159,7 +159,7 @@ export default function FormatsPage() {
         </div>
       </section>
 
-      <section className="f-section f-ground-void" aria-labelledby="rules-title">
+      <section className="f-section f-ground-paper" aria-labelledby="rules-title">
         <div className="f-wrap f-split">
           <h2 id="rules-title" className="f-display f-h2">
             Правила для всех форматов

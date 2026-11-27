@@ -1,9 +1,9 @@
-import { siteMetadata, siteViewport } from "@/lib/site-metadata";
+import { legacyViewport, siteMetadata } from "@/lib/site-metadata";
 import "../globals.css";
 import "../craft-theme.css";
 
 export const metadata = siteMetadata;
-export const viewport = siteViewport;
+export const viewport = legacyViewport;
 
 /** Root layout of the pages that still use the first design (auth, dashboard, learning, admin). */
 export default function LegacyRootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
