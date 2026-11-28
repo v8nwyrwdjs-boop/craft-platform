@@ -317,3 +317,10 @@ html[data-scene="live"] .f-chapter__art { opacity: 0; }
 .f-chats a[data-unread="true"] .f-chats__name { font-weight: 800; }
 .f-chats__state { color: var(--fg-2); font-size: 0.9375rem; }
 @media (hover: hover) { .f-chats a:hover { background: var(--hover-tint); } }
+
+/* Вход, регистрация, восстановление доступа */
+.f-auth { display: grid; gap: 1.25rem; max-width: 30rem; align-content: start; }
+.f-auth form { display: grid; gap: 1rem; }
+.f-auth form .f-btn { justify-self: start; }
+.f-auth__hint { margin: 0; color: var(--fg-3); font-size: 0.875rem; }
+.f-auth__foot { display: grid; gap: 0.25rem; color: var(--fg-2); }
