@@ -40,7 +40,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
     <main className="admin-shell">
       <header className="admin-top wrap">
         <Link className="brand" href="/">CRAFT<span>®</span></Link>
-        <div className="admin-top-right"><span className="admin-role">{role === "admin" ? "АДМИНИСТРАТОР" : "НАСТАВНИК"}</span><Link href="/dashboard">Личный кабинет ↗</Link></div>
+        <div className="admin-top-right"><span className="admin-role">{role === "admin" ? "АДМИНИСТРАТОР" : "НАСТАВНИК"}</span><Link href="/messages">Сообщения ↗</Link><Link href="/dashboard">Личный кабинет ↗</Link></div>
       </header>
       <section className="admin-hero wrap">
         <div><p className="eyebrow"><i /> CRAFT / CONTROL ROOM</p><h1>Управляй<br /><em>движением.</em></h1><p>Рабочее пространство команды: ученики, проекты, обучение и обратная связь — в одном месте.</p></div>
