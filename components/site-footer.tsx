@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AccountLink, RegisterLink } from "./account-links";
 import { LiquidLogo } from "./liquid-logo";
 import { MotionToggle } from "./motion-toggle";
 
@@ -19,8 +20,8 @@ export function SiteFooter() {
           <Link href="/products">Каталог</Link>
           <Link href="/directions">Направления</Link>
           <Link href="/formats">Форматы</Link>
-          <Link href="/login" prefetch={false}>Войти</Link>
-          <Link href="/register" prefetch={false}>Регистрация</Link>
+          <AccountLink />
+          <RegisterLink />
           <MotionToggle />
         </nav>
       </div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { AccountLink } from "./account-links";
 import { LiquidLogo } from "./liquid-logo";
 
 const links = [
@@ -47,9 +48,7 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
-          <Link href="/login" prefetch={false} className="f-btn f-btn--ghost">
-            Войти
-          </Link>
+          <AccountLink className="f-btn f-btn--ghost" />
         </nav>
 
         <button
@@ -71,7 +70,7 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
-          <Link href="/login" prefetch={false}>Войти</Link>
+          <AccountLink />
         </nav>
       </div>
     </header>

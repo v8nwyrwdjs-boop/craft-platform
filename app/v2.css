@@ -324,3 +324,29 @@ html[data-scene="live"] .f-chapter__art { opacity: 0; }
 .f-auth form .f-btn { justify-self: start; }
 .f-auth__hint { margin: 0; color: var(--fg-3); font-size: 0.875rem; }
 .f-auth__foot { display: grid; gap: 0.25rem; color: var(--fg-2); }
+
+/* Кабинет и обучение */
+.f-account { display: grid; gap: clamp(2rem, 1.5rem + 2vw, 3.5rem); align-content: start; }
+.f-account__head { display: grid; gap: 1rem; }
+.f-account__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; }
+.f-account__bar form { margin: 0; }
+.f-account__block { display: grid; gap: 1rem; justify-items: start; }
+.f-account__block > .f-index { width: 100%; }
+.f-account__form { display: grid; gap: 0.75rem; justify-items: start; width: min(34rem, 100%); }
+.f-account__form .f-field { width: 100%; }
+.f-progress { appearance: none; width: min(24rem, 100%); height: 0.5rem; border: 0; border-radius: 999px; overflow: hidden; background: var(--rule-strong); color: var(--heat); }
+.f-progress::-webkit-progress-bar { background: var(--rule-strong); }
+.f-progress::-webkit-progress-value { background: var(--heat); border-radius: 999px; }
+.f-progress::-moz-progress-bar { background: var(--heat); border-radius: 999px; }
+.f-lessons { display: grid; gap: 0; border-top: 1px solid var(--rule-strong); }
+.f-lessons > li { display: grid; gap: 1.25rem 3rem; padding: clamp(1.5rem, 1rem + 2vw, 2.5rem) 0; border-bottom: 1px solid var(--rule); }
+@media (min-width: 900px) { .f-lessons > li { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
+.f-lesson { display: grid; gap: 1rem; align-content: start; }
+.f-lesson h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem); line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance; }
+.f-lesson h3 { font-size: 0.9375rem; font-weight: 600; color: var(--fg-3); margin-bottom: 0.25rem; }
+.f-lesson p { max-width: 40em; text-wrap: pretty; }
+.f-lesson__side { display: grid; gap: 1rem; align-content: start; }
+.f-lesson__response { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 0.5rem; }
+.f-lesson summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 500; }
+.f-lesson__side form { display: grid; gap: 0.75rem; justify-items: start; }
+.f-lesson__side .f-field { width: 100%; }
